@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "com.unity.entities": "0.0.12-preview.5",
+    "com.unity.postprocessing": "0.1.8",
+    "com.unity.probuilder": "3.0.8",
+    "com.unity.progrids": "3.0.3-preview.0"
+  }
+}
