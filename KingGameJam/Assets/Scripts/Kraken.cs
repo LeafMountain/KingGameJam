@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Kraken : MonoBehaviour {
 
-	Rigidbody2D Rigidbody;
-
-	// Use this for initialization
-	void Start () 
-	{
-		Rigidbody = GetComponent<Rigidbody2D>();
-	}
-	
-	void Update () 
-	{
+	public static Kraken Instance;
 		
+	void Awake ()
+	{
+		if(Instance == null)
+		{
+			Instance = this;
+		}
+		else 
+		{
+			Destroy(gameObject);
+		}
 	}
 }
