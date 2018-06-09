@@ -155,11 +155,11 @@ MonoBehaviour:
   drugBoatRate: 60
   cruiseShipRate: 90
   floater: 0
-  surfer: 30
-  raft: 120
-  motorBoat: 240
-  drugBoat: 480
-  cruiseShip: 960
+  surfer: 10
+  raft: 20
+  motorBoat: 30
+  drugBoat: 40
+  cruiseShip: 50
 --- !u!4 &929232836
 Transform:
   m_ObjectHideFlags: 0
