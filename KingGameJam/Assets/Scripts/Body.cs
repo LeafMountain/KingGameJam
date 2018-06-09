@@ -39,6 +39,7 @@ public class Body : MonoBehaviour {
 		BodySegment segment = new BodySegment();
 		segment.parent = segments[segments.Count - 1];
 		segment.gameObject = Instantiate(bodyPrefab, segment.parent.position - (Vector2)segment.parent.gameObject.transform.up, segment.parent.gameObject.transform.rotation);
+		segment.parent.child = segment;
 
 		segments.Add(segment);
 
@@ -55,6 +56,7 @@ public class Body : MonoBehaviour {
 
 		Destroy(segments[segments.Count - 1].gameObject);
 		segments.RemoveAt(segments.Count - 1);
+		segments[segments.Count - 1].child = null;		
 		currentScale -= scalePerSegment;
 		ChangeScale(currentScale);		
 	}
@@ -78,7 +80,15 @@ public class Body : MonoBehaviour {
 				continue;
 			}
 
-			segment.gameObject.transform.up = segment.parent.position - segment.position;
+			if(segment.child != null)
+			{
+				segment.gameObject.transform.up = segment.child.position - segment.parent.position;
+			}
+			else 
+			{
+				segment.gameObject.transform.up = segment.parent.position - segment.position;
+			}
+
 			
 			if(Vector3.Distance(segment.position, segment.parent.position) > segmentDistance + (currentScale - 1))
 			{
@@ -88,7 +98,7 @@ public class Body : MonoBehaviour {
 	}
 
 	void MoveSegment (BodySegment segment){
-		Vector2 newPos = Vector2.SmoothDamp(segment.position, segment.parent.position, ref segment.velocity, .2f);
+		Vector2 newPos = Vector2.SmoothDamp(segment.position, segment.parent.position, ref segment.velocity, .5f);
 
 		segment.position = newPos;
 	}
