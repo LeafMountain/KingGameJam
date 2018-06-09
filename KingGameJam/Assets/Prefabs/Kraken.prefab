@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4878722079039052}
   - component: {fileID: 212614023441893642}
+  - component: {fileID: 95653702713168464}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -52,10 +53,10 @@ GameObject:
   - component: {fileID: 4013352372828702}
   - component: {fileID: 50787526592383606}
   - component: {fileID: 58338729875064698}
-  - component: {fileID: 114590790885972176}
   - component: {fileID: 114449755498669318}
   - component: {fileID: 114768752501449156}
   - component: {fileID: 114222854827180372}
+  - component: {fileID: 114526672586331022}
   m_Layer: 0
   m_Name: Kraken
   m_TagString: Untagged
@@ -116,14 +117,14 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 79134edd970b8b64bac4ad96dc341b6d, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &58338729875064698
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -139,6 +140,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
+--- !u!95 &95653702713168464
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1267502539265308}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 976124c8706adbd4db6d9b42f4418c3a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114222854827180372
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -189,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3611ad9d2e70ad549a184bfa4787b640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114590790885972176
+--- !u!114 &114526672586331022
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,26 +216,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1901051755965726}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1baaf43ae0a422b489caa9c4a8588a02, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d976879b7c71504e947aeda43fa5a0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftStick:
-    x: 0
-    y: 0
-  rightStick:
-    x: 0
-    y: 0
-  rightTrigger: 0
-  leftTrigger: 0
-  aButton: 0
-  bButton: 0
-  xButton: 0
-  yButton: 0
-  OnLeftStick:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityVector2Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
 --- !u!114 &114768752501449156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -265,8 +267,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0, g: 1, b: 0.033422947, a: 1}
+  m_Sprite: {fileID: 21300000, guid: a40eb31383caa754d80496ed3ce8a4b4, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
