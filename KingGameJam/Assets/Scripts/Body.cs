@@ -8,7 +8,9 @@ public class Body : MonoBehaviour {
 
 	public GameObject head;
 	public Transform BodyParent;
-	public GameObject tail;
+	public GameObject tailPrefab;
+
+	public BodySegment tailSegment;
 
 	public GameObject bodyPrefab;
 
@@ -28,6 +30,10 @@ public class Body : MonoBehaviour {
 		head.gameObject = this.head;
 		segments.Add(head);
 
+		tailSegment = new BodySegment();
+		tailSegment.gameObject = Instantiate(tailPrefab, transform.position, Quaternion.identity);
+		segments.Add(tailSegment);
+
 		AddSegment();
 		AddSegment();
 		AddSegment();
@@ -36,6 +42,7 @@ public class Body : MonoBehaviour {
 
 	public void AddSegment ()
 	{
+		segments.Remove(tailSegment);
 		BodySegment segment = new BodySegment();
 		segment.parent = segments[segments.Count - 1];
 		segment.gameObject = Instantiate(bodyPrefab, segment.parent.position - (Vector2)segment.parent.gameObject.transform.up, segment.parent.gameObject.transform.rotation);
@@ -43,22 +50,31 @@ public class Body : MonoBehaviour {
 
 		segments.Add(segment);
 
+		segments.Add(tailSegment);
+		tailSegment.parent = segment;
+
 		currentScale += scalePerSegment;
 		ChangeScale(currentScale);
 	}
 
 	public void RemoveSegment ()
 	{
-		if(segments.Count <= 1)
+		if(segments.Count <= 2)
 		{
 			return;
 		}
 
+		segments.Remove(tailSegment);
+
 		Destroy(segments[segments.Count - 1].gameObject);
 		segments.RemoveAt(segments.Count - 1);
-		segments[segments.Count - 1].child = null;		
+		segments[segments.Count - 1].child = null;
+		
+		segments.Add(tailSegment);
+		tailSegment.parent = segments[segments.Count - 1];
+
 		currentScale -= scalePerSegment;
-		ChangeScale(currentScale);		
+		ChangeScale(currentScale);
 	}
 
 	public void ChangeScale (float value)
@@ -82,7 +98,7 @@ public class Body : MonoBehaviour {
 
 			if(segment.child != null)
 			{
-				segment.gameObject.transform.up = segment.child.position - segment.parent.position;
+				segment.gameObject.transform.up = segment.parent.position - segment.child.position;
 			}
 			else 
 			{
