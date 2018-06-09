@@ -29,7 +29,7 @@ public class CameraController : MonoBehaviour {
 
 		Vector3 newPos = Vector3.SmoothDamp(transform.position, target.transform.position, ref velocity, smoothing);
 
-		camera.orthographicSize = originalZ + kraken.currentScale * kraken.scalePerSegment;
+		camera.orthographicSize = originalZ + kraken.currentScale + kraken.scalePerSegment;
 
 		newPos.z = transform.position.z;
 

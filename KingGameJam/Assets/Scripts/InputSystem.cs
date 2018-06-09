@@ -9,7 +9,6 @@ using Unity.Mathematics;
 
 public class InputSystem : ComponentSystem
 {
-
 	public struct Data
 	{
 		public PlayerInput Input;

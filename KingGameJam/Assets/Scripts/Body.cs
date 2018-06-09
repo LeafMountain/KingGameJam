@@ -88,7 +88,8 @@ public class Body : MonoBehaviour {
 	}
 
 	void MoveSegment (BodySegment segment){
-		Vector2 newPos = Vector2.SmoothDamp(segment.position, segment.parent.position, ref segment.velocity, .5f);
+		Vector2 newPos = Vector2.SmoothDamp(segment.position, segment.parent.position, ref segment.velocity, .2f);
+		
 		segment.position = newPos;
 	}
 
