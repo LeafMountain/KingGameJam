@@ -31,8 +31,8 @@ public class Body : MonoBehaviour {
 	{
 		BodySegment segment = new BodySegment();
 		segment.parent = segments[segments.Count - 1];
-
 		segment.gameObject = Instantiate(bodyPrefab, transform.position, Quaternion.identity);
+
 		segments.Add(segment);		
 	}
 
@@ -54,10 +54,20 @@ public class Body : MonoBehaviour {
 			
 			if(Vector3.Distance(segment.position, segment.parent.position) > segmentLength)
 			{
-				Debug.Log("test");				
-				segment.gameObject.transform.Translate(segment.position - segment.parent.position);
+				MoveSegment(segment);
+				LineRenderer line = segment.gameObject.GetComponent<LineRenderer>();
+				line.SetPosition(0, segment.position);
+				line.SetPosition(1, (segment.parent.position));
 			}
 		}
+	}
+
+	void MoveSegment (BodySegment segment){
+		// Vector3.SmoothDamp(segment.position, )
+		// segment.gameObject.transform.Translate(segment.parent.position - segment.position);
+		// segment.gameObject.GetComponent<Rigidbody2D>().AddForce((segment.parent.position - segment.position) * 3);
+		Vector2 newPos = Vector2.SmoothDamp(segment.position, segment.parent.position, ref segment.velocity, .5f);
+		segment.position = newPos;
 	}
 
 	void Update () 
@@ -72,10 +82,14 @@ public class BodySegment
 		get {
 			return gameObject.transform.position;
 		}
+		set {
+			gameObject.transform.position = value;
+		}
 	}
 	public GameObject gameObject;
 	public BodySegment parent;
 	public BodySegment child;
+	public Vector2 velocity;
 
 	public BodySegment () { }
 
