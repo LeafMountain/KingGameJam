@@ -536,7 +536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SerializedData:
-    speed: 0
+    speed: 10
 --- !u!114 &1831769851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -568,9 +568,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1831769849}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50a81edf4e1376b4fa3464b1840554b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fdcf73cf7db45e0a744d4c26ec07ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SerializedData:
+    Value:
+      x: 0
+      y: 0
 --- !u!114 &1831769853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,7 +624,7 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1831769849}
   m_BodyType: 0
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
