@@ -263,8 +263,11 @@ MonoBehaviour:
   head: {fileID: 1267502539265308}
   BodyParent: {fileID: 4367258747071710}
   tail: {fileID: 0}
-  bodyPrefab: {fileID: 0}
-  segmentLength: 1
+  bodyPrefab: {fileID: 1228812513449144, guid: fed46857b4fb9e4488db17c1639d4fad, type: 2}
+  segmentDistance: 1.5
+  scalePerSegment: 0.05
+  currentScale: 0
+  spawnedSegments: []
 --- !u!114 &114768752501449156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -276,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2cd2f8be4c71da4797324c5f264484b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 2
+  force: 5
   maxSpeed: 10
 --- !u!212 &212614023441893642
 SpriteRenderer:
