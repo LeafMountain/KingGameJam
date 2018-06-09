@@ -54,19 +54,20 @@ public class SpawningSystem : MonoBehaviour {
 	}
 	private void Spawner(){
 
-		Vector2 newPos = SetSpawnCoordinates();
+		
 
 		for (int i = 0; i < mobIndex; i++)
 		{
+			Vector2 newPos = SetSpawnCoordinates();
 			Spawn(i, newPos);
 		} 
 
 	}
 	private Vector2 SetSpawnCoordinates(){
 
-		Vector2 krakenPos = Kraken.Instance.transform.position; 
+		Vector2 krakenPos = mainCamera.transform.position; 
 
-		Vector2 randomPos = new Vector2(Random.Range(-1f,1f), Random.Range(-1f,1f))*10.0f;
+		Vector2 randomPos = new Vector2(Random.Range(-1f,1f), Random.Range(-1f,1f)).normalized *12.0f;
 
 		return krakenPos + randomPos;
 
