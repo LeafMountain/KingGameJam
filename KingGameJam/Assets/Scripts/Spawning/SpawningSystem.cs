@@ -10,56 +10,67 @@ public class SpawningSystem : MonoBehaviour {
 
 
 	[Header("Seconds between spawns")]
-	public int spawningRate;
+	public int floaterRate;
+	public int surferRate;
+	public int raftRate;
+	public int motorBoatRate;
+	public int drugBoatRate;
+	public int cruiseShipRate;
+
+	private int[] secTweenSpawns; 
 
 	[Header("Spawn Marks in Seconds")]
+	public float floater;
 	public float surfer;
 	public float raft;
 	public float motorBoat;
 	public float drugBoat;
 	public float cruiseShip;
 
-	private float minXspawningCoordinate = 10.0f;
-	private float minYspawningCoordinate = 8.0f;
-	private float maxXspawningCoordinate = 20.0f;
-	private float maxYspawningCoordinate = 16.0f;
+	private float[] spawnMarks; 
 
 	private float timeElapsed = 0.0f;
 	private int mobIndex = 1;
-	private float spawningRateCounter = 0;
+	private float[] spawningRateCounter;
 
 	void Start () {
 		if(mainCamera == null)mainCamera = GameObject.Find("MainCamera");
+
+		secTweenSpawns = new int[] {floaterRate, surferRate, raftRate, motorBoatRate, drugBoatRate, cruiseShipRate};
+		spawnMarks = new float[] {floater, surfer, raft, motorBoat, drugBoat, cruiseShip};
+		spawningRateCounter = new float[6];
 	}
 	
 
 	void Update () {
 
-		timeElapsed += Time.deltaTime;
-
-		if(spawningRateCounter > (float)spawningRate){
-
-			Spawner();
-			spawningRateCounter = 0;
-		}
-		else
-		{
-			spawningRateCounter += Time.deltaTime;
-
-		}
-		if(timeElapsed > surfer && mobIndex == 1) mobIndex++;
-		if(timeElapsed > motorBoat && mobIndex == 2) mobIndex++;
 		
+
+		
+			Spawner();
+	
+		
+		
+		timeElapsed += Time.deltaTime;
+		
+
+		for (int i = 0; i < spawningRateCounter.Length; i++)
+		{
+			spawningRateCounter[i] += Time.deltaTime;
+		}
 		
 	}
 	private void Spawner(){
 
 		
 
-		for (int i = 0; i < mobIndex; i++)
+		for (int i = 0; i < enemies.Length; i++)
 		{
-			Vector2 newPos = SetSpawnCoordinates();
-			Spawn(i, newPos);
+			if(timeElapsed > (float)spawnMarks[i] && spawningRateCounter[i] > secTweenSpawns[i]){
+				Vector2 newPos = SetSpawnCoordinates();
+				Spawn(i, newPos);
+				spawningRateCounter[i] = 0.0f;
+			}
 		} 
 
 	}
@@ -67,7 +78,9 @@ public class SpawningSystem : MonoBehaviour {
 
 		Vector2 krakenPos = mainCamera.transform.position; 
 
-		Vector2 randomPos = new Vector2(Random.Range(-1f,1f), Random.Range(-1f,1f)).normalized *12.0f;
+		float range = Random.Range(12.0f, 20.0f);
+
+		Vector2 randomPos = new Vector2(Random.Range(-1f,1f), Random.Range(-1f,1f)).normalized * range;
 
 		return krakenPos + randomPos;
 

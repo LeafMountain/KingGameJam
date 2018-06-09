@@ -556,12 +556,18 @@ MonoBehaviour:
   - {fileID: 1153642514010886, guid: d1c8db10a2ce44772adb93460dde6c67, type: 2}
   - {fileID: 1892080254632494, guid: 1099bf1390a6f424a9d8be2a075d7ef2, type: 2}
   mainCamera: {fileID: 1065967315}
-  spawningRate: 3
-  surfer: 10
-  raft: 30
-  motorBoat: 0
-  drugBoat: 0
-  cruiseShip: 0
+  floaterRate: 5
+  surferRate: 15
+  raftRate: 30
+  motorBoatRate: 50
+  drugBoatRate: 60
+  cruiseShipRate: 90
+  floater: 0
+  surfer: 60
+  raft: 120
+  motorBoat: 240
+  drugBoat: 480
+  cruiseShip: 960
 --- !u!4 &929232836
 Transform:
   m_ObjectHideFlags: 0
