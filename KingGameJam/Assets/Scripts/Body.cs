@@ -2,40 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Body : MonoBehaviour {
+public class Kraken : MonoBehaviour {
 
-	public static Body Instance;
+	public static Kraken Instance;
 
 	public GameObject head;
 	public Transform BodyParent;
-	public GameObject tail;
+	public GameObject tailPrefab;
+
+	public BodySegment tailSegment;
 
 	public GameObject bodyPrefab;
 
 	public float segmentDistance = 1.5f;
 	public float scalePerSegment = .1f;
 
-	[HideInInspector]
-	public float currentScale = 1;
+	public float Scale {
+		get {
+			return segments.Count * scalePerSegment + 1;		
+		}
+	}
+
+	public float TailLength
+	{
+		get 
+		{
+			return segments.Count - 1;
+		}
+	}
 
 	public List<BodySegment> segments = new List<BodySegment>();
 	public List<GameObject> spawnedSegments = new List<GameObject>();
 
+	void Awake ()
+	{
+		if(Instance == null)
+		{
+			Instance = this;
+		}
+	}
+
 	void Start ()
 	{
-		currentScale = 1;
-		BodySegment head = new BodySegment();
-		head.gameObject = this.head;
-		segments.Add(head);
+		// Create Head
+		BodySegment headSegment = new BodySegment();
+		headSegment.gameObject = this.head;
+		segments.Add(headSegment);
 
-		AddSegment();
-		AddSegment();
-		AddSegment();
-		AddSegment();
+		// Create Tail
+		tailSegment = new BodySegment();
+		tailSegment.gameObject = Instantiate(tailPrefab, transform.position, Quaternion.identity);
+		tailSegment.parent = headSegment;
+		segments.Add(tailSegment);
 	}
 
 	public void AddSegment ()
 	{
+		RemoveTail();
+
 		BodySegment segment = new BodySegment();
 		segment.parent = segments[segments.Count - 1];
 		segment.gameObject = Instantiate(bodyPrefab, segment.parent.position - (Vector2)segment.parent.gameObject.transform.up, segment.parent.gameObject.transform.rotation);
@@ -43,29 +67,49 @@ public class Body : MonoBehaviour {
 
 		segments.Add(segment);
 
-		currentScale += scalePerSegment;
-		ChangeScale(currentScale);
+		AddTail();
+
+		UpdateScale();
 	}
 
 	public void RemoveSegment ()
 	{
-		if(segments.Count <= 1)
+		if(segments.Count <= 2)
 		{
 			return;
 		}
 
+		RemoveTail();
+
 		Destroy(segments[segments.Count - 1].gameObject);
 		segments.RemoveAt(segments.Count - 1);
-		segments[segments.Count - 1].child = null;		
-		currentScale -= scalePerSegment;
-		ChangeScale(currentScale);		
+		segments[segments.Count - 1].child = null;
+		
+		AddTail();
+
+		UpdateScale();
 	}
 
-	public void ChangeScale (float value)
-	{		
+	void AddTail ()
+	{
+		tailSegment.parent = segments[segments.Count - 1];		
+		segments.Add(tailSegment);
+	}
+
+	void RemoveTail()
+	{
+		segments.Remove(tailSegment);
+		tailSegment.parent = null;
+	}
+
+	public void UpdateScale ()
+	{
+		Vector2 scale = Vector2.one; 
+		scale *= this.Scale;
+
 		foreach (var segment in segments)
 		{
-			segment.gameObject.transform.localScale = Vector3.one * value;
+			segment.gameObject.transform.localScale = scale;
 		}
 	}
 
@@ -82,28 +126,64 @@ public class Body : MonoBehaviour {
 
 			if(segment.child != null)
 			{
-				segment.gameObject.transform.up = segment.child.position - segment.parent.position;
+				segment.gameObject.transform.up = segment.parent.position - segment.child.position;
+				UpdateIK(segment);
 			}
 			else 
 			{
 				segment.gameObject.transform.up = segment.parent.position - segment.position;
 			}
 
-			
-			if(Vector3.Distance(segment.position, segment.parent.position) > segmentDistance + (currentScale - 1))
-			{
-				MoveSegment(segment);
-			}
+			UpdateFK(segment);
+			MoveSegment(segment);
+
+			Vector2 newPos = Vector2.SmoothDamp(segment.position, segment.targetPos, ref segment.velocity, .1f);
+			segment.position = newPos;
+
+		}
+	}
+
+	void UpdateFK (BodySegment segment)
+	{
+		float distanceToParent = Vector3.Distance(segment.position, segment.parent.position);
+		
+		if(distanceToParent > segmentDistance + (Scale - 1))
+		{
+			segment.targetPos = segment.parent.position + (segment.position - segment.parent.position).normalized * segmentDistance;
+		}
+	}
+
+	void UpdateIK (BodySegment segment)
+	{
+		float distanceToChild = Vector3.Distance(segment.position, segment.child.position);
+
+		if(distanceToChild < segmentDistance + (Scale - 1))
+		{
+			segment.targetPos = segment.parent.position + (segment.parent.position - segment.position).normalized * segmentDistance;
 		}
 	}
 
 	void MoveSegment (BodySegment segment){
-		Vector2 newPos = Vector2.SmoothDamp(segment.position, segment.parent.position, ref segment.velocity, .5f);
+		// Vector2 newPos = Vector2.SmoothDamp(segment.position, segment.parent.position, ref segment.velocity, .5f);
+		segment.targetPos = segment.parent.position + (segment.position - segment.parent.position).normalized * segmentDistance;
+		Debug.DrawLine(segment.position, segment.targetPos, Color.red);
 
-		segment.position = newPos;
+		// segment.position = newPos;
 	}
 
-	void Update () 
+	public Bounds GetBounds ()
+	{
+		Bounds bounds = new Bounds();
+		bounds.center = transform.position;
+		List<Vector2> positions = new List<Vector2>();
+
+		segments.ForEach(segment => positions.Add(segment.position));
+		positions.ForEach(pos => bounds.Encapsulate(pos));
+
+		return bounds;
+	}
+
+	void LateUpdate () 
 	{
 		if(Input.GetKeyDown(KeyCode.KeypadPlus))
 		{
@@ -117,6 +197,11 @@ public class Body : MonoBehaviour {
 
 		UpdateSegments();
 	}
+
+	void OnDrawGizmos ()
+	{
+		Gizmos.DrawWireCube(GetBounds().center, GetBounds().size);
+	}
 }
 
 public class BodySegment
@@ -129,15 +214,12 @@ public class BodySegment
 			gameObject.transform.position = value;
 		}
 	}
+
 	public GameObject gameObject;
 	public BodySegment parent;
 	public BodySegment child;
 	public Vector2 velocity;
+	public Vector2 targetPos;
 
 	public BodySegment () { }
-
-	public BodySegment (BodySegment parent)
-	{
-		this.parent = parent;
-	}
 }

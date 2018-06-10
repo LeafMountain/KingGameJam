@@ -9,41 +9,31 @@ public class CameraController : MonoBehaviour {
 	Kraken kraken;
 
 	Vector3 velocity;
-	float originalZ;
-	Camera camera;
+	float originalSize;
+	Camera cam;
 
 	void Start () 
 	{
 		kraken = Kraken.Instance;
-		originalZ = Camera.main.orthographicSize;
-		camera = Camera.main;
+		originalSize = Camera.main.orthographicSize;
+		cam = Camera.main;
 	}
 	
-	void Update () 
+	void LateUpdate () 
 	{
-		Body kraken = this.kraken.GetComponent<Body>();
+		Kraken kraken = this.kraken.GetComponent<Kraken>();
 
-		Bounds bounds = GetBounds(kraken);
-
-		// Vector3 zTarget = 
+		Bounds bounds = kraken.GetBounds();
 
 		Vector3 newPos = Vector3.SmoothDamp(transform.position, target.transform.position, ref velocity, smoothing);
 
-		camera.orthographicSize = originalZ + kraken.currentScale + kraken.scalePerSegment;
+		if(bounds.size.x > originalSize)
+		{
+			cam.orthographicSize = (bounds.size.x + bounds.size.y) / 2;
+		}
 
 		newPos.z = transform.position.z;
 
 		transform.position = newPos;
-	}
-
-	Bounds GetBounds (Body body)
-	{
-		Bounds krakenBounds = new Bounds();
-		List<Vector2> positions = new List<Vector2>();
-
-		body.segments.ForEach(segment => positions.Add(segment.position));
-		positions.ForEach(pos => krakenBounds.Encapsulate(pos));
-		
-		return krakenBounds;
 	}
 }
