@@ -7,18 +7,22 @@ public class Kraken : MonoBehaviour {
 	public static Kraken Instance;
 
 	public GameObject head;
-	public Transform BodyParent;
 	public GameObject tailPrefab;
 
 	public BodySegment tailSegment;
 
 	public GameObject bodyPrefab;
 
-	public float segmentDistance = 1.5f;
-	public float scalePerSegment = .1f;
+	public float relaxedSpacing = 1.5f;
+	public float squeezeSpacing = .5f;
+	public float scalePerSegment = .1f;	
 
-	public float Scale {
-		get {
+	float segmentDistance = 1.5f;
+
+	public float Scale 
+	{
+		get 
+		{
 			return segments.Count * scalePerSegment + 1;		
 		}
 	}
@@ -181,6 +185,16 @@ public class Kraken : MonoBehaviour {
 		positions.ForEach(pos => bounds.Encapsulate(pos));
 
 		return bounds;
+	}
+
+	public void Squeeze()
+	{
+		segmentDistance = squeezeSpacing;
+	}
+
+	public void Relax ()
+	{
+		segmentDistance = relaxedSpacing;
 	}
 
 	void LateUpdate () 
