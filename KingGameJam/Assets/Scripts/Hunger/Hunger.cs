@@ -5,23 +5,41 @@ using UnityEngine;
 public class Hunger : MonoBehaviour {
 
 
-	
+	[Header("Hunger Properties")]
+	public float hpDropRate;
+	public float hpAmountLoss;
+	public float hpAmountAdd;
+	public int smallTailLimit;
+	public int bigTailLimit;
+	public int tailLossRate;
+
 	public Kraken kraken;
 
-	private float hpDropRate = 0.6f;
+	[Header("Debug")]
+	public bool debugMode;
+	
 
-	private float hp;
+	private float hp; //size
 	private float timePassed = 0.0f;
 
+	private int debugTailSize = 0;
+	private int tailLossCounter;
+	
 
 
 
 	void Start () {
 		
 		
+		if(hpDropRate == 0) hpDropRate = 1.2f;
+		if(hpAmountLoss == 0) hpAmountLoss = 0.01f;
+		if(hpAmountAdd == 0) hpAmountAdd = 1.0f;
+		if(smallTailLimit == 0) smallTailLimit = 5;
+		if(bigTailLimit == 0) bigTailLimit = 10;
 		if(kraken == null) kraken = Kraken.Instance;
 
 		hp = 1.0f;
+		tailLossCounter = 0;
 
 
 	}
@@ -31,28 +49,63 @@ public class Hunger : MonoBehaviour {
 		
 		HPDrop();
 		EatTest();
-		timePassed = Time.deltaTime;
+		LoseTail();
+		timePassed += Time.deltaTime;
 	}
 	
 	public void Eat(){
 		
-		hp += 0.1f/(float)kraken.tailLength; 
+		if(!debugMode){hp += hpAmountAdd/((float)kraken.TailLength + 1.0f);}
+		else
+		{hp += hpAmountAdd/((float)debugTailSize + 1.0f);} 
 	}
 	private void HPDrop(){
 
 		if(timePassed > hpDropRate)
 		{
-			hp -= 0.01f * kraken.tailLength;
+
+			if(!debugMode)
+			{hp -= hpAmountLoss * (kraken.TailLength + 1.0f);}
+			else
+			{
+				hp -= hpAmountLoss *((float)debugTailSize + 1); 
+				
+			}
 			timePassed = 0.0f;
+			tailLossCounter++;
+
 		}
 
 	}
 	private void EatTest()
 	{
-		if(Input.GetKey(KeyCode.Space))
+		if(debugMode)
 		{
-			Eat();
+			
+			if(Input.GetKeyUp(KeyCode.Space))
+			{
+				Eat();
+				debugTailSize++;
+			}
 		}
-
 	}
+	private void LoseTail(){
+		if(tailLossCounter > tailLossRate){
+			if(!debugMode)
+			{
+				if(kraken.TailLength > bigTailLimit){kraken.RemoveSegment(); kraken.RemoveSegment(); kraken.RemoveSegment();}
+				else if(kraken.TailLength > smallTailLimit){kraken.RemoveSegment();}		
+			}
+			else
+			{
+				if(debugTailSize > bigTailLimit){debugTailSize = debugTailSize - 3;}
+				else if(debugTailSize > smallTailLimit) {debugTailSize--;}
+			}
+				tailLossCounter = 0;
+
+		}
+	}
+	//properties
+	public float HP {get{return hp;}}
+
 }
