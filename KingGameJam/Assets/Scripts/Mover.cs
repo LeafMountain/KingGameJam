@@ -15,25 +15,11 @@ public class Mover : MonoBehaviour {
 		rigidbody = GetComponent<Rigidbody2D>();
 	}
 
-	// void Update () 
-	// {
-	// 	float x = Input.GetAxis("Horizontal");
-	// 	float y = Input.GetAxis("Vertical");
-
-	// 	Vector2 leftStick = new Vector2(x, y);
-		
-	// 	if(rigidbody.velocity.magnitude < maxSpeed)
-	// 	{
-	// 		rigidbody.AddForce(leftStick * force, ForceMode2D.Force);
-	// 	}
-	// }
-
 	public void Move (Vector2 Input)
 	{
 		if(rigidbody.velocity.magnitude < maxSpeed)
 		{
 			rigidbody.AddForce(Input * force, ForceMode2D.Force);
-			// transform.position += Vector3.up * 1f;
 		}
 	}
 }
