@@ -275,8 +275,8 @@ MonoBehaviour:
   tailPrefab: {fileID: 1256601064562678, guid: d0494c3f9b36ddb469c81eb570a1b638, type: 2}
   bodyPrefab: {fileID: 1228812513449144, guid: fed46857b4fb9e4488db17c1639d4fad, type: 2}
   relaxedSpacing: 1.5
-  squeezeSpacing: 0.5
-  scalePerSegment: 0.1
+  squeezeSpacing: 0.1
+  scalePerSegment: 0
   attackRange: 1
   spawnedSegments: []
 --- !u!212 &212010395410326360

@@ -93,6 +93,8 @@ public class Kraken : MonoBehaviour {
 
 	void LateUpdate () 
 	{
+		Attack();
+
 		if(Input.GetKeyDown(KeyCode.KeypadPlus))
 		{
 			body.AddSegment();
@@ -106,9 +108,9 @@ public class Kraken : MonoBehaviour {
 		body.UpdateSegments();
 	}
 
-	// void OnTriggerEnter2D(Collider2D col)
+	// void OnCollisionEnter2D(Collision2D col)
 	// {
-	// 	if(rigidbody.velocity.magnitude > 5)
+	// 	if(rigidbody.velocity.magnitude > 7)
 	// 	{
 	// 		Destroy(gameObject);
 	// 	}
