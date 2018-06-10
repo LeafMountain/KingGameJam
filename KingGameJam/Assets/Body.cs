@@ -32,7 +32,7 @@ public class Body
 			return segments.Count - 1;
 		}
 		set
-		{
+		{			
 			if(value > TailLength)
 			{
 				for (int i = 0; i < TailLength - value; i++)

@@ -18,15 +18,12 @@ public class Hunger : MonoBehaviour {
 	[Header("Debug")]
 	public bool debugMode;
 	
-
+	[SerializeField]
 	private float hp; //size
 	private float timePassed = 0.0f;
 
 	private int debugTailSize = 0;
 	private int tailLossCounter;
-	
-
-
 
 	void Start () {
 		
@@ -55,9 +52,14 @@ public class Hunger : MonoBehaviour {
 	
 	public void Eat(){
 		
-		if(!debugMode){hp += hpAmountAdd/((float)kraken.body.TailLength + 1.0f);}
+		if(!debugMode)
+		{
+			hp += hpAmountAdd/((float)kraken.body.TailLength + 1.0f);
+		}
 		else
-		{hp += hpAmountAdd/((float)debugTailSize + 1.0f);} 
+		{
+			hp += hpAmountAdd/((float)debugTailSize + 1.0f);
+		} 
 	}
 	private void HPDrop(){
 

@@ -16,9 +16,10 @@ public class Eater : MonoBehaviour
 		if(hit.transform)
 		{
 			Food food = hit.transform.GetComponent<Food>();
-			Debug.Log(hit.transform);
+
 			if(food)
 			{
+				Debug.Log("Trying to eat " + food.transform);
 				food.Eat();
 			}
 		}
