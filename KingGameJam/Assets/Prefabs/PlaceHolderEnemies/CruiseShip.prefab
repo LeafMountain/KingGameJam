@@ -25,7 +25,10 @@ GameObject:
   - component: {fileID: 114185188434596752}
   - component: {fileID: 114625611484515788}
   - component: {fileID: 114684893726485704}
-  - component: {fileID: 58747778415405392}
+  - component: {fileID: 70579731344990802}
+  - component: {fileID: 95265078776676734}
+  - component: {fileID: 114384412371994582}
+  - component: {fileID: 114614438691290380}
   m_Layer: 0
   m_Name: CruiseShip
   m_TagString: Untagged
@@ -40,14 +43,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1892080254632494}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.504898, y: 2.125053, z: -19.09}
+  m_LocalPosition: {x: -8.504898, y: 2.125053, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &58747778415405392
-CircleCollider2D:
+--- !u!70 &70579731344990802
+CapsuleCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -58,9 +61,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Offset: {x: 0, y: -0.75}
+  m_Size: {x: 8.59, y: 2.1}
+  m_Direction: 1
 --- !u!82 &82091562765699562
 AudioSource:
   m_ObjectHideFlags: 1
@@ -156,6 +159,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &95265078776676734
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1892080254632494}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 28f8dc6a3b809654e8134a10a8f6f7d8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114180861958373236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -179,6 +200,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: b3c01edfa2e3b40288783474af07d9ff, type: 3}
+--- !u!114 &114384412371994582
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1892080254632494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 751277b87e8d8334ca1962e97f631725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  go: {fileID: 1153642514010886, guid: d1c8db10a2ce44772adb93460dde6c67, type: 2}
+  number: 10
+--- !u!114 &114614438691290380
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1892080254632494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0f5e1e7387f06428e36cf540ca975f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Value: 0
+  OnEaten:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114384412371994582}
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114625611484515788}
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114625611484515788
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -253,7 +326,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b7a06f7797261c040abf286d6f040066, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4b02990d54b58f64bb22fdcf48beb942, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
