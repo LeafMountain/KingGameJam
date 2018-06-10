@@ -48,6 +48,12 @@ public class Hunger : MonoBehaviour {
 		EatTest();
 		LoseTail();
 		timePassed += Time.deltaTime;
+		if(hp < 0)
+		{
+			GameObject.Find("GameOver").SetActive(true);
+			Time.timeScale = 0; 
+
+		}
 	}
 	
 	public void Eat(){
