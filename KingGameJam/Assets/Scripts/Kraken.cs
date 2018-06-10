@@ -107,6 +107,7 @@ public class Kraken : MonoBehaviour {
 
 		body.TailLength = GetComponent<Hunger>().HP;
 		body.UpdateSegments();
+		// Debug.Log(GetComponent<Hunger>().HP);
 
 	}
 
