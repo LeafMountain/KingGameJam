@@ -556,7 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b52ff6989a373db4d8d3a69512c5e1c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eatRange: 0
+  eatRange: 2
   OnEat:
     m_PersistentCalls:
       m_Calls: []
@@ -611,6 +611,12 @@ Prefab:
       propertyPath: maxSpeed
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 114449755498669318, guid: 0623d4e367214fb48a045a2a3c9575f2,
+        type: 2}
+      propertyPath: tailPrefab
+      value: 
+      objectReference: {fileID: 1105429235532734, guid: d0494c3f9b36ddb469c81eb570a1b638,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0623d4e367214fb48a045a2a3c9575f2, type: 2}
   m_IsPrefabAsset: 0
@@ -695,32 +701,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114997661815911462, guid: e99048790e46e86429cf01c27cbf8e63, type: 2}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e99048790e46e86429cf01c27cbf8e63, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &985943356 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1192077888509586, guid: e99048790e46e86429cf01c27cbf8e63,
-    type: 2}
-  m_PrefabInternal: {fileID: 979304589}
---- !u!114 &985943360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 985943356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d0f5e1e7387f06428e36cf540ca975f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Value: 0
-  OnEaten:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1209822811
 GameObject:
   m_ObjectHideFlags: 0

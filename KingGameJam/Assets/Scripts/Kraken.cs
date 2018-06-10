@@ -24,6 +24,8 @@ public class Kraken : MonoBehaviour {
 	public List<BodySegment> segments = new List<BodySegment>();
 	public List<GameObject> spawnedSegments = new List<GameObject>();
 
+	Rigidbody2D rigidbody;
+
 	void Awake ()
 	{
 		if(Instance == null)
@@ -35,12 +37,14 @@ public class Kraken : MonoBehaviour {
 	void Start()
 	{
 		body = new Body(gameObject, tailPrefab, bodyPrefab);
+
+		rigidbody = GetComponent<Rigidbody2D>();
 	}
 
 	public void Squeeze()
 	{
 		GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-		
+
 		body.tailSegment.child = body.headSegment;
 		body.headSegment.parent = body.tailSegment;
 
@@ -101,6 +105,14 @@ public class Kraken : MonoBehaviour {
 
 		body.UpdateSegments();
 	}
+
+	// void OnTriggerEnter2D(Collider2D col)
+	// {
+	// 	if(rigidbody.velocity.magnitude > 5)
+	// 	{
+	// 		Destroy(gameObject);
+	// 	}
+	// }
 
 	void OnDrawGizmos ()
 	{
