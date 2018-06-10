@@ -8,6 +8,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: OnEaten.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 4b02990d54b58f64bb22fdcf48beb942,
@@ -28,16 +32,33 @@ Prefab:
       propertyPath: waitTime
       value: 4.6
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: floater
+      value: 
+      objectReference: {fileID: 1153642514010886, guid: d1c8db10a2ce44772adb93460dde6c67,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: OnEaten.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 114407655173728336}
+    - target: {fileID: 0}
+      propertyPath: OnEaten.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DestroyTest
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: OnEaten.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
+  m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1892080254632494}
-  m_IsPrefabParent: 0
+  m_IsPrefabAsset: 0
 --- !u!1 &1892080254632494
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4819349644746950}
   - component: {fileID: 212855098536998470}
@@ -49,6 +70,8 @@ GameObject:
   - component: {fileID: 58747778415405392}
   - component: {fileID: 50416595253378826}
   - component: {fileID: 114724333553762062}
+  - component: {fileID: 114407655173728336}
+  - component: {fileID: 114506933279501414}
   m_Layer: 0
   m_Name: CruiseShip
   m_TagString: Untagged
@@ -59,7 +82,7 @@ GameObject:
 --- !u!4 &4819349644746950
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1892080254632494}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -73,7 +96,7 @@ Transform:
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1892080254632494}
   m_BodyType: 0
@@ -92,7 +115,7 @@ Rigidbody2D:
 --- !u!58 &58747778415405392
 CircleCollider2D:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1892080254632494}
   m_Enabled: 1
@@ -107,7 +130,7 @@ CircleCollider2D:
 --- !u!82 &82091562765699562
 AudioSource:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1892080254632494}
   m_Enabled: 1
@@ -202,7 +225,7 @@ AudioSource:
 --- !u!114 &114180861958373236
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1892080254632494}
   m_Enabled: 1
@@ -213,7 +236,7 @@ MonoBehaviour:
 --- !u!114 &114185188434596752
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1892080254632494}
   m_Enabled: 1
@@ -222,10 +245,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: b3c01edfa2e3b40288783474af07d9ff, type: 3}
+--- !u!114 &114407655173728336
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1892080254632494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0bb57bcb72d7402ebc76fa0d83968ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugMode: 0
+  floater: {fileID: 1153642514010886, guid: d1c8db10a2ce44772adb93460dde6c67, type: 2}
+--- !u!114 &114506933279501414
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1892080254632494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0f5e1e7387f06428e36cf540ca975f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Value: 0
+  OnEaten:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114407655173728336}
+        m_MethodName: DestroyTest
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114625611484515788
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1892080254632494}
   m_Enabled: 1
@@ -236,7 +300,7 @@ MonoBehaviour:
 --- !u!114 &114684893726485704
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1892080254632494}
   m_Enabled: 1
@@ -264,7 +328,7 @@ MonoBehaviour:
 --- !u!114 &114724333553762062
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1892080254632494}
   m_Enabled: 1
@@ -278,7 +342,7 @@ MonoBehaviour:
 --- !u!212 &212855098536998470
 SpriteRenderer:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1892080254632494}
   m_Enabled: 1
@@ -320,3 +384,4 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
