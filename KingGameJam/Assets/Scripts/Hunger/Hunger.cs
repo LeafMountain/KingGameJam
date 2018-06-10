@@ -55,7 +55,7 @@ public class Hunger : MonoBehaviour {
 	
 	public void Eat(){
 		
-		if(!debugMode){hp += hpAmountAdd/((float)kraken.TailLength + 1.0f);}
+		if(!debugMode){hp += hpAmountAdd/((float)kraken.body.TailLength + 1.0f);}
 		else
 		{hp += hpAmountAdd/((float)debugTailSize + 1.0f);} 
 	}
@@ -65,7 +65,7 @@ public class Hunger : MonoBehaviour {
 		{
 
 			if(!debugMode)
-			{hp -= hpAmountLoss * (kraken.TailLength + 1.0f);}
+			{hp -= hpAmountLoss * (kraken.body.TailLength + 1.0f);}
 			else
 			{
 				hp -= hpAmountLoss *((float)debugTailSize + 1); 
@@ -93,15 +93,22 @@ public class Hunger : MonoBehaviour {
 		if(tailLossCounter > tailLossRate){
 			if(!debugMode)
 			{
-				if(kraken.TailLength > bigTailLimit){kraken.RemoveSegment(); kraken.RemoveSegment(); kraken.RemoveSegment();}
-				else if(kraken.TailLength > smallTailLimit){kraken.RemoveSegment();}		
+				if(kraken.body.TailLength > bigTailLimit){
+					kraken.body.RemoveSegment(); 
+					kraken.body.RemoveSegment(); 
+					kraken.body.RemoveSegment();
+					}
+				else if(kraken.body.TailLength > smallTailLimit){
+					kraken.body.RemoveSegment();
+				}		
 			}
 			else
 			{
 				if(debugTailSize > bigTailLimit){debugTailSize = debugTailSize - 3;}
 				else if(debugTailSize > smallTailLimit) {debugTailSize--;}
 			}
-				tailLossCounter = 0;
+			
+			tailLossCounter = 0;
 
 		}
 	}

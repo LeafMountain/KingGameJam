@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour {
 	{
 		Kraken kraken = this.kraken.GetComponent<Kraken>();
 
-		Bounds bounds = kraken.GetBounds();
+		Bounds bounds = kraken.body.GetBounds();
 
 		Vector3 newPos = Vector3.SmoothDamp(transform.position, target.transform.position, ref velocity, smoothing);
 

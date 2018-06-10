@@ -29,7 +29,7 @@ GameObject:
   - component: {fileID: 114039330008012684}
   - component: {fileID: 114942705758834634}
   - component: {fileID: 114412744438715950}
-  - component: {fileID: 114997661815911462}
+  - component: {fileID: 114213629685890962}
   m_Layer: 0
   m_Name: Human
   m_TagString: Untagged
@@ -125,6 +125,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da0419cc806367049bc48d85bae5fd9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114213629685890962
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1192077888509586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0f5e1e7387f06428e36cf540ca975f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Value: 0
+  OnEaten:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114174193736870348}
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114233860406971046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,34 +203,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.1
   maxSpeed: 3
---- !u!114 &114997661815911462
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1192077888509586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3922311a0997fbe448723bb34f000169, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Value: 1
-  OnDead:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114174193736870348}
-        m_MethodName: Trigger
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!212 &212621543887478740
 SpriteRenderer:
   m_ObjectHideFlags: 1
