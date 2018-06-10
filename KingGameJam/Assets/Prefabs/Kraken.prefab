@@ -276,7 +276,7 @@ MonoBehaviour:
   bodyPrefab: {fileID: 1228812513449144, guid: fed46857b4fb9e4488db17c1639d4fad, type: 2}
   relaxedSpacing: 1.5
   squeezeSpacing: 0.1
-  scalePerSegment: 0
+  scalePerSegment: 0.1
   attackRange: 1
   spawnedSegments: []
 --- !u!212 &212010395410326360
