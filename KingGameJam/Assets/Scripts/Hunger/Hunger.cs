@@ -4,13 +4,31 @@ using UnityEngine;
 
 public class Hunger : MonoBehaviour {
 
-	// Use this for initialization
+	public float hpDecreaseFactor;
+	public Kraken kraken;
+
+	private float hp;
+
+
+
+
 	void Start () {
 		
+		if(hpDecreaseFactor == 0) hpDecreaseFactor = 1.0f;
+		hp = 1.0f;
+
+
 	}
 	
-	// Update is called once per frame
+
 	void Update () {
 		
+		hp -= time.deltaTime * hpDecreaseFactor;
+
+	}
+	
+	public void Eat(int tailLength){
+		
+		hp += 0.1f/(float)tailLength; 
 	}
 }
