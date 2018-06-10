@@ -19,11 +19,10 @@ public class EnemyBaseScript : MonoBehaviour {
 		DestroyTest();
 	}
 	public void DestroyTest(){
-		if(debugMode && Input.GetKeyUp(KeyCode.Space))
-		{
+	
 			new SpawnFloaters(gameObject, floater);
 			Destroy(gameObject);
-		}
+		
 	}
 	
 
