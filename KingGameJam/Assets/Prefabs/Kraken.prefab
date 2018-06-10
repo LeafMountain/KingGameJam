@@ -61,6 +61,7 @@ GameObject:
   - component: {fileID: 114114194062091724}
   - component: {fileID: 114062354520153910}
   - component: {fileID: 114310556470648934}
+  - component: {fileID: 114837792442938652}
   m_Layer: 0
   m_Name: Kraken
   m_TagString: Untagged
@@ -293,7 +294,18 @@ MonoBehaviour:
   eatRange: 0.5
   OnEat:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114837792442938652}
+        m_MethodName: Eat
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114536586851016430
@@ -320,6 +332,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114837792442938652
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1337917988891626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45d136bbe047c4da88014ab277487ecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpDropRate: 0
+  hpAmountLoss: 0
+  hpAmountAdd: 0
+  smallTailLimit: 0
+  bigTailLimit: 0
+  tailLossRate: 0
+  kraken: {fileID: 114910017553041654}
+  debugMode: 0
+  hp: 0
 --- !u!114 &114910017553041654
 MonoBehaviour:
   m_ObjectHideFlags: 1

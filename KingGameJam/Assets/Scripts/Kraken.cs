@@ -105,39 +105,13 @@ public class Kraken : MonoBehaviour {
 			body.RemoveSegment();
 		}
 
+		body.TailLength = GetComponent<Hunger>().HP;
 		body.UpdateSegments();
-	}
 
-	// void OnCollisionEnter2D(Collision2D col)
-	// {
-	// 	if(rigidbody.velocity.magnitude > 7)
-	// 	{
-	// 		Destroy(gameObject);
-	// 	}
-	// }
+	}
 
 	void OnDrawGizmos ()
 	{
 		Gizmos.DrawWireCube(body.GetBounds().center, body.GetBounds().size);
 	}
 }
-
-// public class BodySegment
-// {
-// 	public Vector2 position {
-// 		get {
-// 			return gameObject.transform.position;
-// 		}
-// 		set {
-// 			gameObject.transform.position = value;
-// 		}
-// 	}
-
-// 	public GameObject gameObject;
-// 	public BodySegment parent;
-// 	public BodySegment child;
-// 	public Vector2 velocity;
-// 	public Vector2 targetPos;
-
-// 	public BodySegment () { }
-// }
