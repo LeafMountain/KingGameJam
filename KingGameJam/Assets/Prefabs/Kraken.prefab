@@ -42,9 +42,7 @@ GameObject:
   - component: {fileID: 114768752501449156}
   - component: {fileID: 114222854827180372}
   - component: {fileID: 114526672586331022}
-  - component: {fileID: 114734369221607596}
   - component: {fileID: 114931537847656128}
-  - component: {fileID: 114915623538022360}
   - component: {fileID: 114869703279570622}
   - component: {fileID: 114460213871908256}
   m_Layer: 0
@@ -173,6 +171,38 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityVector2Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  OnFireButtonDown:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114449755498669318}
+        m_MethodName: Squeeze
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnFireButtonUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114449755498669318}
+        m_MethodName: Relax
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114449755498669318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -181,9 +211,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1901051755965726}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3611ad9d2e70ad549a184bfa4787b640, type: 3}
+  m_Script: {fileID: 11500000, guid: f78fc2eb34f1a6548bc206a3e97d0926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  head: {fileID: 1267502539265308}
+  tailPrefab: {fileID: 1105429235532734, guid: d0494c3f9b36ddb469c81eb570a1b638, type: 2}
+  bodyPrefab: {fileID: 1228812513449144, guid: fed46857b4fb9e4488db17c1639d4fad, type: 2}
+  relaxedSpacing: 1.5
+  squeezeSpacing: 0.5
+  scalePerSegment: 0.1
+  spawnedSegments: []
 --- !u!114 &114460213871908256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -209,25 +246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d976879b7c71504e947aeda43fa5a0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114734369221607596
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1901051755965726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f78fc2eb34f1a6548bc206a3e97d0926, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  head: {fileID: 1267502539265308}
-  BodyParent: {fileID: 0}
-  tailPrefab: {fileID: 1105429235532734, guid: d0494c3f9b36ddb469c81eb570a1b638, type: 2}
-  bodyPrefab: {fileID: 1228812513449144, guid: fed46857b4fb9e4488db17c1639d4fad, type: 2}
-  segmentDistance: 1.5
-  scalePerSegment: 0.05
-  currentScale: 0
-  spawnedSegments: []
 --- !u!114 &114768752501449156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -253,18 +271,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Value: {x: 0, y: 0, z: 0}
---- !u!114 &114915623538022360
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1901051755965726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d63d17779dcb2e7419b174ef6f6af2ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  area: {x: 10, y: 10}
 --- !u!114 &114931537847656128
 MonoBehaviour:
   m_ObjectHideFlags: 1
