@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 114180861958373236}
   - component: {fileID: 82091562765699562}
   - component: {fileID: 114185188434596752}
+  - component: {fileID: 50884547228873848}
+  - component: {fileID: 114526264809759410}
   m_Layer: 0
   m_Name: Raft
   m_TagString: Untagged
@@ -43,6 +45,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50884547228873848
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1892080254632494}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!82 &82091562765699562
 AudioSource:
   m_ObjectHideFlags: 1
@@ -53,7 +75,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fb702412db8e8426aa44d55453eee35e, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -161,6 +183,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: fb702412db8e8426aa44d55453eee35e, type: 3}
+--- !u!114 &114526264809759410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1892080254632494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56ae2b8c172934d9d8addb6d1a594cd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingTime: 0.6
+  waitTime: 4.6
+  moveSpeed: 0.02
 --- !u!212 &212855098536998470
 SpriteRenderer:
   m_ObjectHideFlags: 1
