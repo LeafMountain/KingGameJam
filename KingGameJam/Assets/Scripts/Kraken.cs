@@ -9,6 +9,7 @@ public class Kraken : MonoBehaviour {
 	public GameObject head;
 	public GameObject tailPrefab;
 
+	public BodySegment headSegment;
 	public BodySegment tailSegment;
 
 	public GameObject bodyPrefab;
@@ -16,6 +17,8 @@ public class Kraken : MonoBehaviour {
 	public float relaxedSpacing = 1.5f;
 	public float squeezeSpacing = .5f;
 	public float scalePerSegment = .1f;	
+
+	public float attackRange = 1;
 
 	float segmentDistance = 1.5f;
 
@@ -33,6 +36,23 @@ public class Kraken : MonoBehaviour {
 		{
 			return segments.Count - 1;
 		}
+		set
+		{
+			if(value > TailLength)
+			{
+				for (int i = 0; i < TailLength - value; i++)
+				{
+					AddSegment();
+				}
+			}
+			else if (value < TailLength)
+			{
+				for (int i = 0; i < value - TailLength; i++)
+				{
+					RemoveSegment();
+				}
+			}
+		}
 	}
 
 	public List<BodySegment> segments = new List<BodySegment>();
@@ -49,8 +69,8 @@ public class Kraken : MonoBehaviour {
 	void Start ()
 	{
 		// Create Head
-		BodySegment headSegment = new BodySegment();
-		headSegment.gameObject = this.head;
+		headSegment = new BodySegment();
+		headSegment.gameObject = gameObject;
 		segments.Add(headSegment);
 
 		// Create Tail
@@ -139,11 +159,10 @@ public class Kraken : MonoBehaviour {
 			}
 
 			UpdateFK(segment);
-			MoveSegment(segment);
+			
 
 			Vector2 newPos = Vector2.SmoothDamp(segment.position, segment.targetPos, ref segment.velocity, .1f);
 			segment.position = newPos;
-
 		}
 	}
 
@@ -153,7 +172,7 @@ public class Kraken : MonoBehaviour {
 		
 		if(distanceToParent > segmentDistance + (Scale - 1))
 		{
-			segment.targetPos = segment.parent.position + (segment.position - segment.parent.position).normalized * segmentDistance;
+			segment.targetPos = segment.parent.position + (segment.position - segment.parent.position).normalized * (segmentDistance * Scale);
 		}
 	}
 
@@ -163,16 +182,14 @@ public class Kraken : MonoBehaviour {
 
 		if(distanceToChild < segmentDistance + (Scale - 1))
 		{
-			segment.targetPos = segment.parent.position + (segment.parent.position - segment.position).normalized * segmentDistance;
+			segment.targetPos = segment.parent.position + (segment.parent.position - segment.position).normalized * (segmentDistance * Scale);
 		}
 	}
 
-	void MoveSegment (BodySegment segment){
-		// Vector2 newPos = Vector2.SmoothDamp(segment.position, segment.parent.position, ref segment.velocity, .5f);
+	void MoveSegment (BodySegment segment)
+	{
 		segment.targetPos = segment.parent.position + (segment.position - segment.parent.position).normalized * segmentDistance;
 		Debug.DrawLine(segment.position, segment.targetPos, Color.red);
-
-		// segment.position = newPos;
 	}
 
 	public Bounds GetBounds ()
@@ -189,16 +206,73 @@ public class Kraken : MonoBehaviour {
 
 	public void Squeeze()
 	{
+		tailSegment.child = headSegment;
+		headSegment.parent = tailSegment;
+
 		segmentDistance = squeezeSpacing;
+		
+		Attack();
 	}
 
 	public void Relax ()
 	{
+		tailSegment.child = null;
+		headSegment.parent = null;
+
 		segmentDistance = relaxedSpacing;
+	}
+
+	void HeadAttack ()
+	{
+		Ray2D ray = new Ray2D(transform.position, transform.up);
+		RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, 2);
+		Debug.DrawRay(ray.origin, ray.direction * 2, Color.magenta);
+		
+		DoDamage(hit.transform?.gameObject);
+	}
+
+	void Attack ()
+	{
+		int index = 0;
+
+		foreach (var segment in segments)
+		{
+			Ray2D rightRay = new Ray2D(segment.position, segment.gameObject.transform.right);
+			Ray2D leftRay = new Ray2D(segment.position, -segment.gameObject.transform.right);
+			RaycastHit2D rightHit;
+			RaycastHit2D leftHit;
+
+			Debug.DrawRay(rightRay.origin, rightRay.direction * attackRange, Color.magenta);
+			Debug.DrawRay(leftRay.origin, leftRay.direction * attackRange, Color.magenta);			
+			
+			rightHit = Physics2D.Raycast(rightRay.origin, rightRay.direction, attackRange);
+			leftHit = Physics2D.Raycast(leftRay.origin, leftRay.direction, attackRange);
+
+			if(rightHit.transform)
+			{
+				DoDamage(rightHit.transform.gameObject);
+			}
+			if(leftHit.transform)
+			{
+				DoDamage(leftHit.transform.gameObject);
+			}
+		}
+	}
+
+	void DoDamage (GameObject go)
+	{
+		go.GetComponent<Health>()?.Damage(1);
+	}
+
+	void Update ()
+	{
+		HeadAttack();
 	}
 
 	void LateUpdate () 
 	{
+		HeadAttack();
+
 		if(Input.GetKeyDown(KeyCode.KeypadPlus))
 		{
 			AddSegment();

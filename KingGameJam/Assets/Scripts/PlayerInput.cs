@@ -27,7 +27,7 @@ public class PlayerInput : MonoBehaviour
 	{
 		OnLeftStick.Invoke(LeftStick());
 
-		if(Input.GetButtonDown("Fire1")){
+		if(Input.GetButton("Fire1")){
 			OnFireButtonDown.Invoke();
 		} else if (Input.GetButtonUp("Fire1")){
 			OnFireButtonUp.Invoke();
