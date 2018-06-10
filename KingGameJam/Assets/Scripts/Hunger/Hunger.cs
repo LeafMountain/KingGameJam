@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class Hunger : MonoBehaviour {
 
-	public float hpDecreaseFactor;
+
+	
 	public Kraken kraken;
 
+	private float hpDropRate = 0.6f;
+
 	private float hp;
+	private float timePassed = 0.0f;
 
 
 
 
 	void Start () {
 		
-		if(hpDecreaseFactor == 0) hpDecreaseFactor = 1.0f;
+		
+		if(kraken == null) kraken = Kraken.Instance;
+
 		hp = 1.0f;
 
 
@@ -23,12 +29,30 @@ public class Hunger : MonoBehaviour {
 
 	void Update () {
 		
-		hp -= time.deltaTime * hpDecreaseFactor;
-
+		HPDrop();
+		EatTest();
+		timePassed = Time.deltaTime;
 	}
 	
-	public void Eat(int tailLength){
+	public void Eat(){
 		
-		hp += 0.1f/(float)tailLength; 
+		hp += 0.1f/(float)kraken.tailLength; 
+	}
+	private void HPDrop(){
+
+		if(timePassed > hpDropRate)
+		{
+			hp -= 0.01f * kraken.tailLength;
+			timePassed = 0.0f;
+		}
+
+	}
+	private void EatTest()
+	{
+		if(Input.GetKey(KeyCode.Space))
+		{
+			Eat();
+		}
+
 	}
 }
