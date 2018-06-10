@@ -19,9 +19,19 @@ public class PlayerInput : MonoBehaviour
 
 	public UnityVector2Event OnLeftStick;
 
+	public UnityEvent OnFireButtonDown;
+	public UnityEvent OnFireButtonUp;
+	
+
 	void Update ()
 	{
 		OnLeftStick.Invoke(LeftStick());
+
+		if(Input.GetButtonDown("Fire1")){
+			OnFireButtonDown.Invoke();
+		} else if (Input.GetButtonUp("Fire1")){
+			OnFireButtonUp.Invoke();
+		}
 	}
 
 	Vector2 LeftStick () 

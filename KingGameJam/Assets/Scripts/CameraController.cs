@@ -27,9 +27,15 @@ public class CameraController : MonoBehaviour {
 
 		Vector3 newPos = Vector3.SmoothDamp(transform.position, target.transform.position, ref velocity, smoothing);
 
-		if(bounds.size.x > originalSize)
+		float boundsSize = (bounds.size.x + bounds.size.y) / 2;
+
+		if(boundsSize > originalSize)
 		{
 			cam.orthographicSize = (bounds.size.x + bounds.size.y) / 2;
+		}
+		else 
+		{
+			cam.orthographicSize = originalSize;
 		}
 
 		newPos.z = transform.position.z;
