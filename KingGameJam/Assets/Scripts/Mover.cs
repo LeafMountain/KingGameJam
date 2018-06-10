@@ -33,6 +33,7 @@ public class Mover : MonoBehaviour {
 		if(rigidbody.velocity.magnitude < maxSpeed)
 		{
 			rigidbody.AddForce(Input * force, ForceMode2D.Force);
+			// transform.position += Vector3.up * 1f;
 		}
 	}
 }
