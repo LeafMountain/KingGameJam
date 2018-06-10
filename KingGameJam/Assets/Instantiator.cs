@@ -10,8 +10,9 @@ public class Instantiator : MonoBehaviour {
 	{
 		for (int i = 0; i < number; i++)
 		{
-			Instantiate(go, transform.position, Quaternion.identity);
-			
+			GameObject go2 = Instantiate(go, transform.position, Quaternion.identity);
+
+			go2.GetComponent<Rigidbody2D>()?.AddForce(new Vector2(Random.Range(-1f, 1), (Random.Range(-1f, 1))) * 2, ForceMode2D.Impulse);
 		}
 	}
 }
