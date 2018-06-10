@@ -23,10 +23,10 @@ GameObject:
   - component: {fileID: 114562130151371516}
   - component: {fileID: 82274432839267766}
   - component: {fileID: 114691922656101208}
-  - component: {fileID: 50455265687013186}
-  - component: {fileID: 58912977677725922}
-  - component: {fileID: 114581707528481206}
-  - component: {fileID: 114322560358399680}
+  - component: {fileID: 50750712678255152}
+  - component: {fileID: 95334262206316148}
+  - component: {fileID: 114546276185808146}
+  - component: {fileID: 114738832361946188}
   m_Layer: 0
   m_Name: Floater
   m_TagString: Untagged
@@ -41,13 +41,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1153642514010886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -19.09}
+  m_LocalPosition: {x: -8.470263, y: 2.7777581, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50455265687013186
+--- !u!50 &50750712678255152
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
@@ -67,21 +67,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &58912977677725922
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1153642514010886}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.2
 --- !u!82 &82274432839267766
 AudioSource:
   m_ObjectHideFlags: 1
@@ -92,7 +77,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7efd99e9ce112476a8bf346df63c0a92, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -177,29 +162,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &114322560358399680
-MonoBehaviour:
+--- !u!95 &95334262206316148
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1153642514010886}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da0419cc806367049bc48d85bae5fd9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114562130151371516
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1153642514010886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114581707528481206
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c5b2d77ebfe0794488b3d289b546e531, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114546276185808146
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -214,7 +195,7 @@ MonoBehaviour:
   OnEaten:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114322560358399680}
+      - m_Target: {fileID: 114738832361946188}
         m_MethodName: Trigger
         m_Mode: 1
         m_Arguments:
@@ -227,6 +208,17 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114562130151371516
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1153642514010886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114691922656101208
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -239,6 +231,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 7efd99e9ce112476a8bf346df63c0a92, type: 3}
+--- !u!114 &114738832361946188
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1153642514010886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da0419cc806367049bc48d85bae5fd9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212345757258647238
 SpriteRenderer:
   m_ObjectHideFlags: 1

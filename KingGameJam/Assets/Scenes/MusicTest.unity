@@ -144,10 +144,10 @@ MonoBehaviour:
   hpAmountLoss: 0
   hpAmountAdd: 0
   smallTailLimit: 5
-  tailLossRate: 4
   bigTailLimit: 20
+  tailLossRate: 4
   kraken: {fileID: 0}
-  debugMode: 1
+  debugMode: 0
 --- !u!4 &501490559
 Transform:
   m_ObjectHideFlags: 0
@@ -161,6 +161,58 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &615041174
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4819349644746950, guid: 51ddb78f8e94342e596ff4ab10006a6d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819349644746950, guid: 51ddb78f8e94342e596ff4ab10006a6d, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819349644746950, guid: 51ddb78f8e94342e596ff4ab10006a6d, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819349644746950, guid: 51ddb78f8e94342e596ff4ab10006a6d, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819349644746950, guid: 51ddb78f8e94342e596ff4ab10006a6d, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819349644746950, guid: 51ddb78f8e94342e596ff4ab10006a6d, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819349644746950, guid: 51ddb78f8e94342e596ff4ab10006a6d, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819349644746950, guid: 51ddb78f8e94342e596ff4ab10006a6d, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892080254632494, guid: 51ddb78f8e94342e596ff4ab10006a6d, type: 2}
+      propertyPath: m_Name
+      value: MotorBoat(Clone)
+      objectReference: {fileID: 0}
+    - target: {fileID: 82091562765699562, guid: 51ddb78f8e94342e596ff4ab10006a6d,
+        type: 2}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114236839494827234, guid: 51ddb78f8e94342e596ff4ab10006a6d, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: 51ddb78f8e94342e596ff4ab10006a6d, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &929232834
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,6 +354,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1426790616 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1892080254632494, guid: 51ddb78f8e94342e596ff4ab10006a6d,
+    type: 2}
+  m_PrefabInternal: {fileID: 615041174}
+--- !u!114 &1426790617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1426790616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0bb57bcb72d7402ebc76fa0d83968ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugMode: 1
+  floater: {fileID: 1153642514010886, guid: d1c8db10a2ce44772adb93460dde6c67, type: 2}
+--- !u!114 &1426790618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1426790616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56ae2b8c172934d9d8addb6d1a594cd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingTime: 1.6
+  waitTime: 4.6
+  moveSpeed: 0.04
 --- !u!1 &1774846951
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,6 +484,7 @@ MonoBehaviour:
   relaxedSpacing: 1.5
   squeezeSpacing: 0.5
   scalePerSegment: 0.1
+  attackRange: 1
   spawnedSegments: []
 --- !u!4 &2036495605
 Transform:
