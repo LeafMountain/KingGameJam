@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: 4344977cdebcbec48bc583207cb92a31
+guid: bd3ed73073acf1d4cba1bb74f741a439
 TextureImporter:
   fileIDToRecycleName:
-    21300000: tex_floating_person_01_32x32_0
-    21300002: tex_floating_person_01_32x32_1
+    21300000: tex_floating_person_10_32x32_0
+    21300002: tex_floating_person_10_32x32_1
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
@@ -84,7 +84,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tex_floating_person_01_32x32_0
+      name: tex_floating_person_10_32x32_0
       rect:
         serializedVersion: 2
         x: 0
@@ -98,13 +98,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ab64c3e5421f1b488779c8b907b3246
+      spriteID: 4ad30e27d3abca448b5fb6de69a88080
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tex_floating_person_01_32x32_1
+      name: tex_floating_person_10_32x32_1
       rect:
         serializedVersion: 2
         x: 16
@@ -118,7 +118,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 719c2925859e9934c8b93847296070aa
+      spriteID: 5de76457ada013b49b109e1d2630a208
       vertices: []
       indices: 
       edges: []
@@ -126,7 +126,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 2521f8385da09894699c028482f359d7
+    spriteID: a4553b5a92218c041bed99ce0f1f2a6e
     vertices: []
     indices: 
     edges: []
