@@ -30,7 +30,7 @@ public class SpawningSystem : MonoBehaviour {
 	private float[] spawnMarks; 
 
 	private float timeElapsed = 0.0f;
-	private int mobIndex = 1;
+	// private int mobIndex = 1;
 	private float[] spawningRateCounter;
 
 	void Start () {

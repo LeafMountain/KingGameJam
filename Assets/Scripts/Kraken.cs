@@ -19,12 +19,12 @@ public class Kraken : MonoBehaviour {
 
 	public float attackRange = 1;
 
-	float segmentDistance = 1.5f;
+	// float segmentDistance = 1.5f;
 
 	public List<BodySegment> segments = new List<BodySegment>();
 	public List<GameObject> spawnedSegments = new List<GameObject>();
 
-	Rigidbody2D rigidbody;
+	// Rigidbody2D rb;
 
 	void Awake ()
 	{
@@ -38,7 +38,7 @@ public class Kraken : MonoBehaviour {
 	{
 		body = new Body(gameObject, tailPrefab, bodyPrefab);
 
-		rigidbody = GetComponent<Rigidbody2D>();
+		// rb = GetComponent<Rigidbody2D>();
 	}
 
 	public void Squeeze()
@@ -48,8 +48,8 @@ public class Kraken : MonoBehaviour {
 		body.tailSegment.child = body.headSegment;
 		body.headSegment.parent = body.tailSegment;
 
-		segmentDistance = squeezeSpacing;
-		Attack();
+		// segmentDistance = squeezeSpacing;
+		// Attack();
 	}
 
 	public void Relax ()
@@ -57,43 +57,43 @@ public class Kraken : MonoBehaviour {
 		body.tailSegment.child = null;
 		body.headSegment.parent = null;
 
-		segmentDistance = relaxedSpacing;
+		// segmentDistance = relaxedSpacing;
 	}
 
-	void Attack ()
-	{
-		foreach (var segment in segments)
-		{
-			Ray2D rightRay = new Ray2D(segment.position, segment.gameObject.transform.right);
-			Ray2D leftRay = new Ray2D(segment.position, -segment.gameObject.transform.right);
-			RaycastHit2D rightHit;
-			RaycastHit2D leftHit;
+	// void Attack ()
+	// {
+	// 	foreach (var segment in segments)
+	// 	{
+	// 		Ray2D rightRay = new Ray2D(segment.position, segment.gameObject.transform.right);
+	// 		Ray2D leftRay = new Ray2D(segment.position, -segment.gameObject.transform.right);
+	// 		RaycastHit2D rightHit;
+	// 		RaycastHit2D leftHit;
 
-			Debug.DrawRay(rightRay.origin, rightRay.direction * attackRange, Color.magenta);
-			Debug.DrawRay(leftRay.origin, leftRay.direction * attackRange, Color.magenta);			
+	// 		Debug.DrawRay(rightRay.origin, rightRay.direction * attackRange, Color.magenta);
+	// 		Debug.DrawRay(leftRay.origin, leftRay.direction * attackRange, Color.magenta);			
 			
-			rightHit = Physics2D.Raycast(rightRay.origin, rightRay.direction, attackRange);
-			leftHit = Physics2D.Raycast(leftRay.origin, leftRay.direction, attackRange);
+	// 		rightHit = Physics2D.Raycast(rightRay.origin, rightRay.direction, attackRange);
+	// 		leftHit = Physics2D.Raycast(leftRay.origin, leftRay.direction, attackRange);
 
-			if(rightHit.transform)
-			{
-				DoDamage(rightHit.transform.gameObject);
-			}
-			if(leftHit.transform)
-			{
-				DoDamage(leftHit.transform.gameObject);
-			}
-		}
-	}
+	// 		// if(rightHit.transform)
+	// 		// {
+	// 		// 	DoDamage(rightHit.transform.gameObject);
+	// 		// }
+	// 		// if(leftHit.transform)
+	// 		// {
+	// 		// 	DoDamage(leftHit.transform.gameObject);
+	// 		// }
+	// 	}
+	// }
 
-	void DoDamage (GameObject go)
-	{
-		go.GetComponent<Health>()?.Damage(1);
-	}
+	// void DoDamage (GameObject go)
+	// {
+	// 	go.GetComponent<Health>()?.Damage(1);
+	// }
 
 	void LateUpdate () 
 	{
-		Attack();
+		// Attack();
 
 		if(Input.GetKeyDown(KeyCode.KeypadPlus))
 		{
@@ -105,7 +105,7 @@ public class Kraken : MonoBehaviour {
 			body.RemoveSegment();
 		}
 
-		body.TailLength = GetComponent<Hunger>().HP;
+		// body.TailLength = GetComponent<Hunger>().HP;
 		body.UpdateSegments();
 		// Debug.Log(GetComponent<Hunger>().HP);
 
@@ -113,6 +113,6 @@ public class Kraken : MonoBehaviour {
 
 	void OnDrawGizmos ()
 	{
-		Gizmos.DrawWireCube(body.GetBounds().center, body.GetBounds().size);
+		// Gizmos.DrawWireCube(body.GetBounds().center, body.GetBounds().size);
 	}
 }

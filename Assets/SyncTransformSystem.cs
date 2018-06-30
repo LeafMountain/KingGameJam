@@ -7,8 +7,7 @@ public class SyncTransformSystem : ComponentSystem
 {
 	public struct Data
 	{
-		public MyPosition Position;
-		public MyHeading Heading;
+		public Heading Heading;
 		public Transform Transform;
 	}
 
@@ -16,8 +15,10 @@ public class SyncTransformSystem : ComponentSystem
     {
 		foreach (var entity in GetEntities<Data>())
 		{
-			entity.Position.Value = entity.Transform.position;
-			// entity.Transform.rotation = Quaternion.Euler((Vector2)entity.Heading.Value);
+			if((Vector2)entity.Heading.Value != Vector2.zero)
+			{
+				entity.Transform.right = Vector2.Lerp(entity.Transform.right, (Vector2)entity.Heading.Value, Time.deltaTime * 5);
+			}
 		}	
     }
 }

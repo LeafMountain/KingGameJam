@@ -71,14 +71,11 @@ GameObject:
   - component: {fileID: 50166697971430448}
   - component: {fileID: 58879084657636414}
   - component: {fileID: 114975566553243630}
-  - component: {fileID: 114103025394202162}
   - component: {fileID: 114190368740061786}
-  - component: {fileID: 114952374225027580}
   - component: {fileID: 114773969307980868}
-  - component: {fileID: 114384081634166438}
-  - component: {fileID: 114129987329171904}
-  - component: {fileID: 114061785173119046}
-  - component: {fileID: 114127448085652246}
+  - component: {fileID: 114681138736743162}
+  - component: {fileID: 114933348020244356}
+  - component: {fileID: 114118153576462710}
   m_Layer: 0
   m_Name: Kraken
   m_TagString: Untagged
@@ -153,7 +150,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0.1
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 79134edd970b8b64bac4ad96dc341b6d, type: 2}
@@ -194,68 +191,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114061785173119046
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1944926467103268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b52ff6989a373db4d8d3a69512c5e1c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eatRange: 1
-  OnEat:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114127448085652246}
-        m_MethodName: Eat
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
---- !u!114 &114103025394202162
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1944926467103268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2cd2f8be4c71da4797324c5f264484b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: 10
-  maxSpeed: 20
---- !u!114 &114127448085652246
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1944926467103268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45d136bbe047c4da88014ab277487ecc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpDropRate: 0
-  hpAmountLoss: 0
-  hpAmountAdd: 0
-  smallTailLimit: 0
-  bigTailLimit: 0
-  tailLossRate: 0
-  kraken: {fileID: 114975566553243630}
-  debugMode: 0
-  hp: 0
---- !u!114 &114129987329171904
+--- !u!114 &114118153576462710
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -283,42 +219,7 @@ MonoBehaviour:
   leftStick:
     x: 0
     y: 0
-  rightStick:
-    x: 0
-    y: 0
-  rightTrigger: 0
-  leftTrigger: 0
-  aButton: 0
-  bButton: 0
-  xButton: 0
-  yButton: 0
-  OnLeftStick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114103025394202162}
-        m_MethodName: Move
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityVector2Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  OnFireButtonDown:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnFireButtonUp:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
---- !u!114 &114384081634166438
+--- !u!114 &114681138736743162
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -326,10 +227,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1944926467103268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 663935887cef90648891cc6f02ff3650, type: 3}
+  m_Script: {fileID: 11500000, guid: 45f04e56a6715dc45a0de0b096220384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Value: {x: 0, y: 0, z: 0}
+  Value: 10
 --- !u!114 &114773969307980868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -341,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114952374225027580
+--- !u!114 &114933348020244356
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -349,16 +250,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1944926467103268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d976879b7c71504e947aeda43fa5a0e, type: 3}
+  m_Script: {fileID: 11500000, guid: e7c99919f5606be438978e24d9441d26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
 --- !u!114 &114975566553243630
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1944926467103268}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f78fc2eb34f1a6548bc206a3e97d0926, type: 3}
   m_Name: 

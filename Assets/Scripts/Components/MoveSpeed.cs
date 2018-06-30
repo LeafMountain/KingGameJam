@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class MyHeading : MonoBehaviour 
+public class MoveSpeed : MonoBehaviour 
 {
-	public float2 Value;
+	public float force = 1;
+	public float maxSpeed = 1;
 }

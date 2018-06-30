@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class RotateTowardsVelocity : MonoBehaviour {
 
-	Rigidbody2D rigidbody;
+	Rigidbody2D rb;
 
 	void Start ()
 	{
-		rigidbody = GetComponent<Rigidbody2D>();
+		rb = GetComponent<Rigidbody2D>();
 	}
 
 	void Update () 
 	{
-		transform.up = rigidbody.velocity;
+		transform.up = rb.velocity;
 	}
 }

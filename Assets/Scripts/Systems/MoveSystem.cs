@@ -10,15 +10,18 @@ public class MoveSystem : ComponentSystem
 	public struct Data
 	{
 		public Rigidbody2D Rigidbody;
-		public Speed Speed;
-		public MyHeading Heading;
+		public MoveSpeed Speed;
+		public Heading Heading;
 	}
 
     protected override void OnUpdate()
     {
 		foreach (var entity in GetEntities<Data>())
 		{
-			entity.Rigidbody.AddForce(entity.Heading.Value * entity.Speed.speed);
+			if(entity.Rigidbody.velocity.magnitude < entity.Speed.maxSpeed)
+			{
+				entity.Rigidbody.AddForce(entity.Heading.Value * entity.Speed.force);
+			}
 		}
     }
 }

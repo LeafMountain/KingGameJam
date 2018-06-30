@@ -44,7 +44,7 @@ public class World : MonoBehaviour {
 		{
 			chunks.Add(chunkIndex);
 			Vector2 position = chunksize * chunkIndex;
-			GameObject go2 = Instantiate(background, position, Quaternion.identity);
+			Instantiate(background, position, Quaternion.identity);
 
 			for (int i = 0; i < 5; i++)
 			{
