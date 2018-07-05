@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Target : MonoBehaviour 
-{
-	public Transform Value;
+public class Position : MonoBehaviour {
+	public Vector3 Value;
 }

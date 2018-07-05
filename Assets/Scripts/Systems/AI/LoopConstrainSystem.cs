@@ -7,9 +7,10 @@ public class LoopConstrainSystem : ComponentSystem {
 
 	public struct Data
 	{
-		public MyPosition Position;
+		public Position Position;
 		public LoopConstrain Constrain;
-		public Transform Transform;
+		public Heading Heading;
+		public MoveTarget Target;
 	}
 
     protected override void OnUpdate()
@@ -21,8 +22,10 @@ public class LoopConstrainSystem : ComponentSystem {
 
 			if(!area.Contains(position))
 			{
-				// position = -position;
-				// entity.Transform.position = position;
+				// Vector2 towardsBounds = (Vector2)area.ClosestPoint(position) - (Vector2)position;
+				entity.Target.Value = (Vector2)area.ClosestPoint(position);
+				// towardsBounds = towardsBounds.normalized;
+				// entity.Heading.Value = towardsBounds;
 			}
 		}
     }
