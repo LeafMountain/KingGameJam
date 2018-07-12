@@ -150,7 +150,7 @@ public class Body
 			UpdateFK(segment);
 			
 
-			Vector2 newPos = Vector2.SmoothDamp(segment.position, segment.targetPos, ref segment.velocity, .1f);
+			Vector2 newPos = Vector2.SmoothDamp(segment.position, segment.targetPos, ref segment.velocity, 0f);
 			segment.position = newPos;
 		}
 	}

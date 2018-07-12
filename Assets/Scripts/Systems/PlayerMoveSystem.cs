@@ -14,15 +14,23 @@ public class PlayerMoveSystem : ComponentSystem
 		// public MoveSpeed Speed;
 		public PlayerInput Input;
 		public Heading Heading;
+		public Transform Transform;
 	}
 
     protected override void OnUpdate()
     {
+		Camera cam = Camera.main;
 		foreach (var entity in GetEntities<Data>())
 		{
 			// float2 force = entity.Speed.Value * entity.Input.leftStick;
 			// entity.Rigidbody.AddForce(force);
-			entity.Heading.Value = entity.Input.leftStick;
+			// entity.Heading.Value = entity.Input.leftStick;
+
+			if(Input.GetMouseButton(0))
+			{
+				Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+				entity.Transform.position = mousePos;
+			}
 		}
     }
 }
