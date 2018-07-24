@@ -5,7 +5,7 @@ TextureImporter:
     21300000: tex_kraken__mid_sprite_32x32_0
     21300002: tex_kraken__mid_sprite_32x32_1
   externalObjects: {}
-  serializedVersion: 5
+  serializedVersion: 6
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -23,6 +23,8 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -33,7 +35,7 @@ TextureImporter:
     serializedVersion: 2
     filterMode: 0
     aniso: -1
-    mipBias: -1
+    mipBias: -100
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -87,9 +89,9 @@ TextureImporter:
       name: tex_kraken__mid_sprite_32x32_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 16
-        width: 16
+        x: 30
+        y: 0
+        width: 2
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -98,7 +100,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3eab320e88ef5f4789562a776a75ab7
+      spriteID: 22136445ce118ec41be97b5f7acdf915
       vertices: []
       indices: 
       edges: []
@@ -107,9 +109,9 @@ TextureImporter:
       name: tex_kraken__mid_sprite_32x32_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 30
         y: 16
-        width: 16
+        width: 2
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -118,7 +120,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5365ce4f8ece1014299f0e57e645df8c
+      spriteID: 6914dd5d3dfeb4548b567456f793ea84
       vertices: []
       indices: 
       edges: []

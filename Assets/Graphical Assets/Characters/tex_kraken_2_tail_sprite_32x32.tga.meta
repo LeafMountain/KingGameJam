@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: a40eb31383caa754d80496ed3ce8a4b4
+guid: 5083b3baece0e2e4bbf294800b921ebb
 TextureImporter:
   fileIDToRecycleName:
-    21300000: tex_kraken_animation_01
-    21300002: tex_kraken_animation_02
-    21300004: tex_kraken_eat
-    21300006: tex_kraken_animation_01
+    21300000: tex_kraken_2_tail_sprite_32x32_0
+    21300002: tex_kraken_2_tail_sprite_32x32_1
   externalObjects: {}
   serializedVersion: 6
   mipmaps:
@@ -88,61 +86,41 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tex_kraken_animation_02
+      name: tex_kraken_2_tail_sprite_32x32_0
       rect:
         serializedVersion: 2
-        x: 16
+        x: 22
         y: 16
-        width: 16
+        width: 10
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ea7d7270ddea8747a03574e40794ce2
+      spriteID: 363d442c245b61f48881aab6bc2bce7b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tex_kraken_eat
+      name: tex_kraken_2_tail_sprite_32x32_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: da1424ffe3add02419f4cff67f7661da
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tex_kraken_animation_01
-      rect:
-        serializedVersion: 2
-        x: 16
+        x: 22
         y: 0
-        width: 16
+        width: 10
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb5d626a4e3bdaa4cbc0a56d3260bfd2
+      spriteID: 30ce9e48950200c419b94a749dd40de7
       vertices: []
       indices: 
       edges: []
@@ -150,7 +128,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 8988f17e9f86a154ca4b2260a68c4a65
+    spriteID: 2646dbedd286f4e459e3b0bfba5de34d
     vertices: []
     indices: 
     edges: []
