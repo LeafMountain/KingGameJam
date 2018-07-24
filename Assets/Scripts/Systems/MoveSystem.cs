@@ -5,6 +5,7 @@ using Unity.Transforms;
 using Unity.Transforms2D;
 using UnityEngine;
 
+// [UpdateAfter(typeof(WaitForFixedUpdate))]
 public class MoveSystem : ComponentSystem 
 {
 	public struct Data

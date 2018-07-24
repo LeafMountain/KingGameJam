@@ -27,11 +27,13 @@ public class DamageSystem : ComponentSystem
     {
         for (int i = 0; i < m_Receivers.Length; i++)
 		{
-			Collider2D collider = m_Receivers.collider[i];
+			CircleCollider2D collider = m_Receivers.collider[i];
 
 			for (int y = 0; y < m_Damagers.Length; y++)
 			{
-				Collider2D damageCollider = m_Damagers.collider[y];
+				CircleCollider2D damageCollider = m_Damagers.collider[y];
+
+				Debug.Log(collider.IsTouching(damageCollider));
 				
 				if(collider.IsTouching(damageCollider))
 				{

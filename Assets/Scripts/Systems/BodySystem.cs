@@ -8,6 +8,7 @@ public class BodySystem : ComponentSystem
 	public struct Data
 	{
 		public Follow Follow;
+		public Heading Heading;
 		public Transform Transform;
 	}
 
@@ -19,6 +20,8 @@ public class BodySystem : ComponentSystem
 			Vector3 targetPosition = vectorTowardsParent.normalized;
 			targetPosition *= entity.Follow.distance;
 			targetPosition += entity.Follow.target.position;
+
+			entity.Heading.Value = vectorTowardsParent;
 
 			entity.Transform.right = vectorTowardsParent;
 
