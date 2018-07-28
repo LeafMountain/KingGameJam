@@ -21,7 +21,7 @@ public class BodySystem : ComponentSystem
 			targetPosition *= entity.Follow.distance;
 			targetPosition += entity.Follow.target.position;
 
-			entity.Heading.Value = vectorTowardsParent;
+			// entity.Heading.Value = vectorTowardsParent;
 
 			entity.Transform.right = vectorTowardsParent;
 
