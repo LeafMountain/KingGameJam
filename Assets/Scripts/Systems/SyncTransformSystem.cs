@@ -23,7 +23,7 @@ public class SyncTransformSystem : ComponentSystem
 		{
 			if((Vector2)entity.Heading.Value != Vector2.zero)
 			{
-				entity.Transform.right = Vector2.Lerp(entity.Transform.right, (Vector2)entity.Heading.Value, Time.deltaTime * 5);
+				entity.Transform.right = Vector2.Lerp(entity.Transform.right, (Vector2)entity.Heading.Value, Time.deltaTime * 50);
 			}
 		}
 
