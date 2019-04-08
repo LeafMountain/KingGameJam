@@ -39,4 +39,68 @@ public static class MeshUtils
             triangles = triangles
         };
     }
+
+    public static Mesh GenerateQuad(float aspectRatio, float size, Vector2 pivot)
+    {
+        Vector3[] _vertices =
+        {
+            new Vector3(size * aspectRatio - pivot.x, size - pivot.y, 0),
+            new Vector3(size * aspectRatio - pivot.x, 0 - pivot.y, 0),
+            new Vector3(0 - pivot.x, 0 - pivot.y, 0),
+            new Vector3(0 - pivot.x,  size - pivot.y, 0)
+        };
+
+        Vector2[] _uv =
+        {
+            new Vector2(1, 1),
+            new Vector2(1, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 1)
+        };
+
+        int[] triangles =
+        {
+            0, 1, 2,
+            2, 3, 0
+        };
+
+        return new Mesh
+        {
+            vertices = _vertices,
+            uv = _uv,
+            triangles = triangles
+        };
+    }
+
+    public static Mesh GenerateQuad(Vector2 size, Vector2 pivot)
+    {
+        Vector3[] _vertices =
+        {
+            new Vector3(size.x - size.x * pivot.x, size.y - size.y * pivot.y, 0),
+            new Vector3(size.x - size.x * pivot.x, 0 - size.y * pivot.y, 0),
+            new Vector3(0 - size.x * pivot.x, 0 - size.y * pivot.y, 0),
+            new Vector3(0 - size.x * pivot.x,  size.y - size.y * pivot.y, 0)
+        };
+
+        Vector2[] _uv =
+        {
+            new Vector2(1, 1),
+            new Vector2(1, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 1)
+        };
+
+        int[] triangles =
+        {
+            0, 1, 2,
+            2, 3, 0
+        };
+
+        return new Mesh
+        {
+            vertices = _vertices,
+            uv = _uv,
+            triangles = triangles
+        };
+    }
 }

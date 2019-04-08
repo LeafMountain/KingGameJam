@@ -45,7 +45,7 @@ public class MoveSystem : JobComponentSystem
             angle *= Mathf.Rad2Deg;
 
             float smoothAngle = math.lerp(currentRotation.eulerAngles.z, angle, deltaTime * 10);
-            UnityEngine.Debug.Log(smoothAngle);
+            // UnityEngine.Debug.Log(smoothAngle);
 
             if ((velocity.Value.x != 0 && velocity.Value.y != 0) || (velocity.Value.x == 0 && velocity.Value.y != 0) || (velocity.Value.x != 0 && velocity.Value.y == 0))
                 rotation.Value = Quaternion.Euler(0, 0, smoothAngle);

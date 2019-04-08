@@ -11,9 +11,6 @@ public class InstancedSpriteRendererComponent : MonoBehaviour, IConvertGameObjec
     public int pixelsPerUnit;
     public float2 pivot;
 
-    // public Mesh mesh;
-    // public Material material;
-    // public int subMesh;
     [LayerField]
     public int layer;
     public UnityEngine.Rendering.ShadowCastingMode castShadows;
@@ -21,9 +18,14 @@ public class InstancedSpriteRendererComponent : MonoBehaviour, IConvertGameObjec
 
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
-        Mesh mesh = MeshUtils.GenerateQuad(1, Vector2.zero);
+        Sprite[] sprites = sprite.CreateSpriteSheet(new float2(0));
+
         Material mat = new Material(Shader.Find("Sprites/Instanced"));
-        mat.mainTexture = this.sprite;
+        mat.mainTexture = sprites[0].ToTexture();
+
+        float aspectRatio = mat.mainTexture.width / mat.mainTexture.height;
+
+        Mesh mesh = MeshUtils.GenerateQuad(aspectRatio, 1, Vector2.one * .25f);
 
         dstManager.AddSharedComponentData(entity, new RenderMesh
         {
@@ -38,6 +40,6 @@ public class InstancedSpriteRendererComponent : MonoBehaviour, IConvertGameObjec
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawMesh(MeshUtils.GenerateQuad(1, Vector2.zero));
+        Gizmos.DrawCube(transform.position, Vector2.one);
     }
 }

@@ -1,11 +1,15 @@
 fileFormatVersion: 2
 guid: a8612e4e93c15c349bfde9d7bff974f8
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: tex_drug_boat_32x32_0
-    21300002: tex_drug_boat_32x32_1
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: tex_drug_boat_32x32_0
+  - first:
+      213: 21300002
+    second: tex_drug_boat_32x32_1
   externalObjects: {}
-  serializedVersion: 6
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -22,7 +26,7 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   grayScaleToAlpha: 0
@@ -60,7 +64,7 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 64
     resizeAlgorithm: 0
@@ -71,7 +75,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 64
     resizeAlgorithm: 0
@@ -82,6 +87,19 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 64
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -101,6 +119,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 11f9377d89ca3f949be882ebe716136c
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -121,6 +140,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 11c6136467b12e0498275487037c8837
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -129,11 +149,15 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 914b50e212aa8d247818f9234f727de0
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
   spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
