@@ -21,6 +21,7 @@ public struct InstancedSpriteRenderer : IComponentData
     //   authoring the data in the Editor.
 
     // public UnityEngine.Texture2D sprite;
-    public int pixelsPerUnit;
-    public float2 pivot;
+    public UnityEngine.Sprite sprite;
+    // public int pixelsPerUnit;
+    // public float2 pivot;
 }

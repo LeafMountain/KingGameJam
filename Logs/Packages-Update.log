@@ -33,3 +33,27 @@ The following packages were removed:
   com.unity.probuilder@3.0.8
   com.unity.progrids@3.0.3-preview.0
   com.unity.xr.legacyinputhelpers@1.0.0
+
+=== Thu Apr 11 14:58:51 2019
+
+Packages were changed.
+Update Mode: resetToDefaultDependencies
+
+The following packages were added:
+  com.unity.2d.tilemap@1.0.0
+  com.unity.2d.sprite@1.0.0
+The following packages were updated:
+  com.unity.purchasing from version 2.0.6 to 2.0.5
+  com.unity.package-manager-ui from version 2.2.0 to 2.1.2
+The following packages were removed:
+  com.unity.entities@0.0.12-preview.30
+  com.unity.rendering.hybrid@0.0.1-preview.10
+
+=== Thu Apr 11 15:08:07 2019
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.package-manager-ui from version 2.1.2 to 2.2.0
+  com.unity.purchasing from version 2.0.5 to 2.0.6

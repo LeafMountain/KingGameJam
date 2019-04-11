@@ -8,24 +8,22 @@ using UnityEngine;
 public class InstancedSpriteRendererComponent : MonoBehaviour, IConvertGameObjectToEntity
 {
     public Texture2D sprite;
-    public int pixelsPerUnit;
-    public float2 pivot;
 
     [LayerField]
     public int layer;
     public UnityEngine.Rendering.ShadowCastingMode castShadows;
     public bool receiveShadows;
+    public int spriteIndex = 0;
 
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
-        Sprite[] sprites = sprite.CreateSpriteSheet(new float2(0));
-
+        Sprite[] sprites = sprite.CreateSpriteSheet();
         Material mat = new Material(Shader.Find("Sprites/Instanced"));
-        mat.mainTexture = sprites[0].ToTexture();
-
+        mat.mainTexture = sprites[spriteIndex].ToTexture();
         float aspectRatio = mat.mainTexture.width / mat.mainTexture.height;
 
-        Mesh mesh = MeshUtils.GenerateQuad(aspectRatio, 1, Vector2.one * .25f);
+
+        Mesh mesh = MeshUtils.GenerateQuad(aspectRatio, 1, sprites[spriteIndex].pivot / sprites[spriteIndex].pixelsPerUnit);
 
         dstManager.AddSharedComponentData(entity, new RenderMesh
         {
@@ -36,6 +34,11 @@ public class InstancedSpriteRendererComponent : MonoBehaviour, IConvertGameObjec
             castShadows = this.castShadows,
             receiveShadows = this.receiveShadows
         });
+
+        // dstManager.AddSharedComponentData(entity, new InstancedSpriteRenderer
+        // {
+        //     sprite = sprites[0]
+        // });
     }
 
     void OnDrawGizmos()

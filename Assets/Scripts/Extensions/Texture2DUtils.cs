@@ -7,7 +7,7 @@ using UnityEngine;
 
 public static class Texture2DUtils
 {
-    public static Sprite[] CreateSpriteSheet(this Texture2D texture, float2 cellSize)
+    public static Sprite[] CreateSpriteSheet(this Texture2D texture)
     {
         string assetPath = AssetDatabase.GetAssetPath(texture);
         Sprite[] sprites = AssetDatabase.LoadAllAssetsAtPath(assetPath).OfType<Sprite>().ToArray();
