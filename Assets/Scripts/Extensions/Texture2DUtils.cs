@@ -18,10 +18,21 @@ public static class Texture2DUtils
     {
         Texture2D texture = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
         Color[] pixels = sprite.texture.GetPixels((int)math.ceil(sprite.textureRect.x), (int)math.ceil(sprite.textureRect.y), (int)math.ceil(sprite.textureRect.width), (int)math.ceil(sprite.textureRect.height));
-        Debug.Log(pixels.Length + " " + sprite.textureRect);
+        // Debug.Log(pixels.Length + " " + sprite.textureRect);
         texture.SetPixels(pixels);
         texture.Apply();
         texture.filterMode = sprite.texture.filterMode;
         return texture;
+    }
+
+    public static float4[] GetPixelsFloat4 (this Texture2D texture)
+    {
+        Color[] pixels = texture.GetPixels();
+        float4[] convertedPixels = new float4[pixels.Length];
+
+        for (int i = 0; i < pixels.Length; i++)
+            convertedPixels[i] = (Vector4)pixels[i];
+
+        return convertedPixels;
     }
 }

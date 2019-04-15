@@ -1,27 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
+using UnityEngine;
 
 [Serializable]
-public struct InstancedSpriteRenderer : IComponentData
+public unsafe struct RenderSprite : ISharedComponentData
 {
-    // Add fields to your component here. Remember that:
-    //
-    // * A component itself is for storing data and doesn't 'do' anything.
-    //
-    // * To act on the data, you will need a System.
-    //
-    // * Data in a component must be blittable, which means a component can
-    //   only contain fields which are primitive types or other blittable
-    //   structs; they cannot contain references to classes.
-    //
-    // * You should focus on the data structure that makes the most sense
-    //   for runtime use here. Authoring Components will be used for 
-    //   authoring the data in the Editor.
+    public Texture sprite;
 
-    // public UnityEngine.Texture2D sprite;
-    public UnityEngine.Sprite sprite;
-    // public int pixelsPerUnit;
-    // public float2 pivot;
+    // public CustomSprite sprite;
+    // public Texture2D texture;
+    // public DynamicBuffer<float4> colors;
+    // public NativeArray<int> test;
+    // public void* colors;
+    // public Texture texture;
+    // public List<int> colors;
+    // public Mesh mesh;
+    // public Material material;
 }
