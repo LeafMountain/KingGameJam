@@ -30,27 +30,48 @@ public class InstancedSpriteRendererSystem : ComponentSystem
         }
     }
 
+    EntityQuery entities;
+
+    protected override void OnCreate()
+    {
+        entities = GetEntityQuery(
+            // ComponentType.ChunkComponentReadOnly<ChunkWorldRenderBounds>(),
+            // ComponentType.ReadOnly<WorldRenderBounds>(),
+            ComponentType.ReadOnly<RenderSprite>(),
+            ComponentType.ReadOnly<LocalToWorld>()
+        );
+    }
+
     protected override void OnUpdate()
     {
-        NativeArray<RenderSprite> renderers;
-        // var entities = GetEntityQuery(ComponentType);
+        var entities = GetEntityQuery(typeof(RenderSprite));
+        NativeArray<ArchetypeChunk> Chunks;
+        ArchetypeChunkSharedComponentType<RenderSprite> RenderSpriteType;
+
+        var arstrst = GetArchetypeChunkSharedComponentType<RenderSprite>();
+
+        for (int i = 0; i < entities.CalculateLength(); i++)
+        {
+            // var arst = entities.
+        }
         // Render the sprites (fuck error checking)
-        throw new System.NotImplementedException();
+        Debug.Log("doing stuff");
+
     }
 }
-        // public void Execute(ref Translation translation, [ReadOnly] ref Rotation rotation, [ReadOnly] ref InstancedSpriteRenderer renderer)
-        // {
-        //     // UnityEngine.Debug.Log("hello");
-        //     // Matrix4x4[] matricesArray = new Matrix4x4[1];
-        //     // matricesArray[0].SetTRS(translation.Value, rotation.Value, Vector2.one);
-        //     // Mesh mesh = MeshUtils.GenerateQuad(10, Vector2.zero);
-        //     Material material = new Material(Shader.Find("Sprites/Instanced"));
+// public void Execute(ref Translation translation, [ReadOnly] ref Rotation rotation, [ReadOnly] ref InstancedSpriteRenderer renderer)
+// {
+//     // UnityEngine.Debug.Log("hello");
+//     // Matrix4x4[] matricesArray = new Matrix4x4[1];
+//     // matricesArray[0].SetTRS(translation.Value, rotation.Value, Vector2.one);
+//     // Mesh mesh = MeshUtils.GenerateQuad(10, Vector2.zero);
+//     Material material = new Material(Shader.Find("Sprites/Instanced"));
 
-        //     // Graphics.DrawMeshInstanced(mesh, 0, material, matricesArray);
-        //     // Graphics.DrawTexture(new Rect(10, 10, 10, 10), 
-        // }
-    // protected override void OnUpdate(JobHandle inputDependencies)
-    // {
-    //     var job = new InstancedSpriteRendererSystemJob();
-    //     return job.Schedule(this, inputDependencies);
-    // }
+//     // Graphics.DrawMeshInstanced(mesh, 0, material, matricesArray);
+//     // Graphics.DrawTexture(new Rect(10, 10, 10, 10), 
+// }
+// protected override void OnUpdate(JobHandle inputDependencies)
+// {
+//     var job = new InstancedSpriteRendererSystemJob();
+//     return job.Schedule(this, inputDependencies);
+// }
