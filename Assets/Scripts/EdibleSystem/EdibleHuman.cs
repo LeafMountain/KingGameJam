@@ -5,9 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class EdibleHuman : MonoBehaviour, IEdible
 {
+    public int pointsValue;
+
     public void Eat(Eater instagator)
     {
-        Debug.Log("FUUUCK YOU ATE ME!!");
+        instagator.GivePoints(pointsValue);
         Destroy(gameObject);
     }
 
