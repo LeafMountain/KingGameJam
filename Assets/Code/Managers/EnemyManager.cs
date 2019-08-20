@@ -8,6 +8,7 @@ public class EnemyManager : MonoBehaviour
 
     public Sprite[] floaterSprites;
     public GameObject floaterPrefab;
+    public GameObject bloodSplatPrefab;
 
     void Awake()
     {

@@ -62,7 +62,7 @@ public class SurferScript : AIBase, IEdible
     {
         Vector2 myPosition = transform.position;
 
-        Instantiate(enemyManagerRef.floaterPrefab, myPosition, Quaternion.identity);
+        Instantiate(enemyManagerRef.bloodSplatPrefab, myPosition, Quaternion.identity);
 
         gameManagerRef.audioManagerRef.ExplosionSurfer();
 
@@ -72,6 +72,6 @@ public class SurferScript : AIBase, IEdible
 
     public void OnEaten()
     {
-        
+        Die();
     }
 }

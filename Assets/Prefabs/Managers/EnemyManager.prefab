@@ -74,3 +74,5 @@ MonoBehaviour:
   - {fileID: 21300002, guid: c149dd8b48e2ade409d05a6bcc1948f3, type: 3}
   floaterPrefab: {fileID: 5309050941364787438, guid: bbbdbb3b859b20446aaf301b577f1b09,
     type: 3}
+  bloodSplat: {fileID: 558956787458477475, guid: b4705a2df291ae546a0b16f884870a91,
+    type: 3}
