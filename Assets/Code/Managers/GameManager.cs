@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     private IStateBase gameState;
     private LoadManager loadManagerRef;
 
+    [HideInInspector]
+    public bool gameRunning;
+
     public bool debugMode;
 
     void Awake()
