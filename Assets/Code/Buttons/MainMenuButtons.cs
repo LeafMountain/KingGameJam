@@ -4,29 +4,30 @@ using UnityEngine;
 
 public class MainMenuButtons : MonoBehaviour
 {
-    private GameManager gameManager_ref;
-    private CanvasManager canvasManager_ref;
-    private AudioManager audioManager_ref;
+    private GameManager gameManagerRef;
+    private CanvasManager canvasManagerRef;
+    private AudioManager audioManagerRef;
     
 
     void Start()
     {
-        gameManager_ref = GameManager.GetInstance();
-        canvasManager_ref = CanvasManager.GetInstance();
-        audioManager_ref = AudioManager.GetInstance();
+        gameManagerRef = GameManager.GetInstance();
+        canvasManagerRef = CanvasManager.GetInstance();
+        audioManagerRef = AudioManager.GetInstance();
     }
 
     public void StartGame()
     {
-        audioManager_ref.ButtonSelect();
+        audioManagerRef.ButtonSelect();
+        gameManagerRef.SetNewState(new PlayState(gameManagerRef));
     }
     public void OpenOptions()
     {
-        canvasManager_ref.SwitchMainMenuPanels(1);
+        canvasManagerRef.SwitchMainMenuPanels(1);
     }
     public void OpenCredits()
     {
-        canvasManager_ref.SwitchMainMenuPanels(2);
+        canvasManagerRef.SwitchMainMenuPanels(2);
     }
     public void QuitGame()
     {

@@ -34,8 +34,8 @@ public class AudioManager : MonoBehaviour
 
     public void ButtonSelect()
     {
-       
-        mainMenuAudio.
+
+        mainMenuAudio.PlayOneShot(mainMenuSFX[2]);
     }
     
     void Update()
