@@ -61,7 +61,8 @@ public class Kroken : MonoBehaviour, IDamageable
     public void Attack()
     {
         Debug.Log("Trying to attack");
-        Ray2D attackRay = new Ray2D(transform.position, transform.right);
+        Ray2D attackRay = new Ray2D(transform.position + transform.right * (GetComponent<BoxCollider2D>().size.x / 1.99f), transform.right);
+        Debug.DrawRay(attackRay.origin, attackRay.direction * attackRange, Color.red);
         RaycastHit2D hit;
         if(hit = Physics2D.Raycast(attackRay.origin, attackRay.direction, attackRange))
         {
@@ -112,17 +113,17 @@ public class Kroken : MonoBehaviour, IDamageable
             paintPositions[1] = paintPositions[0];
         }
 
-        for (int i = 0; i < paintPositions.Length - 1; i++)
-        {
-            Debug.DrawLine(paintPositions[i], paintPositions[i + 1], Color.red);
-        }
+        // for (int i = 0; i < paintPositions.Length - 1; i++)
+        // {
+        //     Debug.DrawLine(paintPositions[i], paintPositions[i + 1], Color.red);
+        // }
 
         UpdateBody();
     }
 
     private void Move(Vector2 direction)
     {
-        if(direction != Vector2.zero)
+        if(direction != Vector2.zero && Vector3.Dot(transform.right, direction) >= -0.5f)
         {
             Vector2 lastPosition = transform.position;
             transform.position += new Vector3(direction.x, direction.y, 0) * speed * Time.deltaTime;
@@ -138,18 +139,13 @@ public class Kroken : MonoBehaviour, IDamageable
             return;
         }
 
-        float delta = Vector3.Distance(paintPositions[0], paintPositions[1]);
+        float percentageDelta = Mathf.InverseLerp(0, bodySpaceing, Vector3.Distance(paintPositions[0], paintPositions[1]));
 
         for (int i = 0; i < bodyParts.Count; i++) {
-            
-            if(i > 0) {
-
-            Vector2 position = Vector2.Lerp(paintPositions[i + 1], paintPositions[i], delta);
+            Vector2 position = Vector2.Lerp(paintPositions[i + 2], paintPositions[i + 1], percentageDelta);
             bodyParts[i].SetPositon(position);
-
-            
-                bodyParts[i].body.transform.right = bodyParts[i].position - paintPositions[i - 1];
-            }
+            Vector2 lookDirection = paintPositions[i + 1] - bodyParts[i].position;
+            bodyParts[i].body.transform.right = lookDirection;
         }
     }
 }
