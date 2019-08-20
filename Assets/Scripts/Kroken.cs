@@ -4,9 +4,21 @@ using UnityEngine;
 
 public class Kroken : MonoBehaviour
 {
-    public float speed = 1;
+    public class BodyPart
+    {
+        public Vector2 position = Vector2.zero;
+        public GameObject body = null;
+        
+        public BodyPart(GameObject bodyPrefab, Vector2 position)
+        {
+            Instantiate(bodyPrefab, position, Quaternion.identity);
+        }
+    }
 
-    private List<Vector2> bodyPositions = new List<Vector2>();
+    public float speed = 1;
+    public GameObject bodyPrefab = null;
+
+    private List<BodyPart> bodyParts = new List<BodyPart>();
 
     void Start()
     {
@@ -25,10 +37,22 @@ public class Kroken : MonoBehaviour
     {
         transform.position += new Vector3(direction.x, direction.y, 0) * speed * Time.deltaTime;
         transform.right = direction;
+
+        UpdateBody();
     }
 
     void UpdateBody()
     {
+        for (int i = bodyParts.Count; i >= 0; i--)
+        {
+            bodyParts[i].position = bodyParts[i - 1].position;
+        }
+        bodyParts[0].position = transform.position;
+    }
+
+    public void Grow()
+    {
+        // bodyParts.Add(new BodyPart(bodyPrefab, bodyParts[bodyParts.Count - 1]))
 
     }
 }
