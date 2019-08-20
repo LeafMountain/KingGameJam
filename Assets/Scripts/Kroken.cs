@@ -4,26 +4,8 @@ using UnityEngine;
 
 public class Kroken : MonoBehaviour, IDamageable
 {
-    public class BodyPart
-    {
-        public Vector2 position = Vector2.zero;
-        public GameObject body = null;
-        
-        public BodyPart(GameObject bodyPrefab, Vector2 position, Transform parent)
-        {
-            this.position = position;
-            body = GameObject.Instantiate(bodyPrefab, position - new Vector2(parent.right.x, parent.right.y), parent.rotation);
-        }
-
-        public void SetPositon(Vector2 position)
-        {
-            this.position = position;
-            body.transform.position = position;
-        }
-    }
-
     public float speed = 1;
-    public GameObject bodyPrefab = null;
+    public BodyPart bodyPrefab = null;
     public float bodySpaceing = 1;
     public float attackRange = 1;
 
@@ -43,14 +25,23 @@ public class Kroken : MonoBehaviour, IDamageable
         }
         
         Vector2 spawnPositon = transform.position;
+        Quaternion spawnRotation = Quaternion.identity;
 
         if(bodyParts.Count > 0)
         {
             BodyPart parentBody = bodyParts[bodyParts.Count - 1];
-            spawnPositon = parentBody.position - new Vector2(parentBody.body.transform.right.x, parentBody.body.transform.right.y);
+            spawnPositon = parentBody.position - new Vector2(parentBody.transform.right.x, parentBody.transform.right.y);
+            spawnRotation = parentBody.transform.rotation;
         }
 
-        bodyParts.Add(new BodyPart(bodyPrefab, spawnPositon, transform));
+        BodyPart bodyPart = Instantiate(bodyPrefab, spawnPositon, spawnRotation);
+        bodyPart.Init(() =>
+        {
+            int damageValue = bodyParts.Count;
+            OnAttacked(damageValue);
+        });
+
+        bodyParts.Add(bodyPart);
     }
 
     public void OnAttacked(int damage)
@@ -59,8 +50,11 @@ public class Kroken : MonoBehaviour, IDamageable
 
         if(bodyParts.Count > 0)
         {
-            Destroy(bodyParts[bodyParts.Count -1].body);
-            bodyParts.RemoveAt(bodyParts.Count - 1);
+            for (int i = bodyParts.Count - 1; i >= damage; i--)
+            {
+                Destroy(bodyParts[i]);
+                bodyParts.RemoveAt(i);
+            }
         }
         else
         {
@@ -71,7 +65,6 @@ public class Kroken : MonoBehaviour, IDamageable
 
     public void Attack()
     {
-        Debug.Log("Trying to attack");
         Ray2D attackRay = new Ray2D(transform.position + transform.right * (GetComponent<BoxCollider2D>().size.x), transform.right);
         Debug.DrawRay(attackRay.origin, attackRay.direction * attackRange, Color.red);
         RaycastHit2D hit;
@@ -160,7 +153,7 @@ public class Kroken : MonoBehaviour, IDamageable
             Vector2 position = Vector2.Lerp(paintPositions[i + 2], paintPositions[i + 1], percentageDelta);
             bodyParts[i].SetPositon(position);
             Vector2 lookDirection = paintPositions[i + 1] - bodyParts[i].position;
-            bodyParts[i].body.transform.right = lookDirection;
+            bodyParts[i].transform.right = lookDirection;
         }
     }
 }
