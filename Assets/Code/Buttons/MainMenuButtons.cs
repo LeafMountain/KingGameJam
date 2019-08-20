@@ -21,6 +21,11 @@ public class MainMenuButtons : MonoBehaviour
         audioManagerRef.ButtonSelect();
         gameManagerRef.SetNewState(new PlayState(gameManagerRef));
     }
+    public void PressStart()
+    {
+        audioManagerRef.ButtonSelect();
+        gameManagerRef.canvasManagerRef.SetMainMenuStep(1);
+    }
     public void OpenOptions()
     {
         canvasManagerRef.SwitchMainMenuPanels(1);
@@ -31,6 +36,7 @@ public class MainMenuButtons : MonoBehaviour
     }
     public void QuitGame()
     {
+        audioManagerRef.ButtonSelect();
         Application.Quit();
     }
 }

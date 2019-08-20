@@ -5,20 +5,20 @@ using Assets.Code.Interfaces;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager gameManager_ref;
-    private AudioManager audioManager_ref;
-    private CanvasManager canvasManager_ref;
+    private static GameManager gameManagerRef;
+    public AudioManager audioManagerRef;
+    public CanvasManager canvasManagerRef;
 
     private IStateBase gameState;
-    private LoadManager loadManager_ref;
+    private LoadManager loadManagerRef;
 
     public bool debugMode;
 
     void Awake()
     {
-        if(gameManager_ref == null)
+        if(gameManagerRef == null)
         {
-            gameManager_ref = this;
+            gameManagerRef = this;
         }
         else
         {
@@ -28,17 +28,17 @@ public class GameManager : MonoBehaviour
 
     public static GameManager GetInstance()
     {
-        return gameManager_ref;
+        return gameManagerRef;
     }
 
     void Start()
     {
         if (gameState == null) gameState = new SplashScreenState(this);
 
-        audioManager_ref = AudioManager.GetInstance();
-        canvasManager_ref = CanvasManager.GetInstance();
+        audioManagerRef = AudioManager.GetInstance();
+        canvasManagerRef = CanvasManager.GetInstance();
 
-        loadManager_ref = new LoadManager();
+        loadManagerRef = new LoadManager();
     }
 
     

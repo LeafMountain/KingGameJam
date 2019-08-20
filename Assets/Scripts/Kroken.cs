@@ -24,13 +24,23 @@ public class Kroken : MonoBehaviour, IDamageable
 
     public float speed = 1;
     public GameObject bodyPrefab = null;
+    public float bodySpaceing = 1;
 
     private List<BodyPart> bodyParts = new List<BodyPart>();
+    private Vector2[] paintPositions = new Vector2[MAX_LENGTH];
+
+    const int MAX_LENGTH = 100;
 
     public void Grow()
     {
         Debug.Log("Trying to grow");
 
+        if(bodyParts.Count >= MAX_LENGTH)
+        {
+            Debug.Log("Kroken too long");
+            return;
+        }
+        
         Vector2 spawnPositon = transform.position;
 
         if(bodyParts.Count > 0)
@@ -59,22 +69,25 @@ public class Kroken : MonoBehaviour, IDamageable
         }
     }
 
-    Vector3 lastPaintPosition = Vector3.zero;
-    float currentPaintDelta = 0;
-    Vector3[] paintPositions = new Vector3[10];
-    int currentPaintIndex = 0;
-
     void Paint()
     {
-        float delta = Vector3.Distance(paintPositions[0], paintPositions[1]);
+        paintPositions[0] = transform.position;
 
-        if(delta > .5f)
-        {
-            paintPositions[currentPaintIndex] = transform.position;
-            currentPaintDelta = 0;
-            currentPaintIndex++;
-            currentPaintIndex %= 10;
-            lastPaintPosition = transform.position;
+        float delta = Vector3.Distance(paintPositions[0], paintPositions[1]);
+        
+        // Move last point
+        Vector2 dirEnd = paintPositions[paintPositions.Length - 1] - paintPositions[paintPositions.Length - 2];
+        paintPositions[paintPositions.Length - 1] = paintPositions[paintPositions.Length - 2] + dirEnd.normalized * (bodySpaceing - delta);
+
+        if(delta > bodySpaceing)
+        {            
+            // shift array
+            for (int i = paintPositions.Length - 1; i > 0 ; i--)
+            {
+                paintPositions[i] = paintPositions[i - 1];
+            }
+
+            paintPositions[1] = paintPositions[0];
         }
 
         for (int i = 0; i < paintPositions.Length - 1; i++)
@@ -82,8 +95,7 @@ public class Kroken : MonoBehaviour, IDamageable
             Debug.DrawLine(paintPositions[i], paintPositions[i + 1], Color.red);
         }
 
-        GetComponent<LineRenderer>().positionCount = 10;
-        GetComponent<LineRenderer>().SetPositions(paintPositions);
+        UpdateBody();
     }
 
     private void Move(Vector2 direction)
@@ -93,24 +105,19 @@ public class Kroken : MonoBehaviour, IDamageable
             Vector2 lastPosition = transform.position;
             transform.position += new Vector3(direction.x, direction.y, 0) * speed * Time.deltaTime;
             transform.right = direction;
-            UpdateBody(lastPosition);
-            Paint();
         }
+
+        Paint();
     }
 
-    private void UpdateBody(Vector2 firstPosition)
+    private void UpdateBody()
     {
         if(bodyParts.Count == 0) {
             return;
         }
 
-        Vector2 parentPosition = bodyParts[0].position;
-        bodyParts[0].SetPositon(firstPosition);
-        for (int i = 1; i < bodyParts.Count; i++)
-        {
-            Vector2 tempPosition = parentPosition;
-            parentPosition = bodyParts[i].position;
-            bodyParts[i].SetPositon(tempPosition);
+        for (int i = 0; i < bodyParts.Count; i++) {
+            bodyParts[i].SetPositon(paintPositions[i]);
         }
     }
 }
