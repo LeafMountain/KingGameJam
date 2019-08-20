@@ -56,12 +56,23 @@ public class Kroken : MonoBehaviour, IDamageable
     public void OnAttacked(int damage)
     {
         Debug.Log("You attacked me :(");
+
+        if(bodyParts.Count > 0)
+        {
+            Destroy(bodyParts[bodyParts.Count -1].body);
+            bodyParts.RemoveAt(bodyParts.Count - 1);
+        }
+        else
+        {
+            Destroy(gameObject);
+            Debug.Log("I'm dead");
+        }
     }
 
     public void Attack()
     {
         Debug.Log("Trying to attack");
-        Ray2D attackRay = new Ray2D(transform.position + transform.right * (GetComponent<BoxCollider2D>().size.x / 1.99f), transform.right);
+        Ray2D attackRay = new Ray2D(transform.position + transform.right * (GetComponent<BoxCollider2D>().size.x), transform.right);
         Debug.DrawRay(attackRay.origin, attackRay.direction * attackRange, Color.red);
         RaycastHit2D hit;
         if(hit = Physics2D.Raycast(attackRay.origin, attackRay.direction, attackRange))
@@ -82,8 +93,11 @@ public class Kroken : MonoBehaviour, IDamageable
         input.y = Input.GetAxisRaw("Vertical");
         Move(input.normalized);
 
-        if(Input.GetKeyDown(KeyCode.T)) {
+        if(Input.GetKeyDown(KeyCode.KeypadPlus)) {
             Grow();
+        }
+        if(Input.GetKeyDown(KeyCode.KeypadMinus)) {
+            OnAttacked(1);
         }
 
         if(Input.GetKeyDown(KeyCode.E))
@@ -123,10 +137,11 @@ public class Kroken : MonoBehaviour, IDamageable
 
     private void Move(Vector2 direction)
     {
-        if(direction != Vector2.zero && Vector3.Dot(transform.right, direction) >= -0.5f)
+        GetComponent<Rigidbody2D>().velocity = new Vector3(direction.x, direction.y, 0) * speed;
+
+        if(direction != Vector2.zero)
         {
             Vector2 lastPosition = transform.position;
-            transform.position += new Vector3(direction.x, direction.y, 0) * speed * Time.deltaTime;
             transform.right = direction;
         }
 
