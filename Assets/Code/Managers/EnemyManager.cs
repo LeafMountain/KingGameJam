@@ -4,15 +4,37 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private static EnemyManager enemyManager;
+
+    public Sprite[] floaterSprites;
+    public GameObject floaterPrefab;
+
+    void Awake()
+    {
+        if(enemyManager == null)
+        {
+            enemyManager = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
+    public static EnemyManager GetInstance()
+    {
+        return enemyManager;
+    }
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         
     }
+
 }

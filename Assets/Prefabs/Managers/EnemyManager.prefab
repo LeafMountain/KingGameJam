@@ -43,3 +43,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b10b072ad29454784081ecee3fee83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floaterSprites:
+  - {fileID: 21300000, guid: 4344977cdebcbec48bc583207cb92a31, type: 3}
+  - {fileID: 21300002, guid: 4344977cdebcbec48bc583207cb92a31, type: 3}
+  - {fileID: 21300000, guid: 975c8fea2d6c3874fa2606b11f099633, type: 3}
+  - {fileID: 21300002, guid: 975c8fea2d6c3874fa2606b11f099633, type: 3}
+  - {fileID: 21300000, guid: b5d1ba707963d384691ee4d36154eca1, type: 3}
+  - {fileID: 21300002, guid: b5d1ba707963d384691ee4d36154eca1, type: 3}
+  - {fileID: 21300000, guid: 79f5ad157ae4c9245a5e9282f4679c6c, type: 3}
+  - {fileID: 21300002, guid: 79f5ad157ae4c9245a5e9282f4679c6c, type: 3}
+  - {fileID: 21300000, guid: 04044b35f606bbe4fb682a342869483d, type: 3}
+  - {fileID: 21300002, guid: 04044b35f606bbe4fb682a342869483d, type: 3}
+  - {fileID: 21300000, guid: e4f20c38802ce4c4cba4e29d1e1cb716, type: 3}
+  - {fileID: 21300002, guid: e4f20c38802ce4c4cba4e29d1e1cb716, type: 3}
+  - {fileID: 21300000, guid: 91781e0b9fd299c47820bf5f2c5a0035, type: 3}
+  - {fileID: 21300002, guid: 91781e0b9fd299c47820bf5f2c5a0035, type: 3}
+  - {fileID: 21300000, guid: 8937111938f050d419243aa76993fc96, type: 3}
+  - {fileID: 21300002, guid: 8937111938f050d419243aa76993fc96, type: 3}
+  - {fileID: 21300000, guid: 222a5fe4e12ab9f45be0580d451e04e5, type: 3}
+  - {fileID: 21300002, guid: 222a5fe4e12ab9f45be0580d451e04e5, type: 3}
+  - {fileID: 21300000, guid: bd3ed73073acf1d4cba1bb74f741a439, type: 3}
+  - {fileID: 21300002, guid: bd3ed73073acf1d4cba1bb74f741a439, type: 3}
+  - {fileID: 21300000, guid: b89d2bca47440b94fa84305602986819, type: 3}
+  - {fileID: 21300002, guid: b89d2bca47440b94fa84305602986819, type: 3}
+  - {fileID: 21300000, guid: 609a74e9c24e6484fb8fdcd507f6a8ab, type: 3}
+  - {fileID: 21300002, guid: 609a74e9c24e6484fb8fdcd507f6a8ab, type: 3}
+  - {fileID: 21300000, guid: badbe32aeb2751745af9781fe2640eef, type: 3}
+  - {fileID: 21300002, guid: badbe32aeb2751745af9781fe2640eef, type: 3}
+  - {fileID: 21300000, guid: c149dd8b48e2ade409d05a6bcc1948f3, type: 3}
+  - {fileID: 21300002, guid: c149dd8b48e2ade409d05a6bcc1948f3, type: 3}
+  floaterPrefab: {fileID: 5309050941364787438, guid: bbbdbb3b859b20446aaf301b577f1b09,
+    type: 3}

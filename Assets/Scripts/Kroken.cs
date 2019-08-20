@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Kroken : MonoBehaviour, IDamageable
+public class Kroken : MonoBehaviour, IEdible
 {
     public class BodyPart
     {
@@ -65,7 +65,7 @@ public class Kroken : MonoBehaviour, IDamageable
         RaycastHit2D hit;
         if(hit = Physics2D.Raycast(attackRay.origin, attackRay.direction, attackRange))
         {
-            IDamageable damageable = hit.transform.GetComponent<IDamageable>();
+            IEdible damageable = hit.transform.GetComponent<IEdible>();
             if(damageable != null)
             {
                 Debug.Log("Attacked: " + hit.transform.name);
