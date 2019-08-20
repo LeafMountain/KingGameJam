@@ -61,7 +61,8 @@ public class Kroken : MonoBehaviour, IDamageable
     public void Attack()
     {
         Debug.Log("Trying to attack");
-        Ray2D attackRay = new Ray2D(transform.position, transform.right);
+        Ray2D attackRay = new Ray2D(transform.position + transform.right * (GetComponent<BoxCollider2D>().size.x / 1.99f), transform.right);
+        Debug.DrawRay(attackRay.origin, attackRay.direction * attackRange, Color.red);
         RaycastHit2D hit;
         if(hit = Physics2D.Raycast(attackRay.origin, attackRay.direction, attackRange))
         {
@@ -112,10 +113,10 @@ public class Kroken : MonoBehaviour, IDamageable
             paintPositions[1] = paintPositions[0];
         }
 
-        for (int i = 0; i < paintPositions.Length - 1; i++)
-        {
-            Debug.DrawLine(paintPositions[i], paintPositions[i + 1], Color.red);
-        }
+        // for (int i = 0; i < paintPositions.Length - 1; i++)
+        // {
+        //     Debug.DrawLine(paintPositions[i], paintPositions[i + 1], Color.red);
+        // }
 
         UpdateBody();
     }
@@ -143,15 +144,8 @@ public class Kroken : MonoBehaviour, IDamageable
         for (int i = 0; i < bodyParts.Count; i++) {
             Vector2 position = Vector2.Lerp(paintPositions[i + 2], paintPositions[i + 1], percentageDelta);
             bodyParts[i].SetPositon(position);
-            if(i > 0)
-            {
-                // Vector2 lookDirection = Vector2.Lerp(bodyParts[i].position - paintPositions[i], paintPositions[i + 1] - bodyParts[i].position, percentageDelta);
-                Vector2 lookDirection = paintPositions[i + 1] - bodyParts[i].position;
-                // if(lookDirection != Vector2.zero)
-                {
-                    bodyParts[i].body.transform.right = lookDirection;
-                }
-            }    
+            Vector2 lookDirection = paintPositions[i + 1] - bodyParts[i].position;
+            bodyParts[i].body.transform.right = lookDirection;
         }
     }
 }
