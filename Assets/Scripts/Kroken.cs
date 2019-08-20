@@ -122,7 +122,7 @@ public class Kroken : MonoBehaviour, IDamageable
 
     private void Move(Vector2 direction)
     {
-        if(direction != Vector2.zero)
+        if(direction != Vector2.zero && Vector3.Dot(transform.right, direction) >= -0.5f)
         {
             Vector2 lastPosition = transform.position;
             transform.position += new Vector3(direction.x, direction.y, 0) * speed * Time.deltaTime;
@@ -138,18 +138,20 @@ public class Kroken : MonoBehaviour, IDamageable
             return;
         }
 
-        float delta = Vector3.Distance(paintPositions[0], paintPositions[1]);
+        float percentageDelta = Mathf.InverseLerp(0, bodySpaceing, Vector3.Distance(paintPositions[0], paintPositions[1]));
 
         for (int i = 0; i < bodyParts.Count; i++) {
-            
-            if(i > 0) {
-
-            Vector2 position = Vector2.Lerp(paintPositions[i + 1], paintPositions[i], delta);
+            Vector2 position = Vector2.Lerp(paintPositions[i + 2], paintPositions[i + 1], percentageDelta);
             bodyParts[i].SetPositon(position);
-
-            
-                bodyParts[i].body.transform.right = bodyParts[i].position - paintPositions[i - 1];
-            }
+            if(i > 0)
+            {
+                // Vector2 lookDirection = Vector2.Lerp(bodyParts[i].position - paintPositions[i], paintPositions[i + 1] - bodyParts[i].position, percentageDelta);
+                Vector2 lookDirection = paintPositions[i + 1] - bodyParts[i].position;
+                // if(lookDirection != Vector2.zero)
+                {
+                    bodyParts[i].body.transform.right = lookDirection;
+                }
+            }    
         }
     }
 }
