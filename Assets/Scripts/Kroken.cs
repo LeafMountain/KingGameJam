@@ -35,9 +35,9 @@ public class Kroken : MonoBehaviour, IDamageable
         }
 
         BodyPart bodyPart = Instantiate(bodyPrefab, spawnPositon, spawnRotation);
+        int damageValue = bodyParts.Count;
         bodyPart.Init(() =>
         {
-            int damageValue = bodyParts.Count;
             OnAttacked(damageValue);
         });
 
@@ -65,6 +65,8 @@ public class Kroken : MonoBehaviour, IDamageable
 
     public void Attack()
     {
+        GetComponent<Animator>().SetTrigger("Attack");
+
         Ray2D attackRay = new Ray2D(transform.position + transform.right * (GetComponent<BoxCollider2D>().size.x), transform.right);
         Debug.DrawRay(attackRay.origin, attackRay.direction * attackRange, Color.red);
         RaycastHit2D hit;
@@ -90,7 +92,7 @@ public class Kroken : MonoBehaviour, IDamageable
             Grow();
         }
         if(Input.GetKeyDown(KeyCode.KeypadMinus)) {
-            OnAttacked(1);
+            OnAttacked(bodyParts.Count - 1);
         }
 
         if(Input.GetKeyDown(KeyCode.E))
