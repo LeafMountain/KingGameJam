@@ -1,4 +1,4 @@
-﻿public interface IEdible
+﻿public interface IDamageable
 {
     void OnAttacked(int damage);
 }
