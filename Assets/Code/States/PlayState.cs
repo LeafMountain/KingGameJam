@@ -19,6 +19,14 @@ public class PlayState : IStateBase
             Debug.Log("Constructing PlayState!");
         }
 
+        if (!gameManagerRef.gameRunning)
+        {
+            gameManagerRef.gameRunning = true;
+            gameManagerRef.audioManagerRef.StartMusicTrack();
+        }
+
+
+
        gameManagerRef.canvasManagerRef.TogglePlayUI(true);
         gameManagerRef.canvasManagerRef.ToggleMainMenu(false);
 

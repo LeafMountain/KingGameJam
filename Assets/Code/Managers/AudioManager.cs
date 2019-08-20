@@ -20,6 +20,12 @@ public class AudioManager : MonoBehaviour
     [Header("MusicClips")]
     public AudioClip[] musicClips;
 
+    private bool isOn;
+    private bool defaultIsPlaying;
+    private bool beatCount;
+    private float beatLength = 0.75f;
+    private float timeTracker;
+    private int beatsTracker;
     void Awake()
     {
         if(audioManager_ref == null)
@@ -40,6 +46,21 @@ public class AudioManager : MonoBehaviour
     {
         
     }
+    public void StartMusicTrack()
+    {
+        isOn = true;
+        defaultIsPlaying = true;
+        musicAudio.clip = musicClips[1];
+       
+    }
+    public void PauseMusicTrack()
+    {
+        isOn = false;
+    }
+    public void StopMusicTrack()
+    {
+        isOn = false;
+    }
 
     public void ButtonSelect()
     {
@@ -52,6 +73,44 @@ public class AudioManager : MonoBehaviour
     
     void Update()
     {
-        
+        BeatTimer();
+
+        PlayMusic();
+    }
+
+    private void PlayMusic()
+    {
+        FirstOn();
+    }
+
+    private void BeatTimer()
+    {
+            if(timeTracker >= beatLength)
+            {
+                beatsTracker++;
+                beatCount = true;
+
+                if(defaultIsPlaying && beatsTracker >= 16)
+                {
+                    beatsTracker = 0;
+
+                   
+                }
+
+                timeTracker = 0;
+            }
+            else
+        {
+            beatCount = false;
+        }
+
+            timeTracker += Time.deltaTime;
+    }
+    private void FirstOn()
+    {
+        if (isOn && !musicAudio.isPlaying && beatCount)
+        {
+            musicAudio.Play();
+        }
     }
 }
