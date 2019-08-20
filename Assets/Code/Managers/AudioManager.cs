@@ -6,10 +6,19 @@ public class AudioManager : MonoBehaviour
 {
     private static AudioManager audioManager_ref;
 
+    [Header("Audio Sources")]
     public AudioSource mainMenuAudio;
+    public AudioSource sfxAudio;
+    public AudioSource musicAudio;
 
     [Header("Menu Sound")]
     public AudioClip[] mainMenuSFX;
+
+    [Header("SFX")]
+    public AudioClip[] SFX;
+
+    [Header("MusicClips")]
+    public AudioClip[] musicClips;
 
     void Awake()
     {
