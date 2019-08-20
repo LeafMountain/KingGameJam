@@ -22,7 +22,8 @@ public class AudioManager : MonoBehaviour
 
     private bool isOn;
     private bool defaultIsPlaying;
-    private bool beatCount;
+    [HideInInspector]
+    public bool beatCount;
     private float beatLength = 0.75f;
     private float timeTracker;
     private int beatsTracker;
@@ -69,6 +70,12 @@ public class AudioManager : MonoBehaviour
     public void BackSF()
     {
         mainMenuAudio.PlayOneShot(mainMenuSFX[0]);
+    }
+    public void ExplosionSurfer()
+    {
+        
+
+        sfxAudio.PlayOneShot(SFX[5]);
     }
     
     void Update()
