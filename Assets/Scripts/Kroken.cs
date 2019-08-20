@@ -25,6 +25,7 @@ public class Kroken : MonoBehaviour, IDamageable
     public float speed = 1;
     public GameObject bodyPrefab = null;
     public float bodySpaceing = 1;
+    public float attackRange = 1;
 
     private List<BodyPart> bodyParts = new List<BodyPart>();
     private Vector2[] paintPositions = new Vector2[MAX_LENGTH];
@@ -57,6 +58,22 @@ public class Kroken : MonoBehaviour, IDamageable
         Debug.Log("You attacked me :(");
     }
 
+    public void Attack()
+    {
+        Debug.Log("Trying to attack");
+        Ray2D attackRay = new Ray2D(transform.position, transform.right);
+        RaycastHit2D hit;
+        if(hit = Physics2D.Raycast(attackRay.origin, attackRay.direction, attackRange))
+        {
+            IDamageable damageable = hit.transform.GetComponent<IDamageable>();
+            if(damageable != null)
+            {
+                Debug.Log("Attacked: " + hit.transform.name);
+                damageable.OnAttacked(1);
+            }
+        }
+    }
+
     private void Update()
     {
         Vector2 input = Vector2.zero;
@@ -67,9 +84,14 @@ public class Kroken : MonoBehaviour, IDamageable
         if(Input.GetKeyDown(KeyCode.T)) {
             Grow();
         }
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            Attack();
+        }
     }
 
-    void Paint()
+    private void Paint()
     {
         paintPositions[0] = transform.position;
 
@@ -116,8 +138,18 @@ public class Kroken : MonoBehaviour, IDamageable
             return;
         }
 
+        float delta = Vector3.Distance(paintPositions[0], paintPositions[1]);
+
         for (int i = 0; i < bodyParts.Count; i++) {
-            bodyParts[i].SetPositon(paintPositions[i]);
+            
+            if(i > 0) {
+
+            Vector2 position = Vector2.Lerp(paintPositions[i + 1], paintPositions[i], delta);
+            bodyParts[i].SetPositon(position);
+
+            
+                bodyParts[i].body.transform.right = bodyParts[i].position - paintPositions[i - 1];
+            }
         }
     }
 }
