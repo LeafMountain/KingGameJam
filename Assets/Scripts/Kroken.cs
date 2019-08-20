@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class Kroken : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float speed = 1;
+
+    private List<Vector2> bodyPositions = new List<Vector2>();
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        Vector2 input = Vector2.zero;
+        input.x = Input.GetAxisRaw("Horizontal");
+        input.y = Input.GetAxisRaw("Vertical");
+        Move(input.normalized);
+    }
+
+    void Move(Vector2 direction)
+    {
+        transform.position += new Vector3(direction.x, direction.y, 0) * speed * Time.deltaTime;
+        transform.right = direction;
+    }
+
+    void UpdateBody()
+    {
+
     }
 }
