@@ -34,6 +34,11 @@ public class PlayState : IStateBase
         {
             Debug.Log("Constructing PlayState DONE!!!");
         }
+
+        for (int i = 0; i < gameManagerRef.players.Count; i++)
+        {
+            gameManagerRef.players[i].SetMovementLock(false);
+        }
     }
 
     public void StateUpdate()
@@ -41,7 +46,7 @@ public class PlayState : IStateBase
         //DebugWin
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            gameManagerRef.SetNewState(new ResultState(gameManagerRef));
+            gameManagerRef.SetNewState(new ResultState(gameManagerRef, null));
         }
 
         if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
@@ -11,7 +12,10 @@ public class CanvasManager : MonoBehaviour
     private GameObject pnl_MainMenu_ref;
     private GameObject pnl_Play_ref;
     private GameObject pnl_Pause_ref;
-    private GameObject pnl_ResultRef;
+
+    [Header("Result screen")]
+    public GameObject pnl_ResultRef;
+    public Text winText = null;
 
     private GameObject[] panels; 
 
@@ -46,13 +50,10 @@ public class CanvasManager : MonoBehaviour
     
     void Start()
     {
-        
-
         pnl_SplashScreen_ref = transform.GetChild(0).gameObject;
         pnl_MainMenu_ref = transform.GetChild(1).gameObject;
         pnl_Play_ref = transform.GetChild(2).gameObject;
         pnl_Pause_ref = transform.GetChild(3).gameObject;
-        pnl_ResultRef = transform.GetChild(4).gameObject;
 
         tier1pnls = new GameObject[] { pnl_SplashScreen_ref, pnl_MainMenu_ref,
                                         pnl_Play_ref, pnl_Pause_ref };
@@ -83,10 +84,12 @@ public class CanvasManager : MonoBehaviour
 
         pnl_Play_ref.SetActive(b);
     }
-    public void ToggleVictoryPanel(bool b)
+    public void ToggleVictoryPanel(bool b, string nickname, Color color)
     {
         DisablePanels();
-
+        
+        winText.text = nickname.ToUpper() + " WINS!";
+        winText.color = color;
         pnl_ResultRef.SetActive(b);
     }
 

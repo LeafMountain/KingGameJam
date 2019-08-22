@@ -6,8 +6,15 @@ using Assets.Code.Interfaces;
 public class GameManager : MonoBehaviour
 {
     private static GameManager gameManagerRef;
-    public AudioManager audioManagerRef;
-    public CanvasManager canvasManagerRef;
+    [HideInInspector] public AudioManager audioManagerRef;
+    [HideInInspector] public CanvasManager canvasManagerRef;
+
+    [Header("Setup")]
+    public Kroken krokenPrefab = null;
+    public InputMapping[] inputMappings = null;
+    [HideInInspector] public List<int> usedMappings = new List<int>();
+    public ColorPalette[] colorPalettes = null;
+    [HideInInspector] public List<int> usedPalettes = new List<int>();
 
     public Camera cam;
 
@@ -19,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     public bool debugMode;
 
-    private List<Kroken> players = new List<Kroken>();
+    public  List<Kroken> players = new List<Kroken>();
 
     void Awake()
     {
@@ -87,7 +94,7 @@ public class GameManager : MonoBehaviour
         if(players.Count == 1)
         {
             Debug.Log($"Game is done. Player {players[0].name} won!");
-            SetNewState(new ResultState(this));
+            SetNewState(new ResultState(this, players[0]));
         }
         else if(players.Count < 1)
         {

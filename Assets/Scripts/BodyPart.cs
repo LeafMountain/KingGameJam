@@ -6,9 +6,10 @@ public class BodyPart : MonoBehaviour, IDamageable
 
     private UnityEngine.Events.UnityAction attackedCallback = null;
 
-    public void Init(UnityEngine.Events.UnityAction attackedCallback)
+    public void Init(UnityEngine.Events.UnityAction attackedCallback, Color color)
     {
         this.attackedCallback = attackedCallback;
+        GetComponent<Renderer>().material.SetColor("_MaskColor", color);
     }
 
     public void SetPositon(Vector2 position)
@@ -22,7 +23,7 @@ public class BodyPart : MonoBehaviour, IDamageable
         attackedCallback.Invoke();
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         Destroy(gameObject);
     }

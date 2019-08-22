@@ -8,13 +8,31 @@ public class Kroken : MonoBehaviour, IDamageable
     public BodyPart bodyPrefab = null;
     public float bodySpaceing = 1;
     public float attackRange = 1;
-    public InputMapping inputMapping = null;
-    public Color bodyColor = Color.green;
 
+    private string nickname = string.Empty;
+    private InputMapping inputMapping = null;
+    private ColorPalette bodyColor = null;
     private List<BodyPart> bodyParts = new List<BodyPart>();
     private Vector2[] paintPositions = new Vector2[MAX_LENGTH];
+    private bool movementLocked = true;
 
     const int MAX_LENGTH = 100;
+
+    public void Init(InputMapping inputMapping, ColorPalette palette)
+    {
+        this.inputMapping = inputMapping;
+        nickname = palette.paletteName;
+        bodyColor = palette;
+        GetComponent<Renderer>().material.SetColor("_MaskColor", bodyColor.color);
+    }
+
+    public void SetMovementLock(bool value)
+    {
+        movementLocked = value;
+    }
+
+    public Color GetColor() => bodyColor.color;
+    public string GetName() => nickname;
 
     public void Grow()
     {
@@ -41,7 +59,7 @@ public class Kroken : MonoBehaviour, IDamageable
         bodyPart.Init(() =>
         {
             OnAttacked(damageValue);
-        });
+        } , bodyColor.color);
 
         bodyParts.Add(bodyPart);
     }
@@ -112,7 +130,6 @@ public class Kroken : MonoBehaviour, IDamageable
     private void OnCollisionEnter2D(Collision2D col)
     {
         IEdible edible = col.transform.GetComponent<IEdible>();
-        Debug.Log(edible);
         if(edible != null)
         {
             edible.OnEaten();
@@ -154,8 +171,11 @@ public class Kroken : MonoBehaviour, IDamageable
         // Debug.Log(Vector2.Dot(transform.right, direction));
         if(Vector2.Dot(transform.right, direction) > -0.9f)
         {
-            float modSpeed = speed;
-            GetComponent<Rigidbody2D>().velocity = new Vector3(direction.x, direction.y, 0) * modSpeed;
+            if(movementLocked == false)
+            {
+                float modSpeed = speed;
+                GetComponent<Rigidbody2D>().velocity = new Vector3(direction.x, direction.y, 0) * modSpeed;
+            }
 
             if(direction != Vector2.zero)
             {
