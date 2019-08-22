@@ -9,6 +9,7 @@ public class Kroken : MonoBehaviour, IDamageable
     public float bodySpaceing = 1;
     public float attackRange = 1;
     public InputMapping inputMapping = null;
+    public Color bodyColor = Color.green;
 
     private List<BodyPart> bodyParts = new List<BodyPart>();
     private Vector2[] paintPositions = new Vector2[MAX_LENGTH];
@@ -98,6 +99,16 @@ public class Kroken : MonoBehaviour, IDamageable
         }
     }
 
+    private void OnEnable()
+    {
+        GameManager.GetInstance().AddPlayer(this);
+    }
+
+    private void OnDisable()
+    {
+        GameManager.GetInstance().RemovePlayer(this);
+    }
+
     private void OnCollisionEnter2D(Collision2D col)
     {
         IEdible edible = col.transform.GetComponent<IEdible>();
@@ -140,7 +151,7 @@ public class Kroken : MonoBehaviour, IDamageable
 
     private void Move(Vector2 direction)
     {
-        Debug.Log(Vector2.Dot(transform.right, direction));
+        // Debug.Log(Vector2.Dot(transform.right, direction));
         if(Vector2.Dot(transform.right, direction) > -0.9f)
         {
             float modSpeed = speed;

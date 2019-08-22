@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     public bool debugMode;
 
+    private List<Kroken> players = new List<Kroken>();
+
     void Awake()
     {
         if(gameManagerRef == null)
@@ -52,5 +54,39 @@ public class GameManager : MonoBehaviour
     public void SetNewState(IStateBase newState)
     {
         gameState = newState;
+    }
+
+    public void AddPlayer(Kroken player)
+    {
+        if(players.Contains(player))
+        {
+            Debug.Log("Player already exists");
+            return;
+        }
+        players.Add(player);
+    }
+
+    public void RemovePlayer(Kroken player)
+    {
+        if(!players.Contains(player))
+        {
+            Debug.Log("This player is not a part of the game");
+            return;
+        }
+
+        players.Remove(player);
+        CheckIfDone();
+    }
+
+    private void CheckIfDone()
+    {
+        if(players.Count == 1)
+        {
+            Debug.Log($"Game is done. Player {players[0].name} won!");
+        }
+        else if(players.Count < 1)
+        {
+            Debug.Log("No player left. Ending game in a tie");
+        }
     }
 }
