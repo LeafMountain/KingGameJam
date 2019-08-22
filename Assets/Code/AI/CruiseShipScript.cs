@@ -10,12 +10,20 @@ public class CruiseShipScript : AIBase, IDamageable
     void Start()
     {
         GetReferences();
+        direction = GetRandomDirection();
+        CheckFlipX(direction.x);
     }
 
    
     void Update()
     {
         UpdateSprite();
+        Move();
+        CheckBounderies();
+    }
+    public override void Move()
+    {
+        base.Move();
     }
 
     public void OnAttacked(int damage)

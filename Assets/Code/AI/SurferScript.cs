@@ -8,16 +8,18 @@ public class SurferScript : AIBase, IEdible
 
     void Start()
     {
-        gameManagerRef = GameManager.GetInstance();
-        enemyManagerRef = EnemyManager.GetInstance();
-
-        mySpriteRenderer = GetComponent<SpriteRenderer>();
+        GetReferences();
+       direction = GetRandomDirection();
+        CheckFlipX(direction.x);
+      
     }
 
     void Update()
     {
         UpdateSprite();
         CheckDeath();
+        Move();
+        CheckBounderies();
     }
 
     public void OnAttacked(int damage)
@@ -41,6 +43,12 @@ public class SurferScript : AIBase, IEdible
 
         Destroy(gameObject);
 
+    }
+
+    public override void Move()
+    {
+
+        base.Move();
     }
 
     public void OnEaten()

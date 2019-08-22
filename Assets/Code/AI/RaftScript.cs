@@ -9,18 +9,22 @@ public class RaftScript : AIBase, IDamageable
     
     void Start()
     {
-        gameManagerRef = GameManager.GetInstance();
-        enemyManagerRef = EnemyManager.GetInstance();
 
-        mySpriteRenderer = GetComponent<SpriteRenderer>();
+        GetReferences();
+        direction = GetRandomDirection();
     }
 
     
     void Update()
     {
         UpdateSprite();
+        Move();
+        CheckBounderies();
     }
-
+    public override void Move()
+    {
+        base.Move();
+    }
     public void OnAttacked(int damage)
     {
         health -= damage;

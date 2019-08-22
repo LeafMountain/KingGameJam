@@ -9,17 +9,19 @@ public class MotorBoatScript : AIBase, IDamageable
     
     void Start()
     {
-        gameManagerRef = GameManager.GetInstance();
-        enemyManagerRef = EnemyManager.GetInstance();
-
-        mySpriteRenderer = GetComponent<SpriteRenderer>();
+        GetReferences();
+        direction = GetRandomDirection();
+        CheckFlipX(direction.x);
     }
 
     
     void Update()
     {
         UpdateSprite();
+        Move();
+        CheckBounderies();
     }
+
 
     public void OnAttacked(int damage)
     {
@@ -27,7 +29,7 @@ public class MotorBoatScript : AIBase, IDamageable
 
         if(health <= 0)
         {
-
+            SpawnFloaters(2);
         }
 
     }

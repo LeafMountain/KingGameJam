@@ -5,6 +5,8 @@ using UnityEngine;
 public class FloaterScript : AIBase , IEdible
 {
 
+    
+
     void Start()
     {
         gameManagerRef = GameManager.GetInstance();
@@ -14,7 +16,9 @@ public class FloaterScript : AIBase , IEdible
 
         GetRandomSpriteSet();
         mySpriteRenderer.sprite = mySprites[0];
-       
+
+        direction = GetRandomDirection();
+      
     }
     private void GetRandomSpriteSet()
     {
@@ -28,6 +32,9 @@ public class FloaterScript : AIBase , IEdible
     void Update()
     {
         UpdateSprite();
+        Move();
+        CheckBounderies();
+
     }
 
     public void OnEaten()
@@ -46,4 +53,11 @@ public class FloaterScript : AIBase , IEdible
         Destroy(gameObject);
 
     }
+
+    public override void Move()
+    {
+        base.Move();
+    }
+
+  
 }
