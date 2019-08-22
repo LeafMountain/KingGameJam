@@ -41,7 +41,7 @@ public class PlayState : IStateBase
         //DebugWin
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            gameManagerRef.SetNewState(new ResultState(gameManagerRef));
+            gameManagerRef.SetNewState(new ResultState(gameManagerRef, null));
         }
 
         if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))

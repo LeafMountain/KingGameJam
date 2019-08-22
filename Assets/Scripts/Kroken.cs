@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Kroken : MonoBehaviour, IDamageable
 {
+    [HideInInspector] public string nickname = string.Empty;
     public float speed = 1;
     public BodyPart bodyPrefab = null;
     public float bodySpaceing = 1;
     public float attackRange = 1;
     public InputMapping inputMapping = null;
-    public Color bodyColor = Color.green;
+    public ColorPalette bodyColor = null;
 
     private List<BodyPart> bodyParts = new List<BodyPart>();
     private Vector2[] paintPositions = new Vector2[MAX_LENGTH];
@@ -41,7 +42,7 @@ public class Kroken : MonoBehaviour, IDamageable
         bodyPart.Init(() =>
         {
             OnAttacked(damageValue);
-        });
+        } , bodyColor.color);
 
         bodyParts.Add(bodyPart);
     }
@@ -97,6 +98,12 @@ public class Kroken : MonoBehaviour, IDamageable
         if(inputMapping.GetAttack()) {
             Attack();
         }
+    }
+
+    private void Start()
+    {
+        nickname = bodyColor.paletteName;
+        GetComponent<Renderer>().material.SetColor("_MaskColor", bodyColor.color);
     }
 
     private void OnEnable()

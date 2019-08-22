@@ -9,13 +9,13 @@ public class ResultState : IStateBase
 
     private ResultState() { }
 
-    public ResultState(GameManager gameManagerRef)
+    public ResultState(GameManager gameManagerRef, Kroken player)
     {
         this.gameManagerRef = gameManagerRef;
 
-        gameManagerRef.canvasManagerRef.ToggleVictoryPanel(true);
+        gameManagerRef.canvasManagerRef.ToggleVictoryPanel(true, player.nickname, player.bodyColor.color);
     }
-
+    
     public void StateUpdate()
     {
       
