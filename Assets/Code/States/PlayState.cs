@@ -34,6 +34,11 @@ public class PlayState : IStateBase
         {
             Debug.Log("Constructing PlayState DONE!!!");
         }
+
+        for (int i = 0; i < gameManagerRef.players.Count; i++)
+        {
+            gameManagerRef.players[i].SetMovementLock(false);
+        }
     }
 
     public void StateUpdate()

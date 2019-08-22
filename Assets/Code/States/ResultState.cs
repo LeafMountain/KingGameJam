@@ -13,7 +13,7 @@ public class ResultState : IStateBase
     {
         this.gameManagerRef = gameManagerRef;
 
-        gameManagerRef.canvasManagerRef.ToggleVictoryPanel(true, player.nickname, player.bodyColor.color);
+        gameManagerRef.canvasManagerRef.ToggleVictoryPanel(true, player.GetName(), player.GetColor());
     }
     
     public void StateUpdate()

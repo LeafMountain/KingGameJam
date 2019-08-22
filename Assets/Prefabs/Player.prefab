@@ -54,7 +54,7 @@ MonoBehaviour:
     type: 3}
   bodySpaceing: 1
   attackRange: 1
-  inputMapping: {fileID: 11400000, guid: 5641f3c6cab6bce40b86f20d8cf50dc9, type: 2}
+  inputMapping: {fileID: 0}
   bodyColor: {fileID: 11400000, guid: 6af39b5588aab6549959e6d306b21fd4, type: 2}
 --- !u!212 &8461280662659796955
 SpriteRenderer:

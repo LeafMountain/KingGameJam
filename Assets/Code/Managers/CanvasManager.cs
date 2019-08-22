@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class CanvasManager : MonoBehaviour
 {
@@ -16,7 +15,7 @@ public class CanvasManager : MonoBehaviour
 
     [Header("Result screen")]
     public GameObject pnl_ResultRef;
-    public TMP_Text winText = null;
+    public Text winText = null;
 
     private GameObject[] panels; 
 
@@ -88,8 +87,8 @@ public class CanvasManager : MonoBehaviour
     public void ToggleVictoryPanel(bool b, string nickname, Color color)
     {
         DisablePanels();
-
-        winText.SetText(nickname + " wins!");
+        
+        winText.text = nickname.ToUpper() + " WINS!";
         winText.color = color;
         pnl_ResultRef.SetActive(b);
     }

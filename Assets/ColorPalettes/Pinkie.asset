@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 624277c6163e1ab4ba4f4f149f5950b1, type: 3}
-  m_Name: Poopie
+  m_Name: Pinkie
   m_EditorClassIdentifier: 
-  paletteName: 
-  color: {r: 1, g: 1, b: 1, a: 1}
+  paletteName: Pinkie
+  color: {r: 1, g: 0, b: 0.56635475, a: 1}

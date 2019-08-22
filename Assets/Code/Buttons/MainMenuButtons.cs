@@ -23,8 +23,16 @@ public class MainMenuButtons : MonoBehaviour
     }
     public void PressStart()
     {
-        audioManagerRef.ButtonSelect();
-        gameManagerRef.canvasManagerRef.SetMainMenuStep(1);
+        if(gameManagerRef.players.Count > 1)
+        {
+            audioManagerRef.ButtonSelect();
+            gameManagerRef.canvasManagerRef.SetMainMenuStep(1);
+            gameManagerRef.SetNewState(new PlayState(gameManagerRef));
+        }
+        else
+        {
+            Debug.Log("Not enough players to start game");
+        }
     }
     public void OpenOptions()
     {
