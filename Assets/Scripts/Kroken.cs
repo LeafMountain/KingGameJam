@@ -98,9 +98,10 @@ public class Kroken : MonoBehaviour, IDamageable
         }
     }
 
-    private void OnTriggerEnter(Collider col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        IEdible edible = col.GetComponent<IEdible>();
+        IEdible edible = col.transform.GetComponent<IEdible>();
+        Debug.Log(edible);
         if(edible != null)
         {
             edible.OnEaten();
@@ -139,12 +140,17 @@ public class Kroken : MonoBehaviour, IDamageable
 
     private void Move(Vector2 direction)
     {
-        GetComponent<Rigidbody2D>().velocity = new Vector3(direction.x, direction.y, 0) * speed;
-
-        if(direction != Vector2.zero)
+        Debug.Log(Vector2.Dot(transform.right, direction));
+        if(Vector2.Dot(transform.right, direction) > -0.9f)
         {
-            Vector2 lastPosition = transform.position;
-            transform.right = direction;
+            float modSpeed = speed;
+            GetComponent<Rigidbody2D>().velocity = new Vector3(direction.x, direction.y, 0) * modSpeed;
+
+            if(direction != Vector2.zero)
+            {
+                Vector2 lastPosition = transform.position;
+                transform.right = direction;
+            }
         }
 
         Paint();
