@@ -8,6 +8,7 @@ public class Kroken : MonoBehaviour, IDamageable
     public BodyPart bodyPrefab = null;
     public float bodySpaceing = 1;
     public float attackRange = 1;
+    public InputMapping inputMapping = null;
 
     private List<BodyPart> bodyParts = new List<BodyPart>();
     private Vector2[] paintPositions = new Vector2[MAX_LENGTH];
@@ -58,8 +59,7 @@ public class Kroken : MonoBehaviour, IDamageable
         }
         else
         {
-            Destroy(gameObject);
-            Debug.Log("I'm dead");
+            OnDeath();
         }
     }
 
@@ -84,9 +84,7 @@ public class Kroken : MonoBehaviour, IDamageable
     private void Update()
     {
         Vector2 input = Vector2.zero;
-        input.x = Input.GetAxisRaw("Horizontal");
-        input.y = Input.GetAxisRaw("Vertical");
-        Move(input.normalized);
+        Move(inputMapping.GetMovement());
 
         if(Input.GetKeyDown(KeyCode.KeypadPlus)) {
             Grow();
@@ -95,9 +93,18 @@ public class Kroken : MonoBehaviour, IDamageable
             OnAttacked(bodyParts.Count - 1);
         }
 
-        if(Input.GetKeyDown(KeyCode.E))
-        {
+        if(inputMapping.GetAttack()) {
             Attack();
+        }
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        IEdible edible = col.GetComponent<IEdible>();
+        if(edible != null)
+        {
+            edible.OnEaten();
+            Grow();
         }
     }
 
@@ -157,5 +164,11 @@ public class Kroken : MonoBehaviour, IDamageable
             Vector2 lookDirection = paintPositions[i + 1] - bodyParts[i].position;
             bodyParts[i].transform.right = lookDirection;
         }
+    }
+
+    private void OnDeath()
+    {
+        Destroy(gameObject);
+        Debug.Log("I'm dead");
     }
 }
