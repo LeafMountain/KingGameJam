@@ -39,7 +39,7 @@ public class PlayState : IStateBase
     public void StateUpdate()
     {
         //DebugWin
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
             gameManagerRef.SetNewState(new ResultState(gameManagerRef));
         }
