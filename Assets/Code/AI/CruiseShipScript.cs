@@ -20,6 +20,16 @@ public class CruiseShipScript : AIBase, IDamageable
 
     public void OnAttacked(int damage)
     {
-        
+        health -= damage;
+
+        if(health <= 0)
+        {
+            SpawnFloaters(5);
+            Destroy(gameObject);
+        }
+        else
+        {
+            SpawnFloaters(2);
+        }
     }
 }

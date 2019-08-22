@@ -23,6 +23,12 @@ public class MotorBoatScript : AIBase, IDamageable
 
     public void OnAttacked(int damage)
     {
-       
+        health -= damage;
+
+        if(health <= 0)
+        {
+
+        }
+
     }
 }

@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioManagerRef: {fileID: 0}
   canvasManagerRef: {fileID: 0}
+  gameRunning: 0
   debugMode: 0
 --- !u!1001 &1304793506083437880
 PrefabInstance:
@@ -115,7 +116,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 358268275195840709, guid: 2c726b6456e541643bb7b1c19c454c7e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5176861277475894106, guid: 2c726b6456e541643bb7b1c19c454c7e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5380478153210889844, guid: 2c726b6456e541643bb7b1c19c454c7e,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
@@ -125,6 +136,12 @@ PrefabInstance:
 --- !u!4 &2992621918038327167 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4295416999358366279, guid: 2c726b6456e541643bb7b1c19c454c7e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1304793506083437880}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &6429347293219976659 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5413941977553570027, guid: 2c726b6456e541643bb7b1c19c454c7e,
     type: 3}
   m_PrefabInstance: {fileID: 1304793506083437880}
   m_PrefabAsset: {fileID: 0}
@@ -199,7 +216,7 @@ PrefabInstance:
         type: 3}
       propertyPath: mainMenuAudio
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6429347293219976659}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df92ecd4bf72fa046b733d381d318bf6, type: 3}
 --- !u!4 &1949713106088171157 stripped
