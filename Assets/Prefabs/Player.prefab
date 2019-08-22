@@ -54,6 +54,7 @@ MonoBehaviour:
   bodySpaceing: 1
   attackRange: 1
   inputMapping: {fileID: 11400000, guid: 5641f3c6cab6bce40b86f20d8cf50dc9, type: 2}
+  bodyColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!212 &8461280662659796955
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -71,7 +72,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 807d4c1b79bacb449b3f3cf61c55af9c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
