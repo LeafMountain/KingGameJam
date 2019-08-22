@@ -12,8 +12,6 @@ public abstract class AIBase : MonoBehaviour
     protected GameManager gameManagerRef;
     protected EnemyManager enemyManagerRef;
 
-   
-
     public Sprite[] mySprites;
 
     [Header("Stats")]
@@ -22,6 +20,7 @@ public abstract class AIBase : MonoBehaviour
     public float speed;
 
     protected SpriteRenderer mySpriteRenderer;
+    protected Vector2 direction;
     private int indexTracker;
 
     void Update()
@@ -75,6 +74,68 @@ public abstract class AIBase : MonoBehaviour
         return spawnPosition;
     }
 
-   
+    public virtual void Move()
+    {
+        transform.position = (Vector2)transform.position + (direction * speed * Time.deltaTime);
+    }
+
+    protected Vector2 GetRandomDirection()
+    {
+        Vector2 dir;
+
+        float x = Random.Range(-1.0f, 1.0f);
+        float y = Random.Range(-1.0f, 1.0f);
+
+        dir = new Vector2(x, y);
+
+        if(x == 0 && y == 0)
+        {
+           dir = GetRandomDirection();
+        }
+
+        CheckFlipX(direction.x);
+
+        return dir;
+    }
+
+    protected void CheckBounderies()
+    {
+        Vector2 screenPos = gameManagerRef.cam.WorldToScreenPoint(transform.position);
+
+        if(screenPos.x < 0 ||
+            screenPos.x > Screen.width)
+        {
+            direction = new Vector2(-direction.x, direction.y);
+            CheckFlipX(direction.x);
+        }
+            if(screenPos.y < 0 ||
+            screenPos.y > Screen.height)
+        {
+            direction = new Vector2(direction.x, -direction.y);
+        }
+    }
+
+    protected void CheckFlipX(float x)
+    {
+        if (myType == EnemyType.Surfer ||
+            myType == EnemyType.MotorBoat ||
+            myType == EnemyType.DrugBoat ||
+            myType == EnemyType.CruiseShip)
+        {
+            if (x < 0)
+            {
+                mySpriteRenderer.flipX = true;
+            }
+            else
+            {
+                mySpriteRenderer.flipX = false;
+            }
+        }
+    }
+
     
+
+
+
+
 }

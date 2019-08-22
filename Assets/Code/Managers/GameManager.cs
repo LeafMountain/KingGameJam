@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public AudioManager audioManagerRef;
     public CanvasManager canvasManagerRef;
 
+    public Camera cam;
+
     private IStateBase gameState;
     private LoadManager loadManagerRef;
 
@@ -40,6 +42,8 @@ public class GameManager : MonoBehaviour
 
         audioManagerRef = AudioManager.GetInstance();
         canvasManagerRef = CanvasManager.GetInstance();
+
+        cam = Camera.main;
 
         loadManagerRef = new LoadManager();
     }

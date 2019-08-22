@@ -10,7 +10,7 @@ public class RaftEditor : Editor
     {
         base.OnInspectorGUI();
 
-        DrawDefaultInspector();
+      
 
         RaftScript myAIBase = (RaftScript)target;
 
