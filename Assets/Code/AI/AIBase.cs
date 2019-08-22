@@ -28,6 +28,10 @@ public abstract class AIBase : MonoBehaviour
        
     }
 
+    public virtual void Die()
+    {
+        enemyManagerRef.RemoveFromEnemyList(this);
+    }
     protected void UpdateSprite()
     {
         if (gameManagerRef.audioManagerRef.beatCount)
@@ -48,6 +52,8 @@ public abstract class AIBase : MonoBehaviour
         enemyManagerRef = EnemyManager.GetInstance();
 
         mySpriteRenderer = GetComponent<SpriteRenderer>();
+
+        enemyManagerRef.AddToEnemyList(this);
     }
 
     protected void SpawnFloaters(int amount)

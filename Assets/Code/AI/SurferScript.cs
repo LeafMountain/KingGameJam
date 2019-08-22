@@ -33,8 +33,10 @@ public class SurferScript : AIBase, IEdible
             Die();
         }
     }
-    private void Die()
+    public override void Die()
     {
+        base.Die();
+
         Vector2 myPosition = transform.position;
 
         Instantiate(enemyManagerRef.bloodSplatPrefab, myPosition, Quaternion.identity);

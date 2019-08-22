@@ -74,5 +74,13 @@ MonoBehaviour:
   - {fileID: 21300002, guid: c149dd8b48e2ade409d05a6bcc1948f3, type: 3}
   floaterPrefab: {fileID: 5309050941364787438, guid: bbbdbb3b859b20446aaf301b577f1b09,
     type: 3}
-  bloodSplat: {fileID: 558956787458477475, guid: b4705a2df291ae546a0b16f884870a91,
+  enemies:
+  - {fileID: 5309050941364787438, guid: bbbdbb3b859b20446aaf301b577f1b09, type: 3}
+  - {fileID: 8303859965800596205, guid: 417f1f20c1cd6f348bd3014da1558688, type: 3}
+  - {fileID: 8303859965800596205, guid: f643f4ef5cc6bbc4e99489851e234fa9, type: 3}
+  - {fileID: 8303859965800596205, guid: 2624d324783f8674baa5c3f00425690c, type: 3}
+  - {fileID: 8303859965800596205, guid: a3caa07858650d94e978e7716980af6b, type: 3}
+  - {fileID: 8303859965800596205, guid: 93f67fe7a8e41e941bcd370019276b03, type: 3}
+  bloodSplatPrefab: {fileID: 558956787458477475, guid: b4705a2df291ae546a0b16f884870a91,
     type: 3}
+  spawn: 4

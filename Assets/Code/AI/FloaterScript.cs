@@ -9,10 +9,7 @@ public class FloaterScript : AIBase , IEdible
 
     void Start()
     {
-        gameManagerRef = GameManager.GetInstance();
-        enemyManagerRef = EnemyManager.GetInstance();
-
-        mySpriteRenderer = GetComponent<SpriteRenderer>();
+        GetReferences();
 
         GetRandomSpriteSet();
         mySpriteRenderer.sprite = mySprites[0];
@@ -44,13 +41,19 @@ public class FloaterScript : AIBase , IEdible
 
     private void Die()
     {
+
+        base.Die();
+
         Vector2 myPosition = transform.position;
 
         Instantiate(enemyManagerRef.bloodSplatPrefab, myPosition, Quaternion.identity);
 
         gameManagerRef.audioManagerRef.ExplosionSurfer();
 
+        
+
         Destroy(gameObject);
+
 
     }
 

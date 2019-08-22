@@ -34,6 +34,8 @@ public class RaftScript : AIBase, IDamageable
             SpawnFloaters(2);
         }
 
+        base.Die();
+
         Destroy(gameObject);
 
     }
