@@ -53,6 +53,8 @@ MonoBehaviour:
     type: 3}
   bodySpaceing: 1
   attackRange: 1
+  inputMapping: {fileID: 11400000, guid: 5641f3c6cab6bce40b86f20d8cf50dc9, type: 2}
+  bodyColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!212 &8461280662659796955
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -70,7 +72,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 807d4c1b79bacb449b3f3cf61c55af9c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -148,7 +150,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.84, y: 0.7}
   m_EdgeRadius: 0
 --- !u!95 &6245151246645104425
 Animator:
@@ -176,11 +178,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8461280662659796957}
     m_Modifications:
-    - target: {fileID: 857272003166662520, guid: 9dbec63dc0c33734b92e9fcd3ac87be9,
-        type: 3}
-      propertyPath: m_Name
-      value: vfx_water_trail_01
-      objectReference: {fileID: 0}
     - target: {fileID: 860355166208221488, guid: 9dbec63dc0c33734b92e9fcd3ac87be9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -235,6 +232,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 857272003166662520, guid: 9dbec63dc0c33734b92e9fcd3ac87be9,
+        type: 3}
+      propertyPath: m_Name
+      value: vfx_water_trail_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dbec63dc0c33734b92e9fcd3ac87be9, type: 3}

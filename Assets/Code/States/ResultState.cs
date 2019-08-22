@@ -24,8 +24,5 @@ public class ResultState : IStateBase
     public void UIState()
     {
        
-    }
-
-   
-    
+    }   
 }
