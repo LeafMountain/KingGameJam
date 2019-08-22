@@ -7,7 +7,7 @@ public enum EnemyType { Floater, Surfer, Raft, MotorBoat, DrugBoat, CruiseShip, 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
-public class AIBase : MonoBehaviour
+public abstract class AIBase : MonoBehaviour
 {
     protected GameManager gameManagerRef;
     protected EnemyManager enemyManagerRef;
@@ -50,4 +50,31 @@ public class AIBase : MonoBehaviour
 
         mySpriteRenderer = GetComponent<SpriteRenderer>();
     }
+
+    protected void SpawnFloaters(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            GameObject floater = 
+            Instantiate(enemyManagerRef.floaterPrefab, 
+                GetSpawnPosition(transform.position), Quaternion.identity);
+
+            floater.transform.SetParent(enemyManagerRef.transform);
+        }
+    }
+
+    private Vector2 GetSpawnPosition(Vector2 pos)
+    {
+        Vector2 spawnPosition;
+
+        float x = pos.x + Random.Range(-(int)myType, (int)myType);
+        float y = pos.y + Random.Range(-(int)myType, (int)myType);
+
+        spawnPosition = new Vector2(x, y);
+
+        return spawnPosition;
+    }
+
+   
+    
 }

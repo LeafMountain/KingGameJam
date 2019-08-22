@@ -32,11 +32,18 @@ public class FloaterScript : AIBase , IEdible
 
     public void OnEaten()
     {
-        
+        Die();
     }
 
-    public void OnAttacked(int damage)
+    private void Die()
     {
-      //throw new System.NotImplementedException();
+        Vector2 myPosition = transform.position;
+
+        Instantiate(enemyManagerRef.bloodSplatPrefab, myPosition, Quaternion.identity);
+
+        gameManagerRef.audioManagerRef.ExplosionSurfer();
+
+        Destroy(gameObject);
+
     }
 }

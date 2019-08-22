@@ -5,12 +5,12 @@ using Assets.Code.Interfaces;
 
 public class MainMenuState : IStateBase
 {
-    private GameManager gameManager_ref;
+    private GameManager gameManagerRef;
     
     private MainMenuState() { }
     public MainMenuState(GameManager gameManager_ref)
     {
-        this.gameManager_ref = gameManager_ref;
+        this.gameManagerRef = gameManager_ref;
         if (gameManager_ref.debugMode)
         {
             Debug.Log("Constructing MainMenuState!");
@@ -25,7 +25,10 @@ public class MainMenuState : IStateBase
 
     public void StateUpdate()
     {
-
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            gameManagerRef.SetNewState(new PlayState(gameManagerRef));
+        }
 
     }
 

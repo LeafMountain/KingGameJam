@@ -23,6 +23,14 @@ public class RaftScript : AIBase, IDamageable
 
     public void OnAttacked(int damage)
     {
-        throw new System.NotImplementedException();
+        health -= damage;
+
+        if(health <= 0)
+        {
+            SpawnFloaters(2);
+        }
+
+        Destroy(gameObject);
+
     }
 }
