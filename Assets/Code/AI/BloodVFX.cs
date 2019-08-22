@@ -9,6 +9,8 @@ public class BloodVFX : MonoBehaviour
     private GameManager gameManagerRef;
     private SpriteRenderer mySpriteRenderer;
 
+    private float alpha = 1;
+
     private int indexTracker;
     void Start()
     {
@@ -20,6 +22,22 @@ public class BloodVFX : MonoBehaviour
     void Update()
     {
         UpdateSprite();
+        UpdateAlpha();
+        
+    }
+    private void UpdateAlpha()
+    {
+        if (gameManagerRef.audioManagerRef.beatCount)
+        {
+            alpha -= .25f;
+
+            mySpriteRenderer.color = new Color(1, 0, 0, alpha);
+
+            if(alpha <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
     private void UpdateSprite()
