@@ -4,28 +4,23 @@ using UnityEngine;
 
 public class FloaterScript : AIBase , IEdible
 {
-    public Sprite[] floaterSprites;
 
-    private EnemyManager enemyManagerRef;
-    private GameManager gameManagerRef;
-
-    private SpriteRenderer mySpriteRenderer;
-
-    private int indexTracker;
     void Start()
     {
-        enemyManagerRef = EnemyManager.GetInstance();
         gameManagerRef = GameManager.GetInstance();
+        enemyManagerRef = EnemyManager.GetInstance();
+
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
 
         GetRandomSpriteSet();
-        mySpriteRenderer = GetComponent<SpriteRenderer>();
-        mySpriteRenderer.sprite = floaterSprites[0];
+        mySpriteRenderer.sprite = mySprites[0];
+       
     }
     private void GetRandomSpriteSet()
     {
         int rand = Random.Range(0, 14);
 
-        floaterSprites = new Sprite[] {enemyManagerRef.floaterSprites[rand *2],
+        mySprites = new Sprite[] {enemyManagerRef.floaterSprites[rand *2],
         enemyManagerRef.floaterSprites[rand *2 +1]};
 
     }
@@ -33,20 +28,6 @@ public class FloaterScript : AIBase , IEdible
     void Update()
     {
         UpdateSprite();
-    }
-
-    private void UpdateSprite()
-    {
-        if (gameManagerRef.audioManagerRef.beatCount)
-        {
-            indexTracker++;
-
-            int spriteIndex = indexTracker > 1 ? 0 : 1;
-
-            indexTracker = spriteIndex;
-
-            mySpriteRenderer.sprite = floaterSprites[indexTracker];
-        }
     }
 
     public void OnEaten()
