@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
         if(players.Count == 1)
         {
             Debug.Log($"Game is done. Player {players[0].name} won!");
+            SetNewState(new ResultState(this));
         }
         else if(players.Count < 1)
         {
