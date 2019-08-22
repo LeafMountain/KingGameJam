@@ -10,7 +10,7 @@ public class CruiseShipEditor : Editor
     {
         base.OnInspectorGUI();
 
-        DrawDefaultInspector();
+      
 
         CruiseShipScript myCruiseShipScript = (CruiseShipScript)target;
 

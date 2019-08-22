@@ -10,7 +10,7 @@ public class FloaterEditor : Editor
     {
         base.OnInspectorGUI();
 
-        DrawDefaultInspector();
+      
 
         FloaterScript myFloaterScript = (FloaterScript)target;
 

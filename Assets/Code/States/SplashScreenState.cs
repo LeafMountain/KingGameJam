@@ -25,7 +25,7 @@ public class SplashScreenState : IStateBase
 
     public void StateUpdate()
     {
-
+        gameManager_ref.SetNewState(new MainMenuState(gameManager_ref));
     }
     public void UIState()
     {
