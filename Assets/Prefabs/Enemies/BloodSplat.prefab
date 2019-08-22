@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5758602501884412038}
   - component: {fileID: 447669894051252373}
   - component: {fileID: 1295479752845409738}
+  - component: {fileID: -8148845645445668518}
   m_Layer: 0
   m_Name: BloodSplat
   m_TagString: Untagged
@@ -96,3 +97,22 @@ MonoBehaviour:
   bloodSprites:
   - {fileID: 21300000, guid: f6e1b0c13cc641c46ba4ac9f09b61933, type: 3}
   - {fileID: 21300002, guid: f6e1b0c13cc641c46ba4ac9f09b61933, type: 3}
+--- !u!95 &-8148845645445668518
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558956787458477475}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c7f94daa262ccc941aff7280385414e1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
