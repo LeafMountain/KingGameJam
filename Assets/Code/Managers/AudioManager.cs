@@ -19,8 +19,8 @@ public class AudioManager : MonoBehaviour
 
     [Header("MusicClips")]
     public AudioClip[] musicClips;
-
-    private bool isOn;
+    [HideInInspector]
+    public bool isOn;
     private bool defaultIsPlaying;
     [HideInInspector]
     public bool beatCount;
@@ -61,6 +61,7 @@ public class AudioManager : MonoBehaviour
     public void StopMusicTrack()
     {
         isOn = false;
+        musicAudio.Stop(); 
     }
 
     public void ButtonSelect()
