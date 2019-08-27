@@ -18,19 +18,38 @@ public abstract class AIBase : MonoBehaviour
     public EnemyType myType;
     public int health;
     public float speed;
+    public bool isShip;
 
+    public GameObject mask;
     protected SpriteRenderer mySpriteRenderer;
     protected Vector2 direction;
     private int indexTracker;
 
+    protected bool sinkShake;
+    private bool shakeRight;
+    protected bool sinking;
+
     void Update()
     {
-       
+        DeathShake();
     }
 
     public virtual void Die()
     {
         enemyManagerRef.RemoveFromEnemyList(this);
+        sinking = true;
+
+        if (isShip)
+        {
+            mask.transform.SetParent(transform.parent);
+            mySpriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
+
+            sinkShake = true;
+
+            Destroy(mask,3f);
+            Destroy(gameObject,3f);
+
+        }
     }
     protected void UpdateSprite()
     {
@@ -82,7 +101,10 @@ public abstract class AIBase : MonoBehaviour
 
     public virtual void Move()
     {
-        transform.position = (Vector2)transform.position + (direction * speed * Time.deltaTime);
+        if (!sinking)
+        {
+            transform.position = (Vector2)transform.position + (direction * speed * Time.deltaTime);
+        }
     }
 
     protected Vector2 GetRandomDirection()
@@ -136,6 +158,32 @@ public abstract class AIBase : MonoBehaviour
             {
                 mySpriteRenderer.flipX = false;
             }
+        }
+    }
+
+    protected void DeathShake()
+    {
+        if (sinkShake)
+        {
+            if (shakeRight)
+            {
+                transform.position = new Vector3(
+                    transform.position.x + 0.1f,
+                    transform.position.y - (1f * Time.deltaTime));
+
+                shakeRight = !shakeRight;
+            }
+            else
+            {
+                transform.position = new Vector3(
+                   transform.position.x - 0.1f,
+                   transform.position.y- (1f * Time.deltaTime));
+
+                shakeRight = !shakeRight;
+            }
+
+
+            
         }
     }
 
