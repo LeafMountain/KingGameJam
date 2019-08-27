@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FloaterScript : AIBase , IEdible
 {
-
+    public AudioClip eaten;
     
 
     void Start()
@@ -36,10 +36,10 @@ public class FloaterScript : AIBase , IEdible
 
     public void OnEaten()
     {
-        Die();
+        Died();
     }
 
-    private void Die()
+    private void Died()
     {
 
         base.Die();
@@ -48,7 +48,7 @@ public class FloaterScript : AIBase , IEdible
 
         Instantiate(enemyManagerRef.bloodSplatPrefab, myPosition, Quaternion.identity);
 
-        gameManagerRef.audioManagerRef.ExplosionSurfer();
+        gameManagerRef.audioManagerRef.sfxAudio.PlayOneShot(eaten);
 
         
 

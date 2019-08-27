@@ -45,14 +45,21 @@ public abstract class AIBase : MonoBehaviour
         if (isShip)
         {
             mask.transform.SetParent(transform.parent);
-            waterParticles.transform.SetParent(transform.parent);
+            if(waterParticles != null)
+            {
+                waterParticles.transform.SetParent(transform.parent);
+                Destroy(waterParticles, 3f);
+            }
+            
 
             mySpriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
 
             sinkShake = true;
+            GetComponent<Collider2D>().enabled = false;
+
 
             Destroy(mask,3f);
-            Destroy(waterParticles, 3f);
+            
             Destroy(gameObject,3f);
 
         }
