@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: blood_splat01
+  m_Name: cruise_ship_waves01
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,10 +20,10 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 6710317958497488439, guid: 85ae0894fd9c1b34492f2195050cef2b,
+      value: {fileID: -2684654525442971672, guid: 7e400081d3bbef1498d6c114d06b65f6,
         type: 3}
     - time: 0.083333336
-      value: {fileID: -3953650198302657306, guid: 85ae0894fd9c1b34492f2195050cef2b,
+      value: {fileID: -7186004971146173310, guid: 7e400081d3bbef1498d6c114d06b65f6,
         type: 3}
     attribute: m_Sprite
     path: 
@@ -44,8 +44,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 6710317958497488439, guid: 85ae0894fd9c1b34492f2195050cef2b, type: 3}
-    - {fileID: -3953650198302657306, guid: 85ae0894fd9c1b34492f2195050cef2b, type: 3}
+    - {fileID: -2684654525442971672, guid: 7e400081d3bbef1498d6c114d06b65f6, type: 3}
+    - {fileID: -7186004971146173310, guid: 7e400081d3bbef1498d6c114d06b65f6, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

@@ -16,10 +16,9 @@ public class CruiseShipScript : AIBase, IDamageable
    
     void Update()
     {
+        ParentUpdate();
+
         UpdateSprite();
-        Move();
-        CheckBounderies();
-        DeathShake();
     }
     public override void Move()
     {

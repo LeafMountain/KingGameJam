@@ -29,9 +29,11 @@ public abstract class AIBase : MonoBehaviour
     private bool shakeRight;
     protected bool sinking;
 
+    private bool onScreen;
+
     void Update()
     {
-        DeathShake();
+       
     }
 
     public virtual void Die()
@@ -109,37 +111,57 @@ public abstract class AIBase : MonoBehaviour
 
     protected Vector2 GetRandomDirection()
     {
+       
         Vector2 dir;
 
-        float x = Random.Range(-1.0f, 1.0f);
-        float y = Random.Range(-1.0f, 1.0f);
-
-        dir = new Vector2(x, y);
-
-        if(x == 0 && y == 0)
+        if (onScreen)
         {
-           dir = GetRandomDirection();
+            float x = Random.Range(-1.0f, 1.0f);
+            float y = Random.Range(-1.0f, 1.0f);
+
+            dir = new Vector2(x, y);
+
+            if (x == 0 && y == 0)
+            {
+                dir = GetRandomDirection();
+            }
+
+            CheckFlipX(direction.x);
+        }
+        else
+        {
+            float x = Random.Range(0, Screen.width);
+            float y = Random.Range(0, Screen.height);
+
+            dir = gameManagerRef.cam.ScreenToWorldPoint(new Vector2(x, y));
+
+            dir = (dir - (Vector2)transform.position).normalized;
+
+            CheckFlipX(direction.x);
         }
 
-        CheckFlipX(direction.x);
+        
 
         return dir;
     }
 
     protected void CheckBounderies()
     {
-        Vector2 screenPos = gameManagerRef.cam.WorldToScreenPoint(transform.position);
+        if (onScreen)
+        {
+            Vector2 screenPos = gameManagerRef.cam.WorldToScreenPoint(transform.position);
 
-        if(screenPos.x < 0 ||
-            screenPos.x > Screen.width)
-        {
-            direction = new Vector2(-direction.x, direction.y);
-            CheckFlipX(direction.x);
-        }
-            if(screenPos.y < 0 ||
+            if (screenPos.x < 0 ||
+                screenPos.x > Screen.width)
+            {
+                direction = new Vector2(-direction.x, direction.y);
+                CheckFlipX(direction.x);
+            }
+            if (screenPos.y < 0 ||
             screenPos.y > Screen.height)
-        {
-            direction = new Vector2(direction.x, -direction.y);
+            {
+                direction = new Vector2(direction.x, -direction.y);
+            }
         }
     }
 
@@ -186,6 +208,31 @@ public abstract class AIBase : MonoBehaviour
             
         }
     }
+    protected void CheckIfOnScreen()
+    {
+        if(!onScreen)
+        {
+            Vector2 screenPos = gameManagerRef.cam.WorldToScreenPoint(transform.position);
+
+            if (screenPos.x > 0 ||
+                screenPos.x < Screen.width ||
+                screenPos.y > 0 ||
+                screenPos.y < Screen.height)
+            {
+                onScreen = true;
+            }
+        }
+    }
+
+    protected void ParentUpdate()
+    {
+        CheckIfOnScreen();
+        DeathShake();
+        CheckBounderies();
+        Move();
+    }
+    
+    
 
     
 
