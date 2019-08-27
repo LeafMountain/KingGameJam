@@ -9,9 +9,10 @@ public class Kroken : MonoBehaviour, IDamageable
     public float bodySpaceing = 1;
     public float attackRange = 1;
 
+    [HideInInspector] public ColorPalette colorPalette = null;
+    [HideInInspector] public InputMapping inputMapping = null;
+
     private string nickname = string.Empty;
-    private InputMapping inputMapping = null;
-    private ColorPalette colorPalette = null;
     private List<BodyPart> bodyParts = new List<BodyPart>();
     private Vector2[] paintPositions = new Vector2[MAX_LENGTH];
     private bool movementLocked = true;
@@ -22,9 +23,6 @@ public class Kroken : MonoBehaviour, IDamageable
     {
         this.inputMapping = inputMapping;
         SetColorPalette(palette);
-        // nickname = palette.paletteName;
-        // colorPalette = palette;
-        // GetComponent<Renderer>().material.SetColor("_MaskColor", colorPalette.color);
     }
 
     public void SetMovementLock(bool value)
@@ -129,19 +127,29 @@ public class Kroken : MonoBehaviour, IDamageable
 
         if(movementLocked == true && inputMapping.GetAttack())
         {
-            GameManager gameManager = GameManager.GetInstance();
-            SetColorPalette(gameManager.SwapPalette(colorPalette));
+            ColorPalette newPalette = PlayerManager.SwapPalette(colorPalette);
+            SetColorPalette(newPalette);
         }
     }
 
     private void OnEnable()
     {
-        GameManager.GetInstance().AddPlayer(this);
+        PlayerManager.AddPlayer(this);
     }
 
     private void OnDisable()
     {
-        GameManager.GetInstance().RemovePlayer(this);
+        for (int i = 0; i < bodyParts.Count; i++)
+        {
+            Destroy(bodyParts[i]);
+            bodyParts.Clear();
+        }
+        PlayerManager.RemovePlayer(this);
+        
+        if(gameObject != null)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D col)
@@ -185,7 +193,10 @@ public class Kroken : MonoBehaviour, IDamageable
 
     private void Move(Vector2 direction)
     {
-        // Debug.Log(Vector2.Dot(transform.right, direction));
+        if(movementLocked)
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
         if(Vector2.Dot(transform.right, direction) > -0.9f)
         {
             if(movementLocked == false)

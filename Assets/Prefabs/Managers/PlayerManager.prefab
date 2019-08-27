@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3807964830766169646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3807964830766169644}
+  - component: {fileID: 3807964830766169647}
+  m_Layer: 0
+  m_Name: PlayerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3807964830766169644
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3807964830766169646}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.5103589, y: -1.6372055, z: -5.9140625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3807964830766169647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3807964830766169646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6559cf7ad0187d9583287a9776e97d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players: []
+  krokenPrefab: {fileID: 8461280662659796956, guid: a22f1137fe13928478a9355163d95417,
+    type: 3}
+  inputMappings:
+  - {fileID: 11400000, guid: 5641f3c6cab6bce40b86f20d8cf50dc9, type: 2}
+  - {fileID: 11400000, guid: 5f415523b38f8474dac9fcf91b436410, type: 2}
+  usedMappings: 
+  colorPalettes:
+  - {fileID: 11400000, guid: 126faa4cd367f1d4ea8e2d460b0f7e1a, type: 2}
+  - {fileID: 11400000, guid: e91c7aeade5deb54fa7db356547ca791, type: 2}
+  - {fileID: 11400000, guid: 5ab560e4a4866cd4ab75e2a08ef8862b, type: 2}
+  - {fileID: 11400000, guid: 26cb8a2f492be7243962149140b74d96, type: 2}
+  - {fileID: 11400000, guid: 32a728ae8199a674cb65c5dd85060143, type: 2}
+  - {fileID: 11400000, guid: 6af39b5588aab6549959e6d306b21fd4, type: 2}
+  - {fileID: 11400000, guid: 5eeed4fc0ac52d848ba16dec4fe7fa66, type: 2}
+  - {fileID: 11400000, guid: b9ad25924a41a1d4caee1aba780ba6d0, type: 2}
+  usedPalettes: 
