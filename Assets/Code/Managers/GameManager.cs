@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public Kroken krokenPrefab = null;
     public InputMapping[] inputMappings = null;
     [HideInInspector] public List<int> usedMappings = new List<int>();
+
     public ColorPalette[] colorPalettes = null;
     [HideInInspector] public List<int> usedPalettes = new List<int>();
 
@@ -87,6 +88,41 @@ public class GameManager : MonoBehaviour
 
         players.Remove(player);
         CheckIfDone();
+    }
+
+    public ColorPalette SwapPalette(ColorPalette oldPalette)
+    {
+        int currentPaletteIndex = -1;
+
+        // Add old palette to available palettes again
+        if(oldPalette != null)
+        {
+            for (int i = 0; i < colorPalettes.Length; i++)
+            {
+                if(colorPalettes[i] == oldPalette)
+                {
+                    usedPalettes.Remove(i);
+                    currentPaletteIndex = i;
+                    break;
+                }
+            }
+        }
+
+        int oldPaletteIndex = currentPaletteIndex;
+        currentPaletteIndex = (currentPaletteIndex + 1) % (colorPalettes.Length);
+        while(usedPalettes.Contains(currentPaletteIndex))
+        {
+            currentPaletteIndex = (currentPaletteIndex + 1) % (colorPalettes.Length);
+
+            if(oldPaletteIndex == currentPaletteIndex)
+            {
+                Debug.Log("Missing available palettes.");
+                return null;
+            }
+        }
+
+        usedPalettes.Add(currentPaletteIndex);
+        return colorPalettes[currentPaletteIndex];
     }
 
     private void CheckIfDone()

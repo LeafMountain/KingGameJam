@@ -11,7 +11,7 @@ public class Kroken : MonoBehaviour, IDamageable
 
     private string nickname = string.Empty;
     private InputMapping inputMapping = null;
-    private ColorPalette bodyColor = null;
+    private ColorPalette colorPalette = null;
     private List<BodyPart> bodyParts = new List<BodyPart>();
     private Vector2[] paintPositions = new Vector2[MAX_LENGTH];
     private bool movementLocked = true;
@@ -21,9 +21,10 @@ public class Kroken : MonoBehaviour, IDamageable
     public void Init(InputMapping inputMapping, ColorPalette palette)
     {
         this.inputMapping = inputMapping;
-        nickname = palette.paletteName;
-        bodyColor = palette;
-        GetComponent<Renderer>().material.SetColor("_MaskColor", bodyColor.color);
+        SetColorPalette(palette);
+        // nickname = palette.paletteName;
+        // colorPalette = palette;
+        // GetComponent<Renderer>().material.SetColor("_MaskColor", colorPalette.color);
     }
 
     public void SetMovementLock(bool value)
@@ -31,7 +32,7 @@ public class Kroken : MonoBehaviour, IDamageable
         movementLocked = value;
     }
 
-    public Color GetColor() => bodyColor.color;
+    public Color GetColor() => colorPalette.color;
     public string GetName() => nickname;
 
     public void Grow()
@@ -59,9 +60,19 @@ public class Kroken : MonoBehaviour, IDamageable
         bodyPart.Init(() =>
         {
             OnAttacked(damageValue);
-        } , bodyColor.color);
+        } , colorPalette.color);
 
         bodyParts.Add(bodyPart);
+    }
+
+    private void SetColorPalette(ColorPalette palette)
+    {
+        if(palette != null)
+        {
+            nickname = palette.paletteName;
+            colorPalette = palette;
+            GetComponent<Renderer>().material.SetColor("_MaskColor", colorPalette.color);
+        }
     }
 
     public void OnAttacked(int damage)
@@ -114,6 +125,12 @@ public class Kroken : MonoBehaviour, IDamageable
 
         if(inputMapping.GetAttack()) {
             Attack();
+        }
+
+        if(movementLocked == true && inputMapping.GetAttack())
+        {
+            GameManager gameManager = GameManager.GetInstance();
+            SetColorPalette(gameManager.SwapPalette(colorPalette));
         }
     }
 

@@ -25,6 +25,7 @@ public class EnemyManager : MonoBehaviour
     public EnemyType spawn;
 
     private float timeBetweenSpawn = 1;
+    private IEnumerator spawningCoroutine = null;
 
     void Awake()
     {
@@ -47,7 +48,9 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         gameManagerRef = GameManager.GetInstance();
-        StartCoroutine(StartSpawning());
+
+        spawningCoroutine = StartSpawning();
+        StartCoroutine(spawningCoroutine);
     }
 
     
@@ -58,10 +61,17 @@ public class EnemyManager : MonoBehaviour
 
     public IEnumerator StartSpawning()
     {
-        SpawnEnemy();
-        yield return new WaitForSeconds(timeBetweenSpawn);
-        timeBetweenSpawn += spawnTimeIncrease;
-        StartCoroutine(StartSpawning());
+        while(true)
+        {
+            SpawnEnemy();
+            yield return new WaitForSeconds(timeBetweenSpawn);
+            timeBetweenSpawn += spawnTimeIncrease;
+        }
+    }
+
+    public void StopSpawning()
+    {
+        StopCoroutine(spawningCoroutine);
     }
 
     public void SpawnEnemy(int index = -1)
