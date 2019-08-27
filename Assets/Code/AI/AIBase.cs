@@ -203,10 +203,19 @@ public abstract class AIBase : MonoBehaviour
             if (x < 0)
             {
                 mySpriteRenderer.flipX = true;
+                if(waterParticles != null)
+                {
+                    waterParticles.GetComponent<SpriteRenderer>().flipX = true;
+                }
             }
             else
             {
                 mySpriteRenderer.flipX = false;
+
+                if (waterParticles != null)
+                {
+                    waterParticles.GetComponent<SpriteRenderer>().flipX = false;
+                }
             }
         }
     }
