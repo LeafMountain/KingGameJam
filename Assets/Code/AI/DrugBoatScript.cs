@@ -21,21 +21,19 @@ public class DrugBoatScript : AIBase, IDamageable
         ParentUpdate();
     }
 
-    public override void Move()
-    {
-        base.Move();
-    }
-
     public void OnAttacked(int damage)
     {
         health -= damage;
-
-        direction = -direction;
 
         if(health <= 0)
         {
             SpawnFloaters(3);
             base.Die();
+        }
+        else
+        {
+            direction = -direction;
+            CheckFlipX(direction.x);
         }
     }
 }

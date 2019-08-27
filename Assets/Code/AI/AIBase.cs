@@ -21,6 +21,7 @@ public abstract class AIBase : MonoBehaviour
     public bool isShip;
 
     public GameObject mask;
+    public GameObject waterParticles;
     protected SpriteRenderer mySpriteRenderer;
     protected Vector2 direction;
     private int indexTracker;
@@ -44,11 +45,14 @@ public abstract class AIBase : MonoBehaviour
         if (isShip)
         {
             mask.transform.SetParent(transform.parent);
+            waterParticles.transform.SetParent(transform.parent);
+
             mySpriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
 
             sinkShake = true;
 
             Destroy(mask,3f);
+            Destroy(waterParticles, 3f);
             Destroy(gameObject,3f);
 
         }
