@@ -19,9 +19,13 @@ public abstract class AIBase : MonoBehaviour
     public int health;
     public float speed;
     public bool isShip;
+    public float length;
+    public float height;
 
     public GameObject mask;
     public GameObject waterParticles;
+    public GameObject explosion;
+
     protected SpriteRenderer mySpriteRenderer;
     protected Vector2 direction;
     private int indexTracker;
@@ -62,6 +66,10 @@ public abstract class AIBase : MonoBehaviour
             
             Destroy(gameObject,3f);
 
+        }
+        else
+        {
+            
         }
     }
     protected void UpdateSprite()
@@ -242,6 +250,26 @@ public abstract class AIBase : MonoBehaviour
         CheckBounderies();
         Move();
     }
+
+    private void SpawnExplosions()
+    {
+        Vector2 pos;
+
+        float x = Random.Range(transform.position.x - (length / 2),
+            transform.position.x + (length / 2));
+
+
+        float y = Random.Range(transform.position.y - (height/2),
+            transform.position.y + (height/2));
+
+        pos = new Vector2(x, y);
+
+        Instantiate(explosion, pos, Quaternion.identity);
+
+
+    }
+
+   
     
     
 
