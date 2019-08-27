@@ -15,11 +15,16 @@ public class EnemyManager : MonoBehaviour
 
     public GameObject bloodSplatPrefab;
 
+    public Vector2 spawnArea = Vector2.one;
+    public float spawnTimeIncrease = 1;
+
     [HideInInspector]
     public List<AIBase> enemiesInGame;
 
     [Header("Debug Spawn")]
     public EnemyType spawn;
+
+    private float timeBetweenSpawn = 1;
 
     void Awake()
     {
@@ -42,7 +47,7 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         gameManagerRef = GameManager.GetInstance();
-       
+        StartCoroutine(StartSpawning());
     }
 
     
@@ -51,34 +56,63 @@ public class EnemyManager : MonoBehaviour
        // print(enemiesInGame.Count);
     }
 
-    public void SpawnEnemy()
+    public IEnumerator StartSpawning()
+    {
+        SpawnEnemy();
+        yield return new WaitForSeconds(timeBetweenSpawn);
+        timeBetweenSpawn += spawnTimeIncrease;
+        StartCoroutine(StartSpawning());
+    }
+
+    public void SpawnEnemy(int index = -1)
     {
         if(spawn != EnemyType.Length)
         {
-            GameObject go =
-                Instantiate(enemies[(int)spawn], GetRandomSpawnPosition(), Quaternion.identity);
+            if(index == -1)
+            {
+                index = Random.Range(0, enemies.Length);
+            }
 
-            go.transform.SetParent(transform);
+            GameObject go = Instantiate(enemies[(int)spawn], GetRandomSpawnPosition(), Quaternion.identity, transform);
         }
+    }
+
+    public void DebugSpawnEnemy()
+    {
+        SpawnEnemy((int)spawn);
     }
 
     private Vector2 GetRandomSpawnPosition()
     {
-        gameManagerRef = GameManager.GetInstance();
-        Vector2 pos = gameManagerRef.cam.ScreenToWorldPoint(
-            new Vector2( Random.Range(0, Screen.height), Random.Range(0, Screen.width)));
+        bool xRandom = Random.Range(0, 2) > 0;
+        float xPos, yPos;
 
-        return pos;
+        if(xRandom == true)
+        {
+            xPos = Random.Range(0f, spawnArea.x);
+            yPos = Random.Range(0, 2) * spawnArea.y;
+        }
+        else
+        {
+            xPos = Random.Range(0, 2) * spawnArea.x;
+            yPos = Random.Range(0f, spawnArea.y);
+        }
+
+        return new Vector2(xPos, yPos) - (spawnArea * .5f);
     }
    
     public void AddToEnemyList(AIBase enemy)
     {
-       // print("ADD");
         enemiesInGame.Add(enemy);
     }
     public void RemoveFromEnemyList(AIBase enemy)
     {
         enemiesInGame.Remove(enemy);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(Vector2.zero, spawnArea);
     }
 
 }
