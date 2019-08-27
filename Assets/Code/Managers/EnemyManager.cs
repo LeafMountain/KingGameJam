@@ -73,7 +73,7 @@ public class EnemyManager : MonoBehaviour
    
     public void AddToEnemyList(AIBase enemy)
     {
-        print("ADD");
+       // print("ADD");
         enemiesInGame.Add(enemy);
     }
     public void RemoveFromEnemyList(AIBase enemy)
