@@ -101,6 +101,10 @@ MonoBehaviour:
   myType: 0
   health: 0
   speed: 0.25
+  isShip: 0
+  mask: {fileID: 0}
+  waterParticles: {fileID: 0}
+  eaten: {fileID: 8300000, guid: 97ed37f9f84c7064f8e7106cf035b106, type: 3}
 --- !u!50 &3578853682376205036
 Rigidbody2D:
   serializedVersion: 4

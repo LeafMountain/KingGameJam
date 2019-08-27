@@ -18,25 +18,22 @@ public class DrugBoatScript : AIBase, IDamageable
     void Update()
     {
         UpdateSprite();
-        Move();
-        CheckBounderies();
-    }
-
-    public override void Move()
-    {
-        base.Move();
+        ParentUpdate();
     }
 
     public void OnAttacked(int damage)
     {
         health -= damage;
 
-        direction = -direction;
-
         if(health <= 0)
         {
             SpawnFloaters(3);
-            Destroy(gameObject);
+            base.Die();
+        }
+        else
+        {
+            direction = -direction;
+            CheckFlipX(direction.x);
         }
     }
 }
