@@ -14,8 +14,7 @@ public class EnemyManager : MonoBehaviour
     public GameObject[] enemies;
 
     public GameObject bloodSplatPrefab;
-    public GameObject explosionVFXPrefag;
-    
+
     public Vector2 spawnArea = Vector2.one;
     public float spawnTimeIncrease = 1;
 

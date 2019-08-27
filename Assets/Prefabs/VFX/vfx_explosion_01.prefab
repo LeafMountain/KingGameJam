@@ -9633,7 +9633,6 @@ GameObject:
   - component: {fileID: 6957413461469091343}
   - component: {fileID: 7088024381247520677}
   - component: {fileID: 7086834669928775955}
-  - component: {fileID: -3645885129990548223}
   m_Layer: 0
   m_Name: vfx_explosion_01
   m_TagString: Untagged
@@ -14436,24 +14435,3 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &-3645885129990548223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6960469909612746823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b9318d55ef90e2418ae5edfb229d144, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosionVariations:
-  - {fileID: 8300000, guid: f2ec4d30d6913da4681504c5a9ca1377, type: 3}
-  - {fileID: 8300000, guid: 020c69fb05462424794b64adc929bd37, type: 3}
-  - {fileID: 8300000, guid: 13210fe5c57dd0348948c4cc716f60e1, type: 3}
-  - {fileID: 8300000, guid: 38d88a23ff3c42e4ab0c626e5fe82792, type: 3}
-  - {fileID: 8300000, guid: 744d39cab55db3a439c63e9881f5e703, type: 3}
-  - {fileID: 8300000, guid: c27c3eff6082e584392f0ecf2c5395c4, type: 3}
-  - {fileID: 8300000, guid: 337a8863162f4724f929efbcaa8a7238, type: 3}
-  - {fileID: 8300000, guid: 8005404fcddda814d8b872955fe1e41b, type: 3}
