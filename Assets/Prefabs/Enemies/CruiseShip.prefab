@@ -307,8 +307,12 @@ MonoBehaviour:
   health: 5
   speed: 1
   isShip: 1
+  length: 0
+  height: 0
   mask: {fileID: 315142684424717405}
   waterParticles: {fileID: 149584493}
+  explosion: {fileID: 6960469909612746823, guid: 36d1ca293c8442b418ce2bc6a14ab79f,
+    type: 3}
 --- !u!68 &4699615683875916142
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -357,6 +361,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3998793931636507229}
     m_Modifications:
+    - target: {fileID: 6960469909612746823, guid: 8e440cbdce32fab46af1f065e00d9107,
+        type: 3}
+      propertyPath: m_Name
+      value: vfx_smoke_01
+      objectReference: {fileID: 0}
     - target: {fileID: 6957413461469091343, guid: 8e440cbdce32fab46af1f065e00d9107,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -411,11 +420,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6960469909612746823, guid: 8e440cbdce32fab46af1f065e00d9107,
-        type: 3}
-      propertyPath: m_Name
-      value: vfx_smoke_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e440cbdce32fab46af1f065e00d9107, type: 3}

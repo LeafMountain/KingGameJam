@@ -322,8 +322,12 @@ MonoBehaviour:
   health: 2
   speed: 2
   isShip: 1
+  length: 0
+  height: 0
   mask: {fileID: 3043682334457102013}
   waterParticles: {fileID: 1163230846}
+  explosion: {fileID: 6960469909612746823, guid: 36d1ca293c8442b418ce2bc6a14ab79f,
+    type: 3}
 --- !u!95 &-3879962092742465438
 Animator:
   serializedVersion: 3
