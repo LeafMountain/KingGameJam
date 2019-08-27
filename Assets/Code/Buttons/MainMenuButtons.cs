@@ -27,7 +27,7 @@ public class MainMenuButtons : MonoBehaviour
         if(PlayerManager.GetPlayerCount() > 1)
         {
             audioManagerRef.ButtonSelect();
-            gameManagerRef.canvasManagerRef.SetMainMenuStep(1);
+            // gameManagerRef.canvasManagerRef.SetMainMenuStep(1);
             gameManagerRef.SetNewState(new PlayState(gameManagerRef));
         }
         else
@@ -43,11 +43,11 @@ public class MainMenuButtons : MonoBehaviour
 
     public void OpenOptions()
     {
-        canvasManagerRef.SwitchMainMenuPanels(1);
+        // canvasManagerRef.SwitchMainMenuPanels(1);
     }
     public void OpenCredits()
     {
-        canvasManagerRef.SwitchMainMenuPanels(2);
+        // canvasManagerRef.SwitchMainMenuPanels(2);
     }
     public void QuitGame()
     {

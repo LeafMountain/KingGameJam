@@ -35,8 +35,6 @@ public class Kroken : MonoBehaviour, IDamageable
 
     public void Grow()
     {
-        Debug.Log("Trying to grow");
-
         if(bodyParts.Count >= MAX_LENGTH)
         {
             Debug.Log("Kroken too long");

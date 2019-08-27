@@ -159,7 +159,6 @@ public class PlayerManager : MonoBehaviour
             {
                 if(inputMappings[i].GetAttack())
                 {
-                    Debug.Log("hej");
                     SpawnPlayer(i);
                 }
             }

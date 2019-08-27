@@ -13,10 +13,13 @@ public class ResultState : IStateBase
     {
         this.gameManagerRef = gameManagerRef;
 
-        gameManagerRef.canvasManagerRef.ToggleVictoryPanel(true, player.GetName(), player.GetColor());
+        // gameManagerRef.canvasManagerRef.ToggleVictoryPanel(true, player.GetName(), player.GetColor());
+        CanvasManager.ActivateWinMenu(player);
         gameManagerRef.audioManagerRef.StopMusicTrack();
 
         PlayerManager.ClearPlayers();
+        EnemyManager.StopSpawning();
+        EnemyManager.ResetSpawner();
     }
     
     public void StateUpdate()

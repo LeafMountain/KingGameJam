@@ -25,16 +25,15 @@ public class PlayState : IStateBase
             gameManagerRef.audioManagerRef.StartMusicTrack();
         }
 
-        gameManagerRef.canvasManagerRef.TogglePlayUI(true);
-        gameManagerRef.canvasManagerRef.ToggleMainMenu(false);
-
         if (gameManager_ref.debugMode)
         {
             Debug.Log("Constructing PlayState DONE!!!");
         }
 
+        CanvasManager.ActivatePlayMenu();
         PlayerManager.StopScanningForPlayers();
         PlayerManager.SetPlayerLockstate(false);
+        EnemyManager.StartSpawning();
     }
 
     public void StateUpdate()
@@ -49,7 +48,7 @@ public class PlayState : IStateBase
             gameManagerRef.SetNewState(new PauseState(gameManagerRef));
         }
     }
-    
+
     public void UIState()
     {
         

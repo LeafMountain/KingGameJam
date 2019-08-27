@@ -21,7 +21,7 @@ public class MainMenuState : IStateBase
             Debug.Log("Constructing MainMenuState DONE!!");
         }
 
-        CanvasManager.GetInstance().ToggleMainMenu(true);
+        CanvasManager.ActivateMainMenu();
     }
 
     public void StateUpdate()

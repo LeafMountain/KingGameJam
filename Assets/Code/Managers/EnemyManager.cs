@@ -17,6 +17,7 @@ public class EnemyManager : MonoBehaviour
     public GameObject explosionVFXPrefag;
     
     public Vector2 spawnArea = Vector2.one;
+    public float spawnInterval = 1;
     public float spawnTimeIncrease = 1;
 
     [HideInInspector]
@@ -50,29 +51,18 @@ public class EnemyManager : MonoBehaviour
     {
         gameManagerRef = GameManager.GetInstance();
 
-        spawningCoroutine = StartSpawning();
-        StartCoroutine(spawningCoroutine);
+        spawningCoroutine = StartSpawning2();
     }
 
-    
-    void Update()
+    public static void StartSpawning()
     {
-       // print(enemiesInGame.Count);
+        enemyManager.StartCoroutine(enemyManager.spawningCoroutine);
     }
 
-    public IEnumerator StartSpawning()
-    {
-        while(true)
-        {
-            SpawnEnemy();
-            yield return new WaitForSeconds(timeBetweenSpawn);
-            timeBetweenSpawn += spawnTimeIncrease;
-        }
-    }
 
-    public void StopSpawning()
+    public static void StopSpawning()
     {
-        StopCoroutine(spawningCoroutine);
+        enemyManager.StopCoroutine(enemyManager.spawningCoroutine);
     }
 
     public void SpawnEnemy(int index = -1)
@@ -83,6 +73,11 @@ public class EnemyManager : MonoBehaviour
         }
 
         GameObject go = Instantiate(enemies[index], GetRandomSpawnPosition(), Quaternion.identity, transform);
+    }
+
+    public static void ResetSpawner()
+    {
+        enemyManager.spawnTimeIncrease = enemyManager.spawnInterval;
     }
 
     public void DebugSpawnEnemy()
@@ -118,9 +113,18 @@ public class EnemyManager : MonoBehaviour
         enemiesInGame.Remove(enemy);
     }
 
+    private IEnumerator StartSpawning2()
+    {
+        while(true)
+        {
+            SpawnEnemy();
+            yield return new WaitForSeconds(timeBetweenSpawn);
+            timeBetweenSpawn += spawnTimeIncrease;
+        }
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(Vector2.zero, spawnArea);
     }
-
 }
