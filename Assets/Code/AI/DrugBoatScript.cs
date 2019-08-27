@@ -18,8 +18,7 @@ public class DrugBoatScript : AIBase, IDamageable
     void Update()
     {
         UpdateSprite();
-        Move();
-        CheckBounderies();
+        ParentUpdate();
     }
 
     public override void Move()
@@ -36,7 +35,7 @@ public class DrugBoatScript : AIBase, IDamageable
         if(health <= 0)
         {
             SpawnFloaters(3);
-            Destroy(gameObject);
+            base.Die();
         }
     }
 }
