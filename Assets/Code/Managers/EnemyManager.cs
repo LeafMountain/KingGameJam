@@ -48,7 +48,7 @@ public class EnemyManager : MonoBehaviour
     
     void Update()
     {
-        print(enemiesInGame.Count);
+       // print(enemiesInGame.Count);
     }
 
     public void SpawnEnemy()
