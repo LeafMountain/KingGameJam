@@ -76,15 +76,12 @@ public class EnemyManager : MonoBehaviour
 
     public void SpawnEnemy(int index = -1)
     {
-        if(spawn != EnemyType.Length)
+        if(index == -1)
         {
-            if(index == -1)
-            {
-                index = Random.Range(0, enemies.Length);
-            }
-
-            GameObject go = Instantiate(enemies[(int)spawn], GetRandomSpawnPosition(), Quaternion.identity, transform);
+            index = Random.Range(0, enemies.Length);
         }
+
+        GameObject go = Instantiate(enemies[index], GetRandomSpawnPosition(), Quaternion.identity, transform);
     }
 
     public void DebugSpawnEnemy()

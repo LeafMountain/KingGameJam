@@ -15,6 +15,8 @@ public class ResultState : IStateBase
 
         gameManagerRef.canvasManagerRef.ToggleVictoryPanel(true, player.GetName(), player.GetColor());
         gameManagerRef.audioManagerRef.StopMusicTrack();
+
+        PlayerManager.ClearPlayers();
     }
     
     public void StateUpdate()
