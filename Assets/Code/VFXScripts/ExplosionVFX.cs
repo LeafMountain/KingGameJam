@@ -15,7 +15,9 @@ public class ExplosionVFX : MonoBehaviour
     }
 
     void Start()
-    { 
+    {
+        GetComponent<AudioSource>().Play();
+
         Destroy(gameObject, 2.0f);
     }
 

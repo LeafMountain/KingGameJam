@@ -306,8 +306,12 @@ MonoBehaviour:
   health: 2
   speed: 3
   isShip: 1
+  length: 1
+  height: 0.5
   mask: {fileID: 1865501954302326512}
   waterParticles: {fileID: 640281757}
+  explosion: {fileID: 6960469909612746823, guid: 36d1ca293c8442b418ce2bc6a14ab79f,
+    type: 3}
 --- !u!61 &324991699855052463
 BoxCollider2D:
   m_ObjectHideFlags: 0

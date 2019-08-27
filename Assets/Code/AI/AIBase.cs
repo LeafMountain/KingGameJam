@@ -61,6 +61,15 @@ public abstract class AIBase : MonoBehaviour
             sinkShake = true;
             GetComponent<Collider2D>().enabled = false;
 
+            if(explosion != null)
+            {
+                SpawnExplosions();
+
+                Invoke("SpawnExplosions", 0.2f);
+                Invoke("SpawnExplosions", 0.5f);
+                //Invoke("SpawnExplosions", 1.0f);
+            }
+
 
             Destroy(mask,3f);
             
