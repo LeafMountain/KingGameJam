@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CruiseShipScript : AIBase, IDamageable
 {
-    
 
   
     void Start()
@@ -17,9 +16,9 @@ public class CruiseShipScript : AIBase, IDamageable
    
     void Update()
     {
+        ParentUpdate();
+
         UpdateSprite();
-        Move();
-        CheckBounderies();
     }
     public override void Move()
     {
@@ -32,8 +31,10 @@ public class CruiseShipScript : AIBase, IDamageable
 
         if(health <= 0)
         {
+            base.Die();
+
             SpawnFloaters(5);
-            Destroy(gameObject);
+           // Destroy(gameObject);
         }
         else
         {

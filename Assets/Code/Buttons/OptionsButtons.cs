@@ -18,6 +18,6 @@ public class OptionsButtons : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        canvasManager_ref.SwitchMainMenuPanels(0);
+        // canvasManager_ref.SwitchMainMenuPanels(0);
     }
 }

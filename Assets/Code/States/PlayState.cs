@@ -25,38 +25,37 @@ public class PlayState : IStateBase
             gameManagerRef.audioManagerRef.StartMusicTrack();
         }
 
-
-
-       gameManagerRef.canvasManagerRef.TogglePlayUI(true);
-        gameManagerRef.canvasManagerRef.ToggleMainMenu(false);
-
         if (gameManager_ref.debugMode)
         {
             Debug.Log("Constructing PlayState DONE!!!");
         }
 
-        for (int i = 0; i < gameManagerRef.players.Count; i++)
-        {
-            gameManagerRef.players[i].SetMovementLock(false);
-        }
+        CanvasManager.ActivatePlayMenu();
+        PlayerManager.StopScanningForPlayers();
+        PlayerManager.SetPlayerLockstate(false);
+        EnemyManager.StartSpawning();
     }
 
     public void StateUpdate()
     {
-        //DebugWin
-        if (Input.GetKeyDown(KeyCode.Y))
+        if (CheckIfDone() || Input.GetKeyDown(KeyCode.Y))
         {
-            gameManagerRef.SetNewState(new ResultState(gameManagerRef, null));
+            gameManagerRef.SetNewState(new ResultState(gameManagerRef, PlayerManager.GetPlayers()[0]));
         }
 
         if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
         {
             gameManagerRef.SetNewState(new PauseState(gameManagerRef));
         }
-
     }
+
     public void UIState()
     {
         
+    }
+
+    private bool CheckIfDone()
+    {
+        return PlayerManager.GetPlayerCount() < 2;
     }
 }

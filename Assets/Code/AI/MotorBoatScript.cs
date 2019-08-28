@@ -17,9 +17,7 @@ public class MotorBoatScript : AIBase, IDamageable
     
     void Update()
     {
-        UpdateSprite();
-        Move();
-        CheckBounderies();
+        ParentUpdate();
     }
 
 
@@ -30,6 +28,7 @@ public class MotorBoatScript : AIBase, IDamageable
         if(health <= 0)
         {
             SpawnFloaters(2);
+            base.Die();
         }
 
     }

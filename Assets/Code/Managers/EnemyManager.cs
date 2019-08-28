@@ -14,12 +14,20 @@ public class EnemyManager : MonoBehaviour
     public GameObject[] enemies;
 
     public GameObject bloodSplatPrefab;
+    public GameObject explosionVFXPrefag;
+    
+    public Vector2 spawnArea = Vector2.one;
+    public float spawnInterval = 1;
+    public float spawnTimeIncrease = 1;
 
     [HideInInspector]
     public List<AIBase> enemiesInGame;
 
     [Header("Debug Spawn")]
     public EnemyType spawn;
+
+    private float timeBetweenSpawn = 1;
+    private IEnumerator spawningCoroutine = null;
 
     void Awake()
     {
@@ -42,38 +50,62 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         gameManagerRef = GameManager.GetInstance();
-       
+
+        spawningCoroutine = StartSpawning2();
     }
 
-    
-    void Update()
+    public static void StartSpawning()
     {
-        print(enemiesInGame.Count);
+        enemyManager.StartCoroutine(enemyManager.spawningCoroutine);
     }
 
-    public void SpawnEnemy()
+
+    public static void StopSpawning()
     {
-        if(spawn != EnemyType.Length)
+        enemyManager.StopCoroutine(enemyManager.spawningCoroutine);
+    }
+
+    public void SpawnEnemy(int index = -1)
+    {
+        if(index == -1)
         {
-            GameObject go =
-                Instantiate(enemies[(int)spawn], GetRandomSpawnPosition(), Quaternion.identity);
-
-            go.transform.SetParent(transform);
+            index = Random.Range(0, enemies.Length);
         }
+
+        GameObject go = Instantiate(enemies[index], GetRandomSpawnPosition(), Quaternion.identity, transform);
+    }
+
+    public static void ResetSpawner()
+    {
+        enemyManager.spawnTimeIncrease = enemyManager.spawnInterval;
+    }
+
+    public void DebugSpawnEnemy()
+    {
+        SpawnEnemy((int)spawn);
     }
 
     private Vector2 GetRandomSpawnPosition()
     {
-        gameManagerRef = GameManager.GetInstance();
-        Vector2 pos = gameManagerRef.cam.ScreenToWorldPoint(
-            new Vector2( Random.Range(0, Screen.height), Random.Range(0, Screen.width)));
+        bool xRandom = Random.Range(0, 2) > 0;
+        float xPos, yPos;
 
-        return pos;
+        if(xRandom == true)
+        {
+            xPos = Random.Range(0f, spawnArea.x);
+            yPos = Random.Range(0, 2) * spawnArea.y;
+        }
+        else
+        {
+            xPos = Random.Range(0, 2) * spawnArea.x;
+            yPos = Random.Range(0f, spawnArea.y);
+        }
+
+        return new Vector2(xPos, yPos) - (spawnArea * .5f);
     }
    
     public void AddToEnemyList(AIBase enemy)
     {
-        print("ADD");
         enemiesInGame.Add(enemy);
     }
     public void RemoveFromEnemyList(AIBase enemy)
@@ -81,4 +113,18 @@ public class EnemyManager : MonoBehaviour
         enemiesInGame.Remove(enemy);
     }
 
+    private IEnumerator StartSpawning2()
+    {
+        while(true)
+        {
+            SpawnEnemy();
+            yield return new WaitForSeconds(timeBetweenSpawn);
+            timeBetweenSpawn += spawnTimeIncrease;
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(Vector2.zero, spawnArea);
+    }
 }

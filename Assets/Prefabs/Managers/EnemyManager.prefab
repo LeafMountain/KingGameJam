@@ -83,4 +83,7 @@ MonoBehaviour:
   - {fileID: 8303859965800596205, guid: 93f67fe7a8e41e941bcd370019276b03, type: 3}
   bloodSplatPrefab: {fileID: 558956787458477475, guid: b4705a2df291ae546a0b16f884870a91,
     type: 3}
+  spawnArea: {x: 27, y: 24}
+  spawnTimeIncrease: 1
+  enemiesInGame: []
   spawn: 4

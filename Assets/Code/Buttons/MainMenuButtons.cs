@@ -14,6 +14,7 @@ public class MainMenuButtons : MonoBehaviour
         gameManagerRef = GameManager.GetInstance();
         canvasManagerRef = CanvasManager.GetInstance();
         audioManagerRef = AudioManager.GetInstance();
+        PlayerManager.StartScanningForPlayers();
     }
 
     public void StartGame()
@@ -23,10 +24,10 @@ public class MainMenuButtons : MonoBehaviour
     }
     public void PressStart()
     {
-        if(gameManagerRef.players.Count > 1)
+        if(PlayerManager.GetPlayerCount() > 1)
         {
             audioManagerRef.ButtonSelect();
-            gameManagerRef.canvasManagerRef.SetMainMenuStep(1);
+            // gameManagerRef.canvasManagerRef.SetMainMenuStep(1);
             gameManagerRef.SetNewState(new PlayState(gameManagerRef));
         }
         else
@@ -34,13 +35,19 @@ public class MainMenuButtons : MonoBehaviour
             Debug.Log("Not enough players to start game");
         }
     }
+
+    public void GoToMainMenu()
+    {
+        gameManagerRef.SetNewState(new MainMenuState(gameManagerRef));
+    }
+
     public void OpenOptions()
     {
-        canvasManagerRef.SwitchMainMenuPanels(1);
+        // canvasManagerRef.SwitchMainMenuPanels(1);
     }
     public void OpenCredits()
     {
-        canvasManagerRef.SwitchMainMenuPanels(2);
+        // canvasManagerRef.SwitchMainMenuPanels(2);
     }
     public void QuitGame()
     {

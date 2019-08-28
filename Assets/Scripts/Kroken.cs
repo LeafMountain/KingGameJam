@@ -9,9 +9,10 @@ public class Kroken : MonoBehaviour, IDamageable
     public float bodySpaceing = 1;
     public float attackRange = 1;
 
+    [HideInInspector] public ColorPalette colorPalette = null;
+    [HideInInspector] public InputMapping inputMapping = null;
+
     private string nickname = string.Empty;
-    private InputMapping inputMapping = null;
-    private ColorPalette bodyColor = null;
     private List<BodyPart> bodyParts = new List<BodyPart>();
     private Vector2[] paintPositions = new Vector2[MAX_LENGTH];
     private bool movementLocked = true;
@@ -21,9 +22,7 @@ public class Kroken : MonoBehaviour, IDamageable
     public void Init(InputMapping inputMapping, ColorPalette palette)
     {
         this.inputMapping = inputMapping;
-        nickname = palette.paletteName;
-        bodyColor = palette;
-        GetComponent<Renderer>().material.SetColor("_MaskColor", bodyColor.color);
+        SetColorPalette(palette);
     }
 
     public void SetMovementLock(bool value)
@@ -31,13 +30,11 @@ public class Kroken : MonoBehaviour, IDamageable
         movementLocked = value;
     }
 
-    public Color GetColor() => bodyColor.color;
+    public Color GetColor() => colorPalette.color;
     public string GetName() => nickname;
 
     public void Grow()
     {
-        Debug.Log("Trying to grow");
-
         if(bodyParts.Count >= MAX_LENGTH)
         {
             Debug.Log("Kroken too long");
@@ -59,9 +56,19 @@ public class Kroken : MonoBehaviour, IDamageable
         bodyPart.Init(() =>
         {
             OnAttacked(damageValue);
-        } , bodyColor.color);
+        } , colorPalette.color);
 
         bodyParts.Add(bodyPart);
+    }
+
+    private void SetColorPalette(ColorPalette palette)
+    {
+        if(palette != null)
+        {
+            nickname = palette.paletteName;
+            colorPalette = palette;
+            GetComponent<Renderer>().material.SetColor("_MaskColor", colorPalette.color);
+        }
     }
 
     public void OnAttacked(int damage)
@@ -115,16 +122,32 @@ public class Kroken : MonoBehaviour, IDamageable
         if(inputMapping.GetAttack()) {
             Attack();
         }
+
+        if(movementLocked == true && inputMapping.GetAttack())
+        {
+            ColorPalette newPalette = PlayerManager.SwapPalette(colorPalette);
+            SetColorPalette(newPalette);
+        }
     }
 
     private void OnEnable()
     {
-        GameManager.GetInstance().AddPlayer(this);
+        PlayerManager.AddPlayer(this);
     }
 
     private void OnDisable()
     {
-        GameManager.GetInstance().RemovePlayer(this);
+        for (int i = 0; i < bodyParts.Count; i++)
+        {
+            Destroy(bodyParts[i]);
+            bodyParts.Clear();
+        }
+        PlayerManager.RemovePlayer(this);
+        
+        if(gameObject != null)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D col)
@@ -168,7 +191,10 @@ public class Kroken : MonoBehaviour, IDamageable
 
     private void Move(Vector2 direction)
     {
-        // Debug.Log(Vector2.Dot(transform.right, direction));
+        if(movementLocked)
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
         if(Vector2.Dot(transform.right, direction) > -0.9f)
         {
             if(movementLocked == false)

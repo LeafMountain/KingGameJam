@@ -13,7 +13,8 @@ public class PauseState : IStateBase
     {
         this.gameManagerRef = gameManagerRef;
 
-        gameManagerRef.canvasManagerRef.TogglePause(true);
+        // gameManagerRef.canvasManagerRef.TogglePause(true);
+        CanvasManager.ActivatePauseMenu();
 
         gameManagerRef.audioManagerRef.BackSF();
     }

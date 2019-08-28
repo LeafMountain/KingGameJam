@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class FloaterScript : AIBase , IEdible
 {
+
     public RuntimeAnimatorController[] animController;
 
     private Animator myAnim;
+
+    public AudioClip eaten;
+    
 
     void Start()
     {
@@ -35,10 +39,17 @@ public class FloaterScript : AIBase , IEdible
 
     public void OnEaten()
     {
-        Die();
+        Died();
     }
 
+
     public override void Die()
+    {
+
+    }
+
+    private void Died()
+
     {
 
         base.Die();
@@ -47,7 +58,7 @@ public class FloaterScript : AIBase , IEdible
 
         Instantiate(enemyManagerRef.bloodSplatPrefab, myPosition, Quaternion.identity);
 
-        gameManagerRef.audioManagerRef.ExplosionSurfer();
+        gameManagerRef.audioManagerRef.sfxAudio.PlayOneShot(eaten);
 
         Destroy(gameObject);
 

@@ -18,10 +18,23 @@ public abstract class AIBase : MonoBehaviour
     public EnemyType myType;
     public int health;
     public float speed;
+    public bool isShip;
+    public float length;
+    public float height;
+
+    public GameObject mask;
+    public GameObject waterParticles;
+    public GameObject explosion;
 
     protected SpriteRenderer mySpriteRenderer;
     protected Vector2 direction;
     private int indexTracker;
+
+    protected bool sinkShake;
+    private bool shakeRight;
+    protected bool sinking;
+
+    private bool onScreen;
 
     void Update()
     {
@@ -31,6 +44,42 @@ public abstract class AIBase : MonoBehaviour
     public virtual void Die()
     {
         enemyManagerRef.RemoveFromEnemyList(this);
+        sinking = true;
+
+        if (isShip)
+        {
+            mask.transform.SetParent(transform.parent);
+            if(waterParticles != null)
+            {
+                waterParticles.transform.SetParent(transform.parent);
+                Destroy(waterParticles, 3f);
+            }
+            
+
+            mySpriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
+
+            sinkShake = true;
+            GetComponent<Collider2D>().enabled = false;
+
+            if(explosion != null)
+            {
+                SpawnExplosions();
+
+                Invoke("SpawnExplosions", 0.2f);
+                Invoke("SpawnExplosions", 0.5f);
+                //Invoke("SpawnExplosions", 1.0f);
+            }
+
+
+            Destroy(mask,3f);
+            
+            Destroy(gameObject,3f);
+
+        }
+        else
+        {
+            
+        }
     }
     protected void UpdateSprite()
     {
@@ -82,42 +131,65 @@ public abstract class AIBase : MonoBehaviour
 
     public virtual void Move()
     {
-        transform.position = (Vector2)transform.position + (direction * speed * Time.deltaTime);
+        if (!sinking)
+        {
+            transform.position = (Vector2)transform.position + (direction * speed * Time.deltaTime);
+        }
     }
 
     protected Vector2 GetRandomDirection()
     {
+       
         Vector2 dir;
 
-        float x = Random.Range(-1.0f, 1.0f);
-        float y = Random.Range(-1.0f, 1.0f);
-
-        dir = new Vector2(x, y);
-
-        if(x == 0 && y == 0)
+        if (onScreen)
         {
-           dir = GetRandomDirection();
+            float x = Random.Range(-1.0f, 1.0f);
+            float y = Random.Range(-1.0f, 1.0f);
+
+            dir = new Vector2(x, y);
+
+            if (x == 0 && y == 0)
+            {
+                dir = GetRandomDirection();
+            }
+
+            CheckFlipX(direction.x);
+        }
+        else
+        {
+            float x = Random.Range(0, Screen.width);
+            float y = Random.Range(0, Screen.height);
+
+            dir = gameManagerRef.cam.ScreenToWorldPoint(new Vector2(x, y));
+
+            dir = (dir - (Vector2)transform.position).normalized;
+
+            CheckFlipX(direction.x);
         }
 
-        CheckFlipX(direction.x);
+        
 
         return dir;
     }
 
     protected void CheckBounderies()
     {
-        Vector2 screenPos = gameManagerRef.cam.WorldToScreenPoint(transform.position);
+        if (onScreen)
+        {
+            Vector2 screenPos = gameManagerRef.cam.WorldToScreenPoint(transform.position);
 
-        if(screenPos.x < 0 ||
-            screenPos.x > Screen.width)
-        {
-            direction = new Vector2(-direction.x, direction.y);
-            CheckFlipX(direction.x);
-        }
-            if(screenPos.y < 0 ||
+            if (screenPos.x < 0 ||
+                screenPos.x > Screen.width)
+            {
+                direction = new Vector2(-direction.x, direction.y);
+                CheckFlipX(direction.x);
+            }
+            if (screenPos.y < 0 ||
             screenPos.y > Screen.height)
-        {
-            direction = new Vector2(direction.x, -direction.y);
+            {
+                direction = new Vector2(direction.x, -direction.y);
+            }
         }
     }
 
@@ -131,13 +203,93 @@ public abstract class AIBase : MonoBehaviour
             if (x < 0)
             {
                 mySpriteRenderer.flipX = true;
+                if(waterParticles != null)
+                {
+                    waterParticles.GetComponent<SpriteRenderer>().flipX = true;
+                }
             }
             else
             {
                 mySpriteRenderer.flipX = false;
+
+                if (waterParticles != null)
+                {
+                    waterParticles.GetComponent<SpriteRenderer>().flipX = false;
+                }
             }
         }
     }
+
+    protected void DeathShake()
+    {
+        if (sinkShake)
+        {
+            if (shakeRight)
+            {
+                transform.position = new Vector3(
+                    transform.position.x + 0.1f,
+                    transform.position.y - (1f * Time.deltaTime));
+
+                shakeRight = !shakeRight;
+            }
+            else
+            {
+                transform.position = new Vector3(
+                   transform.position.x - 0.1f,
+                   transform.position.y- (1f * Time.deltaTime));
+
+                shakeRight = !shakeRight;
+            }
+
+
+            
+        }
+    }
+    protected void CheckIfOnScreen()
+    {
+        if(!onScreen)
+        {
+            Vector2 screenPos = gameManagerRef.cam.WorldToScreenPoint(transform.position);
+
+            if (screenPos.x > 0 ||
+                screenPos.x < Screen.width ||
+                screenPos.y > 0 ||
+                screenPos.y < Screen.height)
+            {
+                onScreen = true;
+            }
+        }
+    }
+
+    protected void ParentUpdate()
+    {
+        CheckIfOnScreen();
+        DeathShake();
+        CheckBounderies();
+        Move();
+    }
+
+    private void SpawnExplosions()
+    {
+        Vector2 pos;
+
+        float x = Random.Range(transform.position.x - (length / 2),
+            transform.position.x + (length / 2));
+
+
+        float y = Random.Range(transform.position.y - (height/2),
+            transform.position.y + (height/2));
+
+        pos = new Vector2(x, y);
+
+        Instantiate(explosion, pos, Quaternion.identity);
+
+
+    }
+
+   
+    
+    
 
     
 
