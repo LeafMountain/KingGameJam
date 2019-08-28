@@ -6,6 +6,10 @@ public class AudioManager : MonoBehaviour
 {
     private static AudioManager audioManager_ref;
 
+    private EnemyManager enemyManagerRef;
+
+    private AudioSource[] musicSources;
+
     [Header("Audio Sources")]
     public AudioSource mainMenuAudio;
     public AudioSource sfxAudio;
@@ -22,11 +26,24 @@ public class AudioManager : MonoBehaviour
 
     private bool isOn;
     private bool defaultIsPlaying;
-    [HideInInspector]
+    //[HideInInspector]
     public bool beatCount;
     private float beatLength = 0.75f;
     private float timeTracker;
     private int beatsTracker;
+
+    private int lastBeat;
+   
+    private int enemyTrackToPlay;
+    private AudioClip upComingClip;
+    private AudioSource upComingMusicSource;
+
+    private int trackCurrentlyPlaying;
+    private AudioClip activeMusicClip;
+    private AudioSource activeMusicSource;
+
+
+
     void Awake()
     {
         if(audioManager_ref == null)
@@ -45,12 +62,15 @@ public class AudioManager : MonoBehaviour
     }
     void Start()
     {
-        
+        StartCoroutine("BeatTimer");
+
+        enemyManagerRef = EnemyManager.GetInstance();
+        musicSources = transform.GetChild(1).GetComponentsInChildren<AudioSource>();
     }
     public void StartMusicTrack()
     {
         isOn = true;
-        defaultIsPlaying = true;
+       // defaultIsPlaying = true;
         musicAudio.clip = musicClips[1];
        
     }
@@ -80,44 +100,251 @@ public class AudioManager : MonoBehaviour
     
     void Update()
     {
-        BeatTimer();
+        if(lastBeat != beatsTracker)
+        {
+            lastBeat = beatsTracker;
+            CheckBeat();
+            beatCount = true;
+        }
+        else
+        {
+            beatCount = false;
+        }
+        
 
         PlayMusic();
+
+        if (beatCount)
+        {
+            CheckEnemies();
+            PrepTrack();
+
+           
+        }
+
+        DJ();
     }
 
     private void PlayMusic()
     {
         FirstOn();
+       
     }
 
-    private void BeatTimer()
+    IEnumerator BeatTimer()
     {
-            if(timeTracker >= beatLength)
+        while (true)
+        {
+            yield return new WaitForSeconds(.59f);
+            beatsTracker++;
+        }
+    }
+
+    private void CheckBeat()
+    {
+        if (isOn)
+        {
+
+
+
+            if (defaultIsPlaying && beatsTracker >= 16)
             {
-                beatsTracker++;
-                beatCount = true;
+                beatsTracker = 0;
 
-                if(defaultIsPlaying && beatsTracker >= 16)
+
+
+            }
+            else if (!defaultIsPlaying && beatsTracker >= 8 && isOn)
+            {
+                for (int i = 0; i < musicSources.Length; i++)
                 {
-                    beatsTracker = 0;
-
-                   
+                    if (i != 0)
+                    {
+                        musicSources[i].Stop();
+                        musicSources[i].Play();
+                    }
                 }
 
-                timeTracker = 0;
+                beatsTracker = 0;
             }
-            else
-        {
-            beatCount = false;
-        }
 
-            timeTracker += Time.deltaTime;
+           
+        }
     }
     private void FirstOn()
     {
         if (isOn && !musicAudio.isPlaying && beatCount)
         {
-            musicAudio.Play();
+            // musicAudio.Play();
+
+            beatsTracker = 0;
+
+            for (int i = 0; i < musicSources.Length; i++)
+            {
+                if(i != 0)
+                {
+                    musicSources[i].Play();
+                    musicSources[i].volume = 0f;
+                }
+                else
+                {
+                    musicSources[i].Play();
+                    musicSources[i].volume = 1f;
+                }
+            }
         }
+    }
+
+    private void CheckEnemies()
+    {
+        int trackToPlay = 0;    
+
+        foreach(AIBase enemy in enemyManagerRef.enemiesInGame)
+        {
+            if((int)enemy.myType > trackToPlay)
+            {
+                trackToPlay = (int)enemy.myType;
+            }
+        }
+
+        enemyTrackToPlay = trackToPlay +2;
+
+
+    }
+
+    private void PrepTrack()
+    {
+        if(enemyTrackToPlay != trackCurrentlyPlaying && isOn)
+        {
+            defaultIsPlaying = false;
+
+            switch (enemyTrackToPlay)
+            {
+                case 0:
+
+                    defaultIsPlaying = true;
+                    trackCurrentlyPlaying = 0;
+
+                    break;
+
+                case 1:
+
+                    upComingMusicSource = musicSources[1];
+
+                    if (musicSources[1].clip == null)
+                    {
+                        musicSources[1].clip = musicClips[6];
+                    }
+
+                    trackCurrentlyPlaying = 1;
+                    break;
+
+                case 2:
+
+                    upComingMusicSource = musicSources[2];
+
+                    if (musicSources[2].clip == null)
+                    {
+                        musicSources[2].clip = musicClips[9];
+                    }
+
+                    trackCurrentlyPlaying = 2;
+                    break;
+
+                case 3:
+
+                    upComingMusicSource = musicSources[3];
+
+                    if (musicSources[3].clip == null)
+                    {
+                        musicSources[3].clip = musicClips[8];
+                    }
+
+                    trackCurrentlyPlaying = 3;
+                    break;
+
+                case 4:
+
+                    trackCurrentlyPlaying = 4;
+
+                    if (musicSources[4].clip == null)
+                    {
+                        musicSources[4].clip = musicClips[5];
+                    }
+
+                    upComingMusicSource = musicSources[4];
+
+                    break;
+
+                case 5:
+
+                    upComingMusicSource = musicSources[5];
+
+                    if (musicSources[5].clip == null)
+                    {
+                        musicSources[5].clip = musicClips[2];
+                    }
+
+                    trackCurrentlyPlaying = 5;
+                    break;
+
+                case 6:
+
+                    upComingMusicSource = musicSources[6];
+
+                    if(musicSources[6].clip == null)
+                    {
+                        musicSources[6].clip = musicClips[0];
+                    }
+
+                    trackCurrentlyPlaying = 6;
+                    break;
+            }
+        }
+    }
+
+    private void DJ()
+    {
+
+        if (upComingMusicSource != null)
+        {
+            foreach (AudioSource source in musicSources)
+            {
+                if(source == activeMusicSource)
+                {
+                    source.volume = 0;
+                }
+
+               
+            }
+
+            foreach (AudioSource source in musicSources)
+            {
+                if (source == upComingMusicSource)
+                {
+                    source.volume = 1;
+                    activeMusicSource = upComingMusicSource;
+                    upComingMusicSource = null;
+                }
+
+
+            }
+
+        }
+        else
+        {
+            foreach(AudioSource source in musicSources)
+            {
+                if(source == activeMusicSource)
+                {
+                    source.volume += .1f;
+                }
+                else
+                {
+                    source.volume -= .1f;
+                }
+            }
+        }
+
     }
 }
