@@ -4,31 +4,30 @@ using UnityEngine;
 
 public class FloaterScript : AIBase , IEdible
 {
+    public RuntimeAnimatorController[] animController;
 
-    
+    private Animator myAnim;
 
     void Start()
     {
         GetReferences();
-
-        GetRandomSpriteSet();
-        mySpriteRenderer.sprite = mySprites[0];
+        myAnim = GetComponent<Animator>();
+        GetRandomAnimatorController();
+       
 
         direction = GetRandomDirection();
       
     }
-    private void GetRandomSpriteSet()
+    private void GetRandomAnimatorController()
     {
-        int rand = Random.Range(0, 14);
+        int rand = Random.Range(0, animController.Length);
 
-        mySprites = new Sprite[] {enemyManagerRef.floaterSprites[rand *2],
-        enemyManagerRef.floaterSprites[rand *2 +1]};
+        myAnim.runtimeAnimatorController = animController[rand];
 
     }
 
     void Update()
     {
-        UpdateSprite();
         Move();
         CheckBounderies();
 
@@ -39,7 +38,7 @@ public class FloaterScript : AIBase , IEdible
         Die();
     }
 
-    private void Die()
+    public override void Die()
     {
 
         base.Die();
@@ -50,10 +49,7 @@ public class FloaterScript : AIBase , IEdible
 
         gameManagerRef.audioManagerRef.ExplosionSurfer();
 
-        
-
         Destroy(gameObject);
-
 
     }
 
