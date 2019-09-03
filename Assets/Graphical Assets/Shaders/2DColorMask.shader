@@ -10,6 +10,9 @@ Shader "Sprites/2DColorMask"
 		_Mask ("Mask", 2D) = "white" {}
 		_MaskColor ("Mask Color", Color) = (1,1,1,1)
 
+		_FlashColor ("Flash Color", Color) = (1,1,1,1)
+		_FlashStrength ("Flash Strength", Float) = 0
+
 		[MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
 	}
 
@@ -71,6 +74,8 @@ Shader "Sprites/2DColorMask"
 			sampler2D _AlphaTex;
             sampler2D _Mask;
 			float _AlphaSplitEnabled;
+			fixed4 _FlashColor;
+			float _FlashStrength;
 
 			fixed4 SampleSpriteTexture (float2 uv)
 			{
@@ -87,10 +92,11 @@ Shader "Sprites/2DColorMask"
 			fixed4 frag(v2f IN) : SV_Target
 			{
 				fixed4 c = SampleSpriteTexture (IN.texcoord) * IN.color;
-				c.rgb *= c.a;
                 fixed4 mask = tex2D(_Mask, IN.texcoord);
                 if(mask.r > 0.1f)
                     c.rgb *= mask.rgb * _MaskColor;
+				c.rgb = lerp(c.rgb, _FlashColor, _FlashStrength);
+				c.rgb *= c.a;
 				return c;
 			}
 		ENDCG
