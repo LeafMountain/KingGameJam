@@ -24,10 +24,13 @@ public class FloaterScript : AIBase , IEdible
     }
     private void GetRandomAnimatorController()
     {
-        int rand = Random.Range(0, animController.Length);
 
-        myAnim.runtimeAnimatorController = animController[rand];
+        if (animController.Length > 0)
+        {
+            int rand = Random.Range(0, animController.Length);
 
+            myAnim.runtimeAnimatorController = animController[rand];
+        }
     }
 
     void Update()
