@@ -177,7 +177,6 @@ public abstract class AIBase : MonoBehaviour
                         CheckFlipX(direction.x);
                     }
 
-
                     if (transform.position.y < playArea.min.y ||
                     transform.position.y > playArea.max.y)
                     {

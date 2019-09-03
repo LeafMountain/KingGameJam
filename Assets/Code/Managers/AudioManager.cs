@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource sfxAudio;
     public AudioSource musicAudio;
 
+
     [Header("Menu Sound")]
     public AudioClip[] mainMenuSFX;
 
@@ -23,6 +24,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("MusicClips")]
     public AudioClip[] musicClips;
+    public AudioClip menuClip;
     [HideInInspector]
     public bool isOn;
     private bool defaultIsPlaying;
@@ -74,7 +76,7 @@ public class AudioManager : MonoBehaviour
     }
     public void StartMenuMusic()
     {
-
+        mainMenuAudio.PlayOneShot(menuClip);
     }
     public void StartPauseMusic()
     {

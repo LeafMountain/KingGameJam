@@ -154,11 +154,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1949713104886483567}
     m_Modifications:
-    - target: {fileID: 3807964830766169646, guid: 17f2dee05612dd841ab15ae371c1e4dd,
-        type: 3}
-      propertyPath: m_Name
-      value: PlayerManager
-      objectReference: {fileID: 0}
     - target: {fileID: 3807964830766169644, guid: 17f2dee05612dd841ab15ae371c1e4dd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -214,6 +209,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3807964830766169646, guid: 17f2dee05612dd841ab15ae371c1e4dd,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerManager
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17f2dee05612dd841ab15ae371c1e4dd, type: 3}
 --- !u!4 &1891217836583956712 stripped
@@ -229,11 +229,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1949713104886483567}
     m_Modifications:
-    - target: {fileID: 4615676909848672548, guid: df92ecd4bf72fa046b733d381d318bf6,
-        type: 3}
-      propertyPath: m_Name
-      value: AudioManager
-      objectReference: {fileID: 0}
     - target: {fileID: 4615676909848672549, guid: df92ecd4bf72fa046b733d381d318bf6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -289,11 +284,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4615676909848672548, guid: df92ecd4bf72fa046b733d381d318bf6,
+        type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
     - target: {fileID: 4615676909848672546, guid: df92ecd4bf72fa046b733d381d318bf6,
         type: 3}
       propertyPath: mainMenuAudio
       value: 
       objectReference: {fileID: 6429347293219976659}
+    - target: {fileID: 4615676909848672546, guid: df92ecd4bf72fa046b733d381d318bf6,
+        type: 3}
+      propertyPath: menuClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8767a55ea0a0ee342899ea76973cdf2b, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df92ecd4bf72fa046b733d381d318bf6, type: 3}
 --- !u!4 &1949713106088171157 stripped

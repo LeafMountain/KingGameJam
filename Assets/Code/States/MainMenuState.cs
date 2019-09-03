@@ -16,6 +16,8 @@ public class MainMenuState : IStateBase
             Debug.Log("Constructing MainMenuState!");
         }
 
+        gameManagerRef.audioManagerRef.StartMenuMusic();
+
         if (gameManager_ref.debugMode)
         {
             Debug.Log("Constructing MainMenuState DONE!!");
