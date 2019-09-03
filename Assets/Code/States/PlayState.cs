@@ -22,7 +22,7 @@ public class PlayState : IStateBase
         if (!gameManagerRef.gameRunning)
         {
             gameManagerRef.gameRunning = true;
-            gameManagerRef.audioManagerRef.StartMusicTrack();
+            gameManagerRef.audioManagerRef.StartPlayMusicTrack();
         }
 
         if (gameManager_ref.debugMode)

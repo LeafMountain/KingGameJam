@@ -36,6 +36,8 @@ public abstract class AIBase : MonoBehaviour
 
     private bool onScreen;
 
+    private Bounds playArea;
+
     void Update()
     {
        
@@ -103,6 +105,8 @@ public abstract class AIBase : MonoBehaviour
         mySpriteRenderer = GetComponent<SpriteRenderer>();
 
         enemyManagerRef.AddToEnemyList(this);
+
+        playArea = EnemyManager.GetPlayArea();
     }
 
     protected void SpawnFloaters(int amount)
@@ -142,54 +146,43 @@ public abstract class AIBase : MonoBehaviour
        
         Vector2 dir;
 
-        if (onScreen)
-        {
-            float x = Random.Range(-1.0f, 1.0f);
-            float y = Random.Range(-1.0f, 1.0f);
-
-            dir = new Vector2(x, y);
-
-            if (x == 0 && y == 0)
-            {
-                dir = GetRandomDirection();
-            }
-
-            CheckFlipX(direction.x);
-        }
-        else
-        {
-            float x = Random.Range(0, Screen.width);
-            float y = Random.Range(0, Screen.height);
-
-            dir = gameManagerRef.cam.ScreenToWorldPoint(new Vector2(x, y));
-
-            dir = (dir - (Vector2)transform.position).normalized;
-
-            CheckFlipX(direction.x);
-        }
+        Vector2 minPlayArea = playArea.min;
+        Vector2 maxPlayArea = playArea.max;
 
         
+
+        
+            float x = Random.Range(minPlayArea.x, maxPlayArea.x);
+            float y = Random.Range(minPlayArea.y, maxPlayArea.y);
+
+
+        Vector2 randomPlayAreaPos = new Vector2(x, y);
+
+        dir = (randomPlayAreaPos - (Vector2)transform.position).normalized;
+
+            CheckFlipX(direction.x);
 
         return dir;
     }
 
     protected void CheckBounderies()
     {
-        if (onScreen)
+        if (!playArea.Contains(transform.position) && !MovingTowardsBounds())
         {
-            Vector2 screenPos = gameManagerRef.cam.WorldToScreenPoint(transform.position);
+           
+                    if (transform.position.x < playArea.min.x ||
+                        transform.position.x > playArea.max.x)
+                    {
+                        direction = new Vector2(-direction.x, direction.y);
+                        CheckFlipX(direction.x);
+                    }
 
-            if (screenPos.x < 0 ||
-                screenPos.x > Screen.width)
-            {
-                direction = new Vector2(-direction.x, direction.y);
-                CheckFlipX(direction.x);
-            }
-            if (screenPos.y < 0 ||
-            screenPos.y > Screen.height)
-            {
-                direction = new Vector2(direction.x, -direction.y);
-            }
+
+                    if (transform.position.y < playArea.min.y ||
+                    transform.position.y > playArea.max.y)
+                    {
+                        direction = new Vector2(direction.x, -direction.y);
+                    }
         }
     }
 
@@ -287,6 +280,20 @@ public abstract class AIBase : MonoBehaviour
 
     }
 
+    private bool MovingTowardsBounds()
+    {
+        if ((((Vector2)transform.position + direction) +
+            (Vector2)playArea.ClosestPoint(transform.position)).magnitude <
+            ((Vector2)transform.position +
+                (Vector2)playArea.ClosestPoint(transform.position)).magnitude)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
    
     
     

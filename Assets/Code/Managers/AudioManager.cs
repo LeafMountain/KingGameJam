@@ -67,13 +67,20 @@ public class AudioManager : MonoBehaviour
         enemyManagerRef = EnemyManager.GetInstance();
         musicSources = transform.GetChild(1).GetComponentsInChildren<AudioSource>();
     }
-    public void StartMusicTrack()
+    public void StartPlayMusicTrack()
     {
-        isOn = true;
-       // defaultIsPlaying = true;
-        musicAudio.clip = musicClips[1];
+       
        
     }
+    public void StartMenuMusic()
+    {
+
+    }
+    public void StartPauseMusic()
+    {
+
+    }
+
     public void PauseMusicTrack()
     {
         isOn = false;
