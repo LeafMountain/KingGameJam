@@ -112,12 +112,12 @@ public class Kroken : MonoBehaviour, IDamageable
         Vector2 input = Vector2.zero;
         Move(inputMapping.GetMovement());
 
-        if(Input.GetKeyDown(KeyCode.KeypadPlus)) {
-            Grow();
-        }
-        if(Input.GetKeyDown(KeyCode.KeypadMinus)) {
-            OnAttacked(bodyParts.Count - 1);
-        }
+        // if(Input.GetKeyDown(KeyCode.KeypadPlus)) {
+        //     Grow();
+        // }
+        // if(Input.GetKeyDown(KeyCode.KeypadMinus)) {
+        //     OnAttacked(bodyParts.Count - 1);
+        // }
 
         if(inputMapping.GetAttack()) {
             Attack();

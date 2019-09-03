@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager Instance = null;
     public List<Kroken> players = new List<Kroken>();
     public Kroken krokenPrefab = null;
+    public float spreadRadius = 2;
 
     public List<InputMapping> inputMappings = null;
     [HideInInspector] public List<int> usedMappings = new List<int>();
@@ -154,6 +155,24 @@ public class PlayerManager : MonoBehaviour
         Instance.StopCoroutine(Instance.scanningCoroutine);
     }
 
+    private void SpreadPlayers()
+    {
+        int count = GetPlayerCount();
+        if(count > 1)
+        {
+            float deltaTheta = (Mathf.PI * 2) / count;
+            float theta = .5f;
+
+            for (int i = 0; i < count; i++)
+            {
+                Vector2 position = new Vector2 (spreadRadius * Mathf.Cos(theta), spreadRadius * Mathf.Sin(theta));
+                theta += deltaTheta;
+                GetPlayers()[i].transform.position = position;
+                GetPlayers()[i].transform.right = (Vector2.zero - position).normalized;
+            }
+        }
+    }
+
     private IEnumerator StartScanningForPlayers2()
     {
         while(true)
@@ -164,6 +183,7 @@ public class PlayerManager : MonoBehaviour
                 if(inputMappings[i].GetAttack())
                 {
                     SpawnPlayer(i);
+                    SpreadPlayers();
                 }
             }
             

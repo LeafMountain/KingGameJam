@@ -115,7 +115,7 @@ public class EnemyManager : MonoBehaviour
 
     public static Bounds GetPlayArea()
     {
-        return new Bounds(enemyManager.transform.position, enemyManager.spawnArea);
+        return new Bounds(enemyManager.transform.position, new Vector3(enemyManager.spawnArea.x, enemyManager.spawnArea.y, 10));
     }
 
     private IEnumerator StartSpawning2()

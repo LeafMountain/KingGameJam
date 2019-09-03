@@ -46,9 +46,11 @@ MonoBehaviour:
   players: []
   krokenPrefab: {fileID: 8461280662659796956, guid: a22f1137fe13928478a9355163d95417,
     type: 3}
+  spreadRadius: 2
   inputMappings:
   - {fileID: 11400000, guid: 5641f3c6cab6bce40b86f20d8cf50dc9, type: 2}
   - {fileID: 11400000, guid: 5f415523b38f8474dac9fcf91b436410, type: 2}
+  - {fileID: 11400000, guid: c013d7cdc50bc3ffd99ee71172e8e9a7, type: 2}
   usedMappings: 
   colorPalettes:
   - {fileID: 11400000, guid: 126faa4cd367f1d4ea8e2d460b0f7e1a, type: 2}
