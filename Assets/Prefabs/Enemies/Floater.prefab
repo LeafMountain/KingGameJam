@@ -102,8 +102,26 @@ MonoBehaviour:
   health: 0
   speed: 0.25
   isShip: 0
+  length: 0
+  height: 0
   mask: {fileID: 0}
   waterParticles: {fileID: 0}
+  explosion: {fileID: 0}
+  animController:
+  - {fileID: 9100000, guid: c5b2d77ebfe0794488b3d289b546e531, type: 2}
+  - {fileID: 9100000, guid: c762bb53db2dc0e48a93857469bb5349, type: 2}
+  - {fileID: 9100000, guid: b2039270f6d9ab148bb38c5f9dbec6b2, type: 2}
+  - {fileID: 9100000, guid: 9b47c8e0435c4644a96984488c5b56b6, type: 2}
+  - {fileID: 9100000, guid: 198f41f0da0a8b54f841d76dd062371b, type: 2}
+  - {fileID: 9100000, guid: 9abbd30e88f583642b774afc7ce83af3, type: 2}
+  - {fileID: 9100000, guid: 384f39591ab826b4d90939cf28b45a24, type: 2}
+  - {fileID: 9100000, guid: cb9cb2442d4c20849b8e05e628bc0a20, type: 2}
+  - {fileID: 9100000, guid: 5d2123dc43b3b4349917002ce90deaf4, type: 2}
+  - {fileID: 9100000, guid: 05f7de0597fffce4ba110ebce2682a7c, type: 2}
+  - {fileID: 9100000, guid: 112b6737d7e0c8d4eaf03ace9b5bf946, type: 2}
+  - {fileID: 9100000, guid: 87c5868f21184464d96ec46d9288ed90, type: 2}
+  - {fileID: 9100000, guid: 5427a2bb7b266964fa9c0b2803a91a6e, type: 2}
+  - {fileID: 9100000, guid: 695a624c6465dfc4591bd173dd0620e3, type: 2}
   eaten: {fileID: 8300000, guid: 97ed37f9f84c7064f8e7106cf035b106, type: 3}
 --- !u!50 &3578853682376205036
 Rigidbody2D:
