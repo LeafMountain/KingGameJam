@@ -141,7 +141,11 @@ public class PlayerManager : MonoBehaviour
 
     public static void StartScanningForPlayers()
     {
-        Instance.scanningCoroutine = Instance.StartScanningForPlayers2();
+        if(Instance.scanningCoroutine == null)
+        {
+            Instance.scanningCoroutine = Instance.StartScanningForPlayers2();
+        }
+
         Instance.StartCoroutine(Instance.scanningCoroutine);
     }
 

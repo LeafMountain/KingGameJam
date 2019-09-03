@@ -22,6 +22,7 @@ public class MainMenuState : IStateBase
         }
 
         CanvasManager.ActivateMainMenu();
+        PlayerManager.StartScanningForPlayers();
     }
 
     public void StateUpdate()

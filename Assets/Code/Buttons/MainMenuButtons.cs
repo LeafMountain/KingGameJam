@@ -14,7 +14,6 @@ public class MainMenuButtons : MonoBehaviour
         gameManagerRef = GameManager.GetInstance();
         canvasManagerRef = CanvasManager.GetInstance();
         audioManagerRef = AudioManager.GetInstance();
-        PlayerManager.StartScanningForPlayers();
     }
 
     public void StartGame()
