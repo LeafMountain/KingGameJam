@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 624277c6163e1ab4ba4f4f149f5950b1, type: 3}
   m_Name: Brownie
   m_EditorClassIdentifier: 
-  paletteName: Black
+  paletteName: Brownie
   color: {r: 0.36078432, g: 0.19607843, b: 0.05882353, a: 1}

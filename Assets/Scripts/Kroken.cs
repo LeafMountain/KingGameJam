@@ -75,9 +75,19 @@ public class Kroken : MonoBehaviour, IDamageable
     {
         Debug.Log("You attacked me :(");
 
+
         if(bodyParts.Count > 0)
         {
-            for (int i = bodyParts.Count - 1; i >= damage; i--)
+            GetComponent<Renderer>().material.SetFloat("_FlashStrength", 1);
+            StartCoroutine(GoNormal());
+            IEnumerator GoNormal()
+            {
+                yield return new WaitForSeconds(0.2f);
+                GetComponent<Renderer>().material.SetFloat("_FlashStrength", 0);
+            }
+
+            int count = bodyParts.Count;
+            for (int i = bodyParts.Count - 1; i > (count - 1) - damage; i--)
             {
                 Destroy(bodyParts[i]);
                 bodyParts.RemoveAt(i);

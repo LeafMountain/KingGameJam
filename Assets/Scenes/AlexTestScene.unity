@@ -361,10 +361,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 771341975835525969, guid: 35947884fc3fda54c9a4ebca24c48115,
         type: 3}
-      propertyPath: bloodSplatPrefab
-      value: 
-      objectReference: {fileID: 558956787458477475, guid: b4705a2df291ae546a0b16f884870a91,
+      propertyPath: spawnInterval
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 771341975835525969, guid: 35947884fc3fda54c9a4ebca24c48115,
         type: 3}
+      propertyPath: spawnTimeIncrease
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35947884fc3fda54c9a4ebca24c48115, type: 3}
 --- !u!1 &702031402
