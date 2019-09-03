@@ -113,6 +113,11 @@ public class EnemyManager : MonoBehaviour
         enemiesInGame.Remove(enemy);
     }
 
+    public static Bounds GetPlayArea()
+    {
+        return new Bounds(enemyManager.transform.position, enemyManager.spawnArea);
+    }
+
     private IEnumerator StartSpawning2()
     {
         while(true)

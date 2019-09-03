@@ -58,6 +58,4 @@ public class GameManager : MonoBehaviour
     {
         gameState = newState;
     }
-
-
 }
