@@ -25,6 +25,7 @@ public class AudioManager : MonoBehaviour
     [Header("MusicClips")]
     public AudioClip[] musicClips;
     public AudioClip menuClip;
+    public AudioClip pauseMusic;
     [HideInInspector]
     public bool isOn;
     private bool defaultIsPlaying;
@@ -71,16 +72,22 @@ public class AudioManager : MonoBehaviour
     }
     public void StartPlayMusicTrack()
     {
-       
-       
+        mainMenuAudio.Stop();
+
     }
     public void StartMenuMusic()
     {
-        mainMenuAudio.PlayOneShot(menuClip);
+        mainMenuAudio.Stop();
+
+        mainMenuAudio.clip = menuClip;
+        mainMenuAudio.Play();
     }
     public void StartPauseMusic()
     {
-
+        mainMenuAudio.Stop();
+        mainMenuAudio.clip = pauseMusic;
+        mainMenuAudio.Play();
+        mainMenuAudio.loop = true;
     }
 
     public void PauseMusicTrack()

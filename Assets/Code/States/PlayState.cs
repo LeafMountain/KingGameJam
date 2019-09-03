@@ -19,6 +19,8 @@ public class PlayState : IStateBase
             Debug.Log("Constructing PlayState!");
         }
 
+        gameManagerRef.audioManagerRef.StartPlayMusicTrack();
+
         if (!gameManagerRef.gameRunning)
         {
             gameManagerRef.gameRunning = true;

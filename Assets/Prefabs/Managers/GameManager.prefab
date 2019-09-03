@@ -299,6 +299,11 @@ PrefabInstance:
       propertyPath: menuClip
       value: 
       objectReference: {fileID: 8300000, guid: 8767a55ea0a0ee342899ea76973cdf2b, type: 3}
+    - target: {fileID: 4615676909848672546, guid: df92ecd4bf72fa046b733d381d318bf6,
+        type: 3}
+      propertyPath: pauseMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: a3e281d5aa936dc428d46a5bc2fe8d4b, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df92ecd4bf72fa046b733d381d318bf6, type: 3}
 --- !u!4 &1949713106088171157 stripped
