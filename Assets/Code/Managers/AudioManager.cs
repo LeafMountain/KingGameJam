@@ -221,19 +221,28 @@ public class AudioManager : MonoBehaviour
 
     private void CheckEnemies()
     {
-        int trackToPlay = 0;    
+        int trackToPlay = 0;
 
-        foreach(AIBase enemy in enemyManagerRef.enemiesInGame)
+        if (enemyManagerRef.enemiesInGame.Count != 0)
         {
-            if((int)enemy.myType > trackToPlay)
+
+
+
+            foreach (AIBase enemy in enemyManagerRef.enemiesInGame)
             {
-                trackToPlay = (int)enemy.myType;
+                if ((int)enemy.myType > trackToPlay)
+                {
+                    trackToPlay = (int)enemy.myType;
+                }
             }
+
+            enemyTrackToPlay = trackToPlay + 2;
+
         }
-
-        enemyTrackToPlay = trackToPlay +2;
-
-
+        else
+        {
+            enemyTrackToPlay = 1;
+        }
     }
 
     private void PrepTrack()
