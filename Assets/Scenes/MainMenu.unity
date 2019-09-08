@@ -670,6 +670,11 @@ PrefabInstance:
       propertyPath: mainMenuAudio
       value: 
       objectReference: {fileID: 2125529722}
+    - target: {fileID: 1949713106088171154, guid: 74291add61a99b8419767027e6db22ba,
+        type: 3}
+      propertyPath: musicClips.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 42c9931e8e5de46d5ae6322fd0976ff5, type: 3}
     - target: {fileID: 6182431976985333346, guid: 74291add61a99b8419767027e6db22ba,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -690,6 +695,11 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1234427351}
+    - target: {fileID: 3845712640326941539, guid: 74291add61a99b8419767027e6db22ba,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 42c9931e8e5de46d5ae6322fd0976ff5, type: 3}
     m_RemovedComponents:
     - {fileID: 1949713106313451913, guid: 74291add61a99b8419767027e6db22ba, type: 3}
     - {fileID: 7301606354971529017, guid: 74291add61a99b8419767027e6db22ba, type: 3}

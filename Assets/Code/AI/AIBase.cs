@@ -50,6 +50,8 @@ public abstract class AIBase : MonoBehaviour
 
         if (isShip)
         {
+
+            mask.SetActive(true);
             mask.transform.SetParent(transform.parent);
             if(waterParticles != null)
             {
@@ -107,6 +109,12 @@ public abstract class AIBase : MonoBehaviour
         enemyManagerRef.AddToEnemyList(this);
 
         playArea = EnemyManager.GetPlayArea();
+
+        if (isShip)
+        {
+            mask = GetComponentInChildren<SpriteMask>().gameObject;
+            mask.SetActive(false);
+        }
     }
 
     protected void SpawnFloaters(int amount)

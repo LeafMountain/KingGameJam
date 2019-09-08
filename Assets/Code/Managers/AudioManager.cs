@@ -99,7 +99,10 @@ public class AudioManager : MonoBehaviour
     public void StopMusicTrack()
     {
         isOn = false;
-        musicAudio.Stop(); 
+        foreach (AudioSource source in musicSources)
+        {
+            source.volume = 0;
+        }
     }
 
     public void ButtonSelect()
@@ -140,7 +143,10 @@ public class AudioManager : MonoBehaviour
 
            
         }
-
+        if (!musicSources[0].isPlaying && isOn)
+        {
+            musicSources[0].Play();
+        }
         DJ();
     }
 
@@ -257,6 +263,10 @@ public class AudioManager : MonoBehaviour
 
                     defaultIsPlaying = true;
                     trackCurrentlyPlaying = 0;
+                    if (!musicSources[0].isPlaying)
+                    {
+                        musicSources[0].Play();
+                    }
 
                     break;
 
@@ -338,19 +348,23 @@ public class AudioManager : MonoBehaviour
 
     private void DJ()
     {
-
-        for (int i = 0; i < 7; i++)
+        if (isOn)
         {
-            if(i != enemyTrackToPlay - 1)
-            {
-                musicSources[i].volume -= 0.1f;
-            }
-            else
-            {
-                musicSources[i].volume += 0.1f;
-            }
-        }
 
-        
+
+
+            for (int i = 0; i < 7; i++)
+            {
+                if (i != enemyTrackToPlay - 1)
+                {
+                    musicSources[i].volume -= 0.1f;
+                }
+                else
+                {
+                    musicSources[i].volume += 0.1f;
+                }
+            }
+
+        }
     }
 }
