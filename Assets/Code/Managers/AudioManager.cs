@@ -74,6 +74,8 @@ public class AudioManager : MonoBehaviour
     {
         mainMenuAudio.Stop();
 
+        isOn = true;
+
     }
     public void StartMenuMusic()
     {
@@ -144,7 +146,7 @@ public class AudioManager : MonoBehaviour
 
     private void PlayMusic()
     {
-        FirstOn();
+        
        
     }
 
@@ -159,26 +161,31 @@ public class AudioManager : MonoBehaviour
 
     private void CheckBeat()
     {
+      
+
         if (isOn)
         {
-
+          
 
 
             if (defaultIsPlaying && beatsTracker >= 16)
             {
                 beatsTracker = 0;
 
-
+             
 
             }
             else if (!defaultIsPlaying && beatsTracker >= 8 && isOn)
             {
+               
+
                 for (int i = 0; i < musicSources.Length; i++)
                 {
                     if (i != 0)
                     {
                         musicSources[i].Stop();
                         musicSources[i].Play();
+                       
                     }
                 }
 
@@ -323,45 +330,18 @@ public class AudioManager : MonoBehaviour
     private void DJ()
     {
 
-        if (upComingMusicSource != null)
+        for (int i = 0; i < 7; i++)
         {
-            foreach (AudioSource source in musicSources)
+            if(i != enemyTrackToPlay - 1)
             {
-                if(source == activeMusicSource)
-                {
-                    source.volume = 0;
-                }
-
-               
+                musicSources[i].volume -= 0.1f;
             }
-
-            foreach (AudioSource source in musicSources)
+            else
             {
-                if (source == upComingMusicSource)
-                {
-                    source.volume = 1;
-                    activeMusicSource = upComingMusicSource;
-                    upComingMusicSource = null;
-                }
-
-
-            }
-
-        }
-        else
-        {
-            foreach(AudioSource source in musicSources)
-            {
-                if(source == activeMusicSource)
-                {
-                    source.volume += .1f;
-                }
-                else
-                {
-                    source.volume -= .1f;
-                }
+                musicSources[i].volume += 0.1f;
             }
         }
 
+        
     }
 }
