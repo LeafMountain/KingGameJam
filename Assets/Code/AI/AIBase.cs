@@ -11,6 +11,7 @@ public abstract class AIBase : MonoBehaviour
 {
     protected GameManager gameManagerRef;
     protected EnemyManager enemyManagerRef;
+    protected AudioManager audioManagerRef;
 
     public Sprite[] mySprites;
 
@@ -25,6 +26,7 @@ public abstract class AIBase : MonoBehaviour
     public GameObject mask;
     public GameObject waterParticles;
     public GameObject explosion;
+    public AudioClip sinkSFX;
 
     protected SpriteRenderer mySpriteRenderer;
     protected Vector2 direction;
@@ -71,7 +73,7 @@ public abstract class AIBase : MonoBehaviour
 
                 Invoke("SpawnExplosions", 0.2f);
                 Invoke("SpawnExplosions", 0.5f);
-                //Invoke("SpawnExplosions", 1.0f);
+                Invoke("PlaySinkSFX", 1.0f);
             }
 
 
@@ -109,6 +111,7 @@ public abstract class AIBase : MonoBehaviour
         enemyManagerRef.AddToEnemyList(this);
 
         playArea = EnemyManager.GetPlayArea();
+        audioManagerRef = AudioManager.GetInstance();
 
         if (isShip)
         {
@@ -300,6 +303,10 @@ public abstract class AIBase : MonoBehaviour
         {
             return false;
         }
+    }
+    private void PlaySinkSFX()
+    {
+        audioManagerRef.sfxAudio.PlayOneShot(sinkSFX);
     }
    
     
