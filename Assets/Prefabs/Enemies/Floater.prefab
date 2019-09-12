@@ -107,6 +107,7 @@ MonoBehaviour:
   mask: {fileID: 0}
   waterParticles: {fileID: 0}
   explosion: {fileID: 0}
+  sinkSFX: {fileID: 0}
   animController:
   - {fileID: 9100000, guid: c5b2d77ebfe0794488b3d289b546e531, type: 2}
   - {fileID: 9100000, guid: c762bb53db2dc0e48a93857469bb5349, type: 2}
@@ -122,7 +123,7 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 87c5868f21184464d96ec46d9288ed90, type: 2}
   - {fileID: 9100000, guid: 5427a2bb7b266964fa9c0b2803a91a6e, type: 2}
   - {fileID: 9100000, guid: 695a624c6465dfc4591bd173dd0620e3, type: 2}
-  eaten: {fileID: 8300000, guid: 97ed37f9f84c7064f8e7106cf035b106, type: 3}
+  eaten: {fileID: 8300000, guid: 83a91f2972591fe46833a8bbb58c2b06, type: 3}
 --- !u!50 &3578853682376205036
 Rigidbody2D:
   serializedVersion: 4
@@ -186,11 +187,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2255670380417535798}
     m_Modifications:
-    - target: {fileID: 4486743275269866294, guid: bbc7ae6a9b33a60409a3c6826059ca57,
-        type: 3}
-      propertyPath: m_Name
-      value: vfx_water_circle_small_01
-      objectReference: {fileID: 0}
     - target: {fileID: 4486743275269866291, guid: bbc7ae6a9b33a60409a3c6826059ca57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -245,6 +241,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4486743275269866294, guid: bbc7ae6a9b33a60409a3c6826059ca57,
+        type: 3}
+      propertyPath: m_Name
+      value: vfx_water_circle_small_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbc7ae6a9b33a60409a3c6826059ca57, type: 3}
