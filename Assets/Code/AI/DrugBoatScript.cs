@@ -34,6 +34,8 @@ public class DrugBoatScript : AIBase, IDamageable
         {
             direction = -direction;
             CheckFlipX(direction.x);
+
+            audioManagerRef.OnDamage();
         }
     }
    

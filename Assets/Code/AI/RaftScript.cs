@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RaftScript : AIBase, IDamageable
 {
-   
+    public AudioClip[] deathSFX;
 
     
     void Start()
@@ -35,6 +35,9 @@ public class RaftScript : AIBase, IDamageable
         }
 
         base.Die();
+
+        gameManagerRef.audioManagerRef.sfxAudio.PlayOneShot(
+            deathSFX[Random.Range(0, deathSFX.Length)]);
 
         Destroy(gameObject);
 

@@ -22,6 +22,8 @@ public class AudioManager : MonoBehaviour
     [Header("SFX")]
     public AudioClip[] SFX;
 
+    public AudioClip[] onDamageSFX;
+
     [Header("MusicClips")]
     public AudioClip[] musicClips;
     public AudioClip menuClip;
@@ -31,7 +33,7 @@ public class AudioManager : MonoBehaviour
     private bool defaultIsPlaying;
     //[HideInInspector]
     public bool beatCount;
-    private float beatLength = 0.75f;
+
     private float timeTracker;
     private int beatsTracker;
 
@@ -115,8 +117,8 @@ public class AudioManager : MonoBehaviour
     }
     public void ExplosionSurfer()
     {
-        
 
+        sfxAudio.pitch = Random.Range(0.8f, 1.2f);
         sfxAudio.PlayOneShot(SFX[5]);
     }
     
@@ -148,6 +150,17 @@ public class AudioManager : MonoBehaviour
             musicSources[0].Play();
         }
         DJ();
+    }
+
+    public void OnDamage()
+    {
+        int randomint = Random.Range(0, onDamageSFX.Length);
+
+        sfxAudio.pitch = Random.Range(0.8f, 1.2f);
+
+        sfxAudio.PlayOneShot(onDamageSFX[randomint]);
+
+        
     }
 
     private void PlayMusic()

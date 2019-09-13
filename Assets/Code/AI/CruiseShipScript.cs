@@ -39,6 +39,7 @@ public class CruiseShipScript : AIBase, IDamageable
         else
         {
             SpawnFloaters(2);
+            audioManagerRef.OnDamage();
         }
     }
 }

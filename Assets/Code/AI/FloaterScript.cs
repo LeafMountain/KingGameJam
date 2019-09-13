@@ -61,6 +61,7 @@ public class FloaterScript : AIBase , IEdible
 
         Instantiate(enemyManagerRef.bloodSplatPrefab, myPosition, Quaternion.identity);
 
+        gameManagerRef.audioManagerRef.sfxAudio.pitch = Random.Range(0.7f, 0.8f);
         gameManagerRef.audioManagerRef.sfxAudio.PlayOneShot(eaten);
 
         Destroy(gameObject);

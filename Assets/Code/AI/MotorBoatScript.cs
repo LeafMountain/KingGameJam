@@ -30,6 +30,10 @@ public class MotorBoatScript : AIBase, IDamageable
             SpawnFloaters(2);
             base.Die();
         }
+        else
+        {
+            audioManagerRef.OnDamage();
+        }
 
     }
 }

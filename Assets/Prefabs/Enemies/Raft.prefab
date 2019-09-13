@@ -249,6 +249,8 @@ MonoBehaviour:
   waterParticles: {fileID: 2022642009}
   explosion: {fileID: 0}
   sinkSFX: {fileID: 0}
+  deathSFX:
+  - {fileID: 8300000, guid: 79458a79cf90b904595b7104bc4e532f, type: 3}
 --- !u!95 &8524509052085475593
 Animator:
   serializedVersion: 3

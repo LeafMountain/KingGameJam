@@ -737,6 +737,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c27c3eff6082e584392f0ecf2c5395c4, type: 3}
   - {fileID: 8300000, guid: 337a8863162f4724f929efbcaa8a7238, type: 3}
   - {fileID: 8300000, guid: 8005404fcddda814d8b872955fe1e41b, type: 3}
+  onDamageSFX:
+  - {fileID: 8300000, guid: c27c3eff6082e584392f0ecf2c5395c4, type: 3}
+  - {fileID: 8300000, guid: 744d39cab55db3a439c63e9881f5e703, type: 3}
   musicClips:
   - {fileID: 8300000, guid: b3c01edfa2e3b40288783474af07d9ff, type: 3}
   - {fileID: 8300000, guid: cc5a801030b01254b8c9d0332e13e1f1, type: 3}
