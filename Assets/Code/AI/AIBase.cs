@@ -45,6 +45,49 @@ public abstract class AIBase : MonoBehaviour
        
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+      
+
+
+        if(collision.gameObject != null && collision.gameObject.tag != "Enemy")
+        {
+           
+
+            if (transform.position.x < collision.transform.position.x ||
+                   transform.position.x > collision.transform.position.x)
+            {
+                direction = new Vector2(-direction.x, direction.y);
+                CheckFlipX(direction.x);
+            }
+
+            if (transform.position.y < collision.transform.position.y ||
+            transform.position.y > collision.transform.position.y)
+            {
+                direction = new Vector2(direction.x, -direction.y);
+            }
+        }
+
+        if (collision.gameObject.tag == "Enemy" &&
+            (int)collision.gameObject.GetComponent<AIBase>().myType > (int)myType)
+        {
+           
+
+            if (transform.position.x < collision.transform.position.x ||
+                      transform.position.x > collision.transform.position.x)
+            {
+                direction = new Vector2(-direction.x, direction.y);
+                CheckFlipX(direction.x);
+            }
+
+            if (transform.position.y < collision.transform.position.y ||
+            transform.position.y > collision.transform.position.y)
+            {
+                direction = new Vector2(direction.x, -direction.y);
+            }
+        }
+    }
+
     public virtual void Die()
     {
         enemyManagerRef.RemoveFromEnemyList(this);

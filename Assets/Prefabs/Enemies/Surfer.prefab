@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -7339461633451389485}
   m_Layer: 0
   m_Name: Surfer
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,6 +102,13 @@ MonoBehaviour:
   myType: 1
   health: 1
   speed: 2
+  isShip: 0
+  length: 0
+  height: 0
+  mask: {fileID: 0}
+  waterParticles: {fileID: 0}
+  explosion: {fileID: 0}
+  sinkSFX: {fileID: 0}
 --- !u!58 &7957583637772631751
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -126,7 +133,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8303859965800596205}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -138,7 +145,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &-7339461633451389485
 Animator:
   serializedVersion: 3

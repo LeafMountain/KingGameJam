@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -6207542166743263120}
   m_Layer: 0
   m_Name: Floater
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,7 +132,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5309050941364787438}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -144,7 +144,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &7361631790650142449
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -187,6 +187,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2255670380417535798}
     m_Modifications:
+    - target: {fileID: 4486743275269866294, guid: bbc7ae6a9b33a60409a3c6826059ca57,
+        type: 3}
+      propertyPath: m_Name
+      value: vfx_water_circle_small_01
+      objectReference: {fileID: 0}
     - target: {fileID: 4486743275269866291, guid: bbc7ae6a9b33a60409a3c6826059ca57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -241,11 +246,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4486743275269866294, guid: bbc7ae6a9b33a60409a3c6826059ca57,
-        type: 3}
-      propertyPath: m_Name
-      value: vfx_water_circle_small_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbc7ae6a9b33a60409a3c6826059ca57, type: 3}

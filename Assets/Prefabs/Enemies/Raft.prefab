@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 8524509052085475593}
   m_Layer: 0
   m_Name: Raft
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -211,7 +211,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8303859965800596205}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -223,7 +223,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1512830735996389666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,8 +243,12 @@ MonoBehaviour:
   health: 1
   speed: 1
   isShip: 0
+  length: 0
+  height: 0
   mask: {fileID: 0}
   waterParticles: {fileID: 2022642009}
+  explosion: {fileID: 0}
+  sinkSFX: {fileID: 0}
 --- !u!95 &8524509052085475593
 Animator:
   serializedVersion: 3

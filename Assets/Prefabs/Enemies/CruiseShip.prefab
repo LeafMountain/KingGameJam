@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 2914912839093498494}
   m_Layer: 0
   m_Name: CruiseShip
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -275,7 +275,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8303859965800596205}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -287,7 +287,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &-467323640058357575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,6 +366,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3998793931636507229}
     m_Modifications:
+    - target: {fileID: 6960469909612746823, guid: 8e440cbdce32fab46af1f065e00d9107,
+        type: 3}
+      propertyPath: m_Name
+      value: vfx_smoke_01
+      objectReference: {fileID: 0}
     - target: {fileID: 6957413461469091343, guid: 8e440cbdce32fab46af1f065e00d9107,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -420,11 +425,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6960469909612746823, guid: 8e440cbdce32fab46af1f065e00d9107,
-        type: 3}
-      propertyPath: m_Name
-      value: vfx_smoke_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e440cbdce32fab46af1f065e00d9107, type: 3}

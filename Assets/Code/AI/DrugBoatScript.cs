@@ -36,4 +36,5 @@ public class DrugBoatScript : AIBase, IDamageable
             CheckFlipX(direction.x);
         }
     }
+   
 }
