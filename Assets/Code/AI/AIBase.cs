@@ -93,6 +93,12 @@ public abstract class AIBase : MonoBehaviour
         enemyManagerRef.RemoveFromEnemyList(this);
         sinking = true;
 
+        Rigidbody2D b = GetComponent<Rigidbody2D>();
+
+        b.bodyType = RigidbodyType2D.Kinematic;
+        b.velocity = Vector2.zero;
+
+
         if (isShip)
         {
 
