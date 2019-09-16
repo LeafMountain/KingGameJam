@@ -40,6 +40,11 @@ public abstract class AIBase : MonoBehaviour
 
     private Bounds playArea;
 
+    private Rigidbody2D body;
+    private Vector3 lastPos;
+    private Vector3 currentPos;
+    
+
     void Update()
     {
        
@@ -159,6 +164,8 @@ public abstract class AIBase : MonoBehaviour
 
         enemyManagerRef.AddToEnemyList(this);
 
+        body = GetComponent<Rigidbody2D>();
+
         playArea = EnemyManager.GetPlayArea();
         audioManagerRef = AudioManager.GetInstance();
 
@@ -198,6 +205,7 @@ public abstract class AIBase : MonoBehaviour
         if (!sinking)
         {
             transform.position = (Vector2)transform.position + (direction * speed * Time.deltaTime);
+
         }
     }
 
@@ -212,8 +220,8 @@ public abstract class AIBase : MonoBehaviour
         
 
         
-            float x = Random.Range(minPlayArea.x, maxPlayArea.x);
-            float y = Random.Range(minPlayArea.y, maxPlayArea.y);
+            float x = Random.Range(minPlayArea.x + 5, maxPlayArea.x - 5);
+            float y = Random.Range(minPlayArea.y + 5 , maxPlayArea.y - 5);
 
 
         Vector2 randomPlayAreaPos = new Vector2(x, y);
@@ -227,22 +235,43 @@ public abstract class AIBase : MonoBehaviour
 
     protected void CheckBounderies()
     {
-        if (!playArea.Contains(transform.position) && !MovingTowardsBounds())
+
+        if ( !MovingTowardsBounds())
         {
+
+
            
-                    if (transform.position.x < playArea.min.x ||
-                        transform.position.x > playArea.max.x)
+                    if (transform.position.x < playArea.min.x  ||
+                        transform.position.x > playArea.max.x )
                     {
                         direction = new Vector2(-direction.x, direction.y);
                         CheckFlipX(direction.x);
+
+                        return;
                     }
 
                     if (transform.position.y < playArea.min.y ||
-                    transform.position.y > playArea.max.y)
+                    transform.position.y > playArea.max.y - 5  )
                     {
-                        direction = new Vector2(direction.x, -direction.y);
+
+              
+
+                          direction = new Vector2(direction.x, -direction.y);
+
+                         return;
                     }
+
+
         }
+
+        if(transform.position.y > playArea.max.y - 10 && body.velocity.y > 0 )
+        {
+
+           
+            direction = new Vector2(direction.x, -direction.y);
+        }
+
+
     }
 
     protected void CheckFlipX(float x)
