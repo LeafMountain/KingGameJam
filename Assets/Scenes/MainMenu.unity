@@ -675,6 +675,11 @@ PrefabInstance:
       propertyPath: musicClips.Array.data[5]
       value: 
       objectReference: {fileID: 8300000, guid: 42c9931e8e5de46d5ae6322fd0976ff5, type: 3}
+    - target: {fileID: 1949713106088171154, guid: 74291add61a99b8419767027e6db22ba,
+        type: 3}
+      propertyPath: menuClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 40e1dfdd21c5a18459bd7772e4d8eadd, type: 3}
     - target: {fileID: 6182431976985333346, guid: 74291add61a99b8419767027e6db22ba,
         type: 3}
       propertyPath: m_LocalPosition.z
