@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum EnemyType { Floater, Surfer, Raft, MotorBoat, DrugBoat, CruiseShip, Length}
 
@@ -44,12 +42,6 @@ public abstract class AIBase : MonoBehaviour
     private Vector3 lastPos;
     private Vector3 currentPos;
     
-
-    void Update()
-    {
-       
-    }
-
     void OnCollisionEnter2D(Collision2D collision)
     {
       
@@ -115,7 +107,6 @@ public abstract class AIBase : MonoBehaviour
                 Destroy(waterParticles, 3f);
             }
             
-
             mySpriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
 
             sinkShake = true;
@@ -130,15 +121,9 @@ public abstract class AIBase : MonoBehaviour
                 Invoke("PlaySinkSFX", 1.0f);
             }
 
-
             Destroy(mask,3f);
             
             Destroy(gameObject,3f);
-
-        }
-        else
-        {
-            
         }
     }
     protected void UpdateSprite()
@@ -205,7 +190,6 @@ public abstract class AIBase : MonoBehaviour
         if (!sinking)
         {
             transform.position = (Vector2)transform.position + (direction * speed * Time.deltaTime);
-
         }
     }
 
@@ -217,12 +201,8 @@ public abstract class AIBase : MonoBehaviour
         Vector2 minPlayArea = playArea.min;
         Vector2 maxPlayArea = playArea.max;
 
-        
-
-        
             float x = Random.Range(minPlayArea.x + 5, maxPlayArea.x - 5);
             float y = Random.Range(minPlayArea.y + 5 , maxPlayArea.y - 5);
-
 
         Vector2 randomPlayAreaPos = new Vector2(x, y);
 
@@ -239,8 +219,6 @@ public abstract class AIBase : MonoBehaviour
         if ( !MovingTowardsBounds())
         {
 
-
-           
                     if (transform.position.x < playArea.min.x  ||
                         transform.position.x > playArea.max.x )
                     {
@@ -254,24 +232,16 @@ public abstract class AIBase : MonoBehaviour
                     transform.position.y > playArea.max.y - 5  )
                     {
 
-              
-
                           direction = new Vector2(direction.x, -direction.y);
 
                          return;
                     }
-
-
         }
 
         if(transform.position.y > playArea.max.y - 10 && body.velocity.y > 0 )
         {
-
-           
             direction = new Vector2(direction.x, -direction.y);
         }
-
-
     }
 
     protected void CheckFlipX(float x)
@@ -321,9 +291,6 @@ public abstract class AIBase : MonoBehaviour
 
                 shakeRight = !shakeRight;
             }
-
-
-            
         }
     }
     protected void CheckIfOnScreen()
@@ -364,8 +331,6 @@ public abstract class AIBase : MonoBehaviour
         pos = new Vector2(x, y);
 
         Instantiate(explosion, pos, Quaternion.identity);
-
-
     }
 
     private bool MovingTowardsBounds()
@@ -386,13 +351,4 @@ public abstract class AIBase : MonoBehaviour
     {
         audioManagerRef.sfxAudio.PlayOneShot(sinkSFX);
     }
-   
-    
-    
-
-    
-
-
-
-
 }
