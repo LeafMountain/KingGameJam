@@ -9,9 +9,7 @@ public class MotorBoatScript : AIBase, IDamageable
     
     void Start()
     {
-        GetReferences();
-        direction = GetRandomDirection();
-        CheckFlipX(direction.x);
+        SetUp();
     }
 
     

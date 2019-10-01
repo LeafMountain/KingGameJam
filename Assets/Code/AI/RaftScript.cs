@@ -10,16 +10,13 @@ public class RaftScript : AIBase, IDamageable
     void Start()
     {
 
-        GetReferences();
-        direction = GetRandomDirection();
+        SetUp();
     }
 
     
     void Update()
     {
-        UpdateSprite();
-        Move();
-        CheckBounderies();
+        ParentUpdate();
     }
     public override void Move()
     {

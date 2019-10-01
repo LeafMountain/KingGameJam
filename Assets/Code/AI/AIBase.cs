@@ -11,8 +11,6 @@ public abstract class AIBase : MonoBehaviour
     protected EnemyManager enemyManagerRef;
     protected AudioManager audioManagerRef;
 
-    public Sprite[] mySprites;
-
     [Header("Stats")]
     public EnemyType myType;
     public int health;
@@ -21,79 +19,79 @@ public abstract class AIBase : MonoBehaviour
     public float length;
     public float height;
 
+    [Header("References")]
     public GameObject mask;
     public GameObject waterParticles;
     public GameObject explosion;
     public AudioClip sinkSFX;
 
-    protected SpriteRenderer mySpriteRenderer;
-    protected Vector2 direction;
-    private int indexTracker;
+    [HideInInspector]
+    public SpriteRenderer mySpriteRenderer;
 
-    protected bool sinkShake;
-    private bool shakeRight;
-    protected bool sinking;
+    [HideInInspector]
+    public bool sinkShake;
+    [HideInInspector]
+    public bool shakeRight;
+    [HideInInspector]
+    public bool sinking;
 
-    private bool onScreen;
+    [HideInInspector]
+    public bool onScreen;
 
-    private Bounds playArea;
+    [HideInInspector]
+    public Rigidbody2D body;
+   
+    public AIMovement aiMovement;
+    public AIVisuals aiVisuals;
+    public AICheckStatus aiCheckStatus;
 
-    private Rigidbody2D body;
-    private Vector3 lastPos;
-    private Vector3 currentPos;
-    
+    #region Collison
     void OnCollisionEnter2D(Collision2D collision)
     {
-      
-
-
-        if(collision.gameObject != null && collision.gameObject.tag != "Enemy")
+        if (aiCheckStatus.DidNotHitEnemy(collision))
         {
-           
-
-            if (transform.position.x < collision.transform.position.x ||
-                   transform.position.x > collision.transform.position.x)
+            if (aiCheckStatus.IsThistoTheRightOfMe(collision) || aiCheckStatus.IsThisToTheLeftOfMe(collision))
             {
-                direction = new Vector2(-direction.x, direction.y);
-                CheckFlipX(direction.x);
+                aiMovement.InvertXDirection();
+
+                if (myType != EnemyType.Floater && myType != EnemyType.Surfer)
+                    AIVisuals.FlipSpriteOnX(mySpriteRenderer,
+                    waterParticles.GetComponent<SpriteRenderer>(),
+                    aiMovement.direction.x, myType);
             }
 
-            if (transform.position.y < collision.transform.position.y ||
-            transform.position.y > collision.transform.position.y)
+            if (aiCheckStatus.IsThisAboveMe(collision) || aiCheckStatus.IsThisBeneathMe(collision))
             {
-                direction = new Vector2(direction.x, -direction.y);
+                aiMovement.InvertYDirection();
             }
         }
-
-        if (collision.gameObject.tag == "Enemy" &&
-            (int)collision.gameObject.GetComponent<AIBase>().myType > (int)myType)
+        else if (aiCheckStatus.HitEnemy(collision) && aiCheckStatus.IsWhatIHitBigger(collision))
         {
-           
-
-            if (transform.position.x < collision.transform.position.x ||
-                      transform.position.x > collision.transform.position.x)
+            if (aiCheckStatus.IsThistoTheRightOfMe(collision) || aiCheckStatus.IsThisToTheLeftOfMe(collision))
             {
-                direction = new Vector2(-direction.x, direction.y);
-                CheckFlipX(direction.x);
+                aiMovement.InvertXDirection();
+
+                if(myType != EnemyType.Floater && myType != EnemyType.Surfer)
+                AIVisuals.FlipSpriteOnX(mySpriteRenderer,
+                   waterParticles.GetComponent<SpriteRenderer>(),
+                   aiMovement.direction.x, myType);
             }
 
-            if (transform.position.y < collision.transform.position.y ||
-            transform.position.y > collision.transform.position.y)
+            if (aiCheckStatus.IsThisAboveMe(collision) || aiCheckStatus.IsThisBeneathMe(collision))
             {
-                direction = new Vector2(direction.x, -direction.y);
+                aiMovement.InvertYDirection();
             }
         }
     }
 
+    #endregion
     public virtual void Die()
     {
         enemyManagerRef.RemoveFromEnemyList(this);
         sinking = true;
 
-        Rigidbody2D b = GetComponent<Rigidbody2D>();
-
-        b.bodyType = RigidbodyType2D.Kinematic;
-        b.velocity = Vector2.zero;
+        body.bodyType = RigidbodyType2D.Kinematic;
+        body.velocity = Vector2.zero;
 
 
         if (isShip)
@@ -126,32 +124,31 @@ public abstract class AIBase : MonoBehaviour
             Destroy(gameObject,3f);
         }
     }
-    protected void UpdateSprite()
+   
+    protected void SetUp()
     {
-        if (gameManagerRef.audioManagerRef.beatCount)
-        {
-            indexTracker++;
+        GetReferences();
 
-            int spriteIndex = indexTracker > 1 ? 0 : 1;
+        aiMovement = new AIMovement(this);
+        aiCheckStatus = new AICheckStatus(this);
 
-            indexTracker = spriteIndex;
-
-            mySpriteRenderer.sprite = mySprites[indexTracker];
-        }
+        if (myType != EnemyType.Floater && myType != EnemyType.Surfer)
+            AIVisuals.FlipSpriteOnX(mySpriteRenderer,
+               waterParticles.GetComponent<SpriteRenderer>(),
+               aiMovement.direction.x, myType);
     }
 
     protected void GetReferences()
     {
         gameManagerRef = GameManager.GetInstance();
         enemyManagerRef = EnemyManager.GetInstance();
-
+       
         mySpriteRenderer = GetComponent<SpriteRenderer>();
 
         enemyManagerRef.AddToEnemyList(this);
 
         body = GetComponent<Rigidbody2D>();
 
-        playArea = EnemyManager.GetPlayArea();
         audioManagerRef = AudioManager.GetInstance();
 
         if (isShip)
@@ -163,190 +160,29 @@ public abstract class AIBase : MonoBehaviour
 
     protected void SpawnFloaters(int amount)
     {
-        for (int i = 0; i < amount; i++)
-        {
-            GameObject floater = 
-            Instantiate(enemyManagerRef.floaterPrefab, 
-                GetSpawnPosition(transform.position), Quaternion.identity);
-
-            floater.transform.SetParent(enemyManagerRef.transform);
-        }
+        AISpawner.SpawnFloaters(this, amount);
     }
-
-    private Vector2 GetSpawnPosition(Vector2 pos)
-    {
-        Vector2 spawnPosition;
-
-        float x = pos.x + Random.Range(-(int)myType, (int)myType);
-        float y = pos.y + Random.Range(-(int)myType, (int)myType);
-
-        spawnPosition = new Vector2(x, y);
-
-        return spawnPosition;
-    }
-
+    
     public virtual void Move()
     {
         if (!sinking)
         {
-            transform.position = (Vector2)transform.position + (direction * speed * Time.deltaTime);
-        }
-    }
-
-    protected Vector2 GetRandomDirection()
-    {
-       
-        Vector2 dir;
-
-        Vector2 minPlayArea = playArea.min;
-        Vector2 maxPlayArea = playArea.max;
-
-            float x = Random.Range(minPlayArea.x + 5, maxPlayArea.x - 5);
-            float y = Random.Range(minPlayArea.y + 5 , maxPlayArea.y - 5);
-
-        Vector2 randomPlayAreaPos = new Vector2(x, y);
-
-        dir = (randomPlayAreaPos - (Vector2)transform.position).normalized;
-
-            CheckFlipX(direction.x);
-
-        return dir;
-    }
-
-    protected void CheckBounderies()
-    {
-
-        if ( !MovingTowardsBounds())
-        {
-
-                    if (transform.position.x < playArea.min.x  ||
-                        transform.position.x > playArea.max.x )
-                    {
-                        direction = new Vector2(-direction.x, direction.y);
-                        CheckFlipX(direction.x);
-
-                        return;
-                    }
-
-                    if (transform.position.y < playArea.min.y ||
-                    transform.position.y > playArea.max.y - 5  )
-                    {
-
-                          direction = new Vector2(direction.x, -direction.y);
-
-                         return;
-                    }
-        }
-
-        if(transform.position.y > playArea.max.y - 10 && body.velocity.y > 0 )
-        {
-            direction = new Vector2(direction.x, -direction.y);
-        }
-    }
-
-    protected void CheckFlipX(float x)
-    {
-        if (myType == EnemyType.Surfer ||
-            myType == EnemyType.MotorBoat ||
-            myType == EnemyType.DrugBoat ||
-            myType == EnemyType.CruiseShip)
-        {
-            if (x < 0)
-            {
-                mySpriteRenderer.flipX = true;
-                if(waterParticles != null)
-                {
-                    waterParticles.GetComponent<SpriteRenderer>().flipX = true;
-                }
-            }
-            else
-            {
-                mySpriteRenderer.flipX = false;
-
-                if (waterParticles != null)
-                {
-                    waterParticles.GetComponent<SpriteRenderer>().flipX = false;
-                }
-            }
-        }
-    }
-
-    protected void DeathShake()
-    {
-        if (sinkShake)
-        {
-            if (shakeRight)
-            {
-                transform.position = new Vector3(
-                    transform.position.x + 0.1f,
-                    transform.position.y - (1f * Time.deltaTime));
-
-                shakeRight = !shakeRight;
-            }
-            else
-            {
-                transform.position = new Vector3(
-                   transform.position.x - 0.1f,
-                   transform.position.y- (1f * Time.deltaTime));
-
-                shakeRight = !shakeRight;
-            }
-        }
-    }
-    protected void CheckIfOnScreen()
-    {
-        if(!onScreen)
-        {
-            Vector2 screenPos = gameManagerRef.cam.WorldToScreenPoint(transform.position);
-
-            if (screenPos.x > 0 ||
-                screenPos.x < Screen.width ||
-                screenPos.y > 0 ||
-                screenPos.y < Screen.height)
-            {
-                onScreen = true;
-            }
+            aiMovement.Move();
         }
     }
 
     protected void ParentUpdate()
     {
-        CheckIfOnScreen();
-        DeathShake();
-        CheckBounderies();
+        aiCheckStatus.CheckStatus();
+        AIVisuals.DeathShakeAndSink(this);
         Move();
     }
 
     private void SpawnExplosions()
     {
-        Vector2 pos;
-
-        float x = Random.Range(transform.position.x - (length / 2),
-            transform.position.x + (length / 2));
-
-
-        float y = Random.Range(transform.position.y - (height/2),
-            transform.position.y + (height/2));
-
-        pos = new Vector2(x, y);
-
-        Instantiate(explosion, pos, Quaternion.identity);
+        AIVisuals.SpawnExplosions(this);
     }
 
-    private bool MovingTowardsBounds()
-    {
-        if ((((Vector2)transform.position + direction) +
-            (Vector2)playArea.ClosestPoint(transform.position)).magnitude <
-            ((Vector2)transform.position +
-                (Vector2)playArea.ClosestPoint(transform.position)).magnitude)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
     private void PlaySinkSFX()
     {
         audioManagerRef.sfxAudio.PlayOneShot(sinkSFX);

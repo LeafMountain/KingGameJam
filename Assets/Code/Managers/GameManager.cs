@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
 
     public bool debugMode;
 
+    [HideInInspector]
+    public AIVisuals aiVisuals;
+    [HideInInspector]
+    public AISpawner aiSpawnerRef;
 
     void Awake()
     {
@@ -30,6 +34,9 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
+
+        aiVisuals = new AIVisuals();
+        aiSpawnerRef = new AISpawner();
     }
 
     public static GameManager GetInstance()

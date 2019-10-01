@@ -8,17 +8,13 @@ public class CruiseShipScript : AIBase, IDamageable
   
     void Start()
     {
-        GetReferences();
-        direction = GetRandomDirection();
-        CheckFlipX(direction.x);
+        SetUp();
     }
 
    
     void Update()
     {
         ParentUpdate();
-
-        UpdateSprite();
     }
     public override void Move()
     {

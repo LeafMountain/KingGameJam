@@ -4,22 +4,14 @@ using UnityEngine;
 
 public class SurferScript : AIBase, IEdible
 {
-   
-
     void Start()
     {
-        GetReferences();
-       direction = GetRandomDirection();
-        CheckFlipX(direction.x);
-      
+        SetUp();
     }
 
     void Update()
     {
-        UpdateSprite();
-        CheckDeath();
-        Move();
-        CheckBounderies();
+        ParentUpdate();
     }
 
     public void OnAttacked(int damage)

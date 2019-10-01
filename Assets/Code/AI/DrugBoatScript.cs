@@ -4,20 +4,13 @@ using UnityEngine;
 
 public class DrugBoatScript : AIBase, IDamageable
 {
-    
-
-   
     void Start()
     {
-        GetReferences();
-        direction = GetRandomDirection();
-        CheckFlipX(direction.x);
+        SetUp();
     }
 
-    
     void Update()
     {
-        UpdateSprite();
         ParentUpdate();
     }
 
@@ -32,9 +25,6 @@ public class DrugBoatScript : AIBase, IDamageable
         }
         else
         {
-            direction = -direction;
-            CheckFlipX(direction.x);
-
             audioManagerRef.OnDamage();
         }
     }
